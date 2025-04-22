@@ -22,5 +22,5 @@
   "terminal.integrated.suggest.suggestOnTriggerCharacters": true,
   "typescript.updateImportsOnPaste.enabled": true,
   "typescript.experimental.expandableHover": true,
-  "emmet.triggerExpansionOnTab": true
+  "emmet.triggerExpansionOnTab": true,
 }
