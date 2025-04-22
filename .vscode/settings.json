@@ -1,0 +1,26 @@
+{
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "prettier.configPath": ".prettierrc.js",
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.removeUnused.ts": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.pasteAs.preferences": ["text.updateImports.jsts"],
+  "editor.pasteAs.enabled": true,
+  "eslint.enable": true,
+  "eslint.run": "onSave",
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.suggest.enabled": true,
+  "terminal.integrated.suggest.suggestOnTriggerCharacters": true,
+  "typescript.updateImportsOnPaste.enabled": true,
+  "typescript.experimental.expandableHover": true,
+  "emmet.triggerExpansionOnTab": true
+}
