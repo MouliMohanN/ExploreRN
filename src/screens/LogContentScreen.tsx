@@ -1,11 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import RNFS from 'react-native-fs';
+import Share from 'react-native-share';
 import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
 
-export const LogContentScreen = ({ route }: ScreenBaseProps) => {
+export const LogContentScreen = ({ route, navigation }: ScreenBaseProps) => {
   const { logFilePath } = route.params as { logFilePath: string };
   const [logContent, setLogContent] = useState('Loading log content...');
+
+  const fileName = logFilePath.split('/').pop();
+
+  const onShare = async () => {
+    try {
+      const content = await RNFS.readFile(logFilePath, 'utf8');
+      const shareOptions = {
+        title: `Share Log File: ${fileName}`,
+        message: `Log file from my app: ${fileName}\n\n${content.substring(0, 500)}... (full log attached)`,
+        url: `file://${logFilePath}`,
+        type: 'text/plain',
+        filename: fileName,
+      };
+      await Share.open(shareOptions);
+    } catch (error) {
+      const errorMessage = (error instanceof Error) ? error.message : String(error);
+      Alert.alert('Share Error', `Failed to share log file: ${errorMessage}`);
+      console.error('Failed to share log file:', errorMessage);
+    }
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={onShare} style={styles.shareButton}>
+          <Text style={styles.shareButtonText}>Share</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, onShare]);
 
   useEffect(() => {
     const readLogContent = async () => {
@@ -24,7 +55,7 @@ export const LogContentScreen = ({ route }: ScreenBaseProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Log File: {logFilePath.split('/').pop()}</Text>
+      <Text style={styles.title}>Log File: ${fileName}</Text>
       <ScrollView style={styles.logContainer}>
         <Text style={styles.logText}>{logContent}</Text>
       </ScrollView>
@@ -54,5 +85,13 @@ const styles = StyleSheet.create({
   logText: {
     fontFamily: 'monospace',
     fontSize: 12,
+  },
+  shareButton: {
+    marginRight: 10,
+    padding: 5,
+  },
+  shareButtonText: {
+    color: '#007AFF', // iOS blue color
+    fontSize: 16,
   },
 });
