@@ -1,6 +1,6 @@
-import { LogLevel, LogFunction } from '../types';
+import { LogLevel, ConsoleLoggerConfig } from '../types';
 
-export const consoleLogger: LogFunction = (level, message, data?) => {
+export const consoleLogger = (level: LogLevel, message: string, data?: any, config?: ConsoleLoggerConfig) => {
   switch (level) {
     case LogLevel.INFO:
       console.log(`[INFO] ${message}`, data);

@@ -1,8 +1,8 @@
-import { LogLevel, LogFunction } from '../types';
+import { LogLevel, NetworkLoggerConfig } from '../types';
 
 const NETWORK_LOG_ENDPOINT = 'https://your-logging-service.com/log'; // TODO: Replace with your actual logging service endpoint
 
-export const networkLogger: LogFunction = async (level, message, data?) => {
+export const networkLogger = async (level: LogLevel, message: string, data?: any, config?: NetworkLoggerConfig) => {
   try {
     const logPayload = {
       timestamp: new Date().toISOString(),

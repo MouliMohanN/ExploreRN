@@ -11,7 +11,7 @@ export const generateLogFileName = () => {
   const minutes = now.getMinutes().toString().padStart(2, '0');
   const seconds = now.getSeconds().toString().padStart(2, '0');
 
-  const fileName = `${appName}_${year}${month}${day}_${hours}${minutes}${seconds}.log`;
+  const fileName = `${appName}_${year}-${month}-${day}_${hours}-${minutes}-${seconds}.log`;
 
   return `${RNFS.DocumentDirectoryPath}/${fileName}`;
 };
