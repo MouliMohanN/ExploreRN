@@ -21,6 +21,10 @@ export const getLogFilePaths = async () => {
   try {
     const files = await RNFS.readDir(RNFS.DocumentDirectoryPath);
     const logFiles = files.filter(file => file.name.startsWith(appName) && file.name.endsWith('.log'))
+                          .sort((a, b) => {
+                            // Sort by modification time (mtime) in descending order (newest first)
+                            return b.mtime.getTime() - a.mtime.getTime();
+                          })
                           .map(file => file.path);
     return logFiles;
   } catch (error) {
