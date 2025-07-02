@@ -8,7 +8,7 @@ const App = () => {
   useEffect(() => {
     setLoggerConfig({
       logLevel: LogLevel.INFO, // Set the desired log level
-      loggers: ['console', 'file', 'network'], // Specify the loggers to use
+      loggers: ['console', 'file'], // Specify the loggers to use
     });
   }, []);
 
