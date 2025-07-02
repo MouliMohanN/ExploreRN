@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import RNFS from 'react-native-fs';
+import getLogFileName from '../common/utils/logger/logFileName';
 
-const logFilePath = `${RNFS.DocumentDirectoryPath}/app.log`;
+const logFilePath = getLogFileName();
 
 export const LogViewerScreen = () => {
   const [logContent, setLogContent] = useState('Loading logs...');
