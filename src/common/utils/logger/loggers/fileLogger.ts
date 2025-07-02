@@ -1,8 +1,8 @@
 import { LogLevel, LogFunction } from '../types';
 import RNFS from 'react-native-fs';
-import getLogFileName from '../logFileName';
+import { generateLogFileName } from '../logFileName';
 
-const logFilePath = getLogFileName();
+const logFilePath = generateLogFileName();
 
 export const fileLogger: LogFunction = async (level, message, data?) => {
   const timestamp = new Date().toISOString();

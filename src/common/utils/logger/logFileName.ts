@@ -1,7 +1,7 @@
 import RNFS from 'react-native-fs';
 import app from '../../../../app.json';
 
-const getLogFileName = () => {
+export const generateLogFileName = () => {
   const appName = app.name;
   const now = new Date();
   const year = now.getFullYear();
@@ -16,4 +16,15 @@ const getLogFileName = () => {
   return `${RNFS.DocumentDirectoryPath}/${fileName}`;
 };
 
-export default getLogFileName;
+export const getLogFilePaths = async () => {
+  const appName = app.name;
+  try {
+    const files = await RNFS.readDir(RNFS.DocumentDirectoryPath);
+    const logFiles = files.filter(file => file.name.startsWith(appName) && file.name.endsWith('.log'))
+                          .map(file => file.path);
+    return logFiles;
+  } catch (error) {
+    console.error('Failed to read log directory:', error);
+    return [];
+  }
+};

@@ -1,33 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import RNFS from 'react-native-fs';
-import getLogFileName from '../common/utils/logger/logFileName';
-
-const logFilePath = getLogFileName();
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { getLogFilePaths } from '../common/utils/logger/logFileName';
+import { ScreenNames } from '../../navigation';
 
 export const LogViewerScreen = () => {
-  const [logContent, setLogContent] = useState('Loading logs...');
+  const [logFiles, setLogFiles] = useState<string[]>([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    const readLogs = async () => {
-      try {
-        const content = await RNFS.readFile(logFilePath, 'utf8');
-        setLogContent(content);
-      } catch (error) {
-        setLogContent(`Error reading log file: ${error.message}`);
-        console.error('Error reading log file:', error);
-      }
+    const fetchLogFiles = async () => {
+      const files = await getLogFilePaths();
+      setLogFiles(files);
     };
 
-    readLogs();
+    fetchLogFiles();
   }, []);
+
+  const renderItem = ({ item }: { item: string }) => (
+    <TouchableOpacity
+      style={styles.logItem}
+      onPress={() => navigation.navigate(ScreenNames.LogContent, { logFilePath: item })}
+    >
+      <Text style={styles.logItemText}>{item.split('/').pop()}</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Application Logs</Text>
-      <ScrollView style={styles.logContainer}>
-        <Text style={styles.logText}>{logContent}</Text>
-      </ScrollView>
+      <Text style={styles.title}>Available Log Files</Text>
+      {logFiles.length > 0 ? (
+        <FlatList
+          data={logFiles}
+          renderItem={renderItem}
+          keyExtractor={item => item}
+          style={styles.listContainer}
+        />
+      ) : (
+        <Text>No log files found.</Text>
+      )}
     </View>
   );
 };
@@ -43,16 +54,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  logContainer: {
+  listContainer: {
     flex: 1,
+    width: '100%',
+  },
+  logItem: {
     backgroundColor: '#ffffff',
-    padding: 10,
+    padding: 15,
+    marginBottom: 10,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#e0e0e0',
   },
-  logText: {
-    fontFamily: 'monospace',
-    fontSize: 12,
+  logItemText: {
+    fontSize: 14,
   },
 });
