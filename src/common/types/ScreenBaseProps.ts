@@ -3,4 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type ScreenBaseProps = {
     navigation: NativeStackNavigationProp<ParamListBase>;
+    route: {
+        params?: Record<string, any>;
+    };
 }

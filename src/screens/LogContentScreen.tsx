@@ -4,7 +4,7 @@ import RNFS from 'react-native-fs';
 import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
 
 export const LogContentScreen = ({ route }: ScreenBaseProps) => {
-  const { logFilePath } = route.params;
+  const { logFilePath } = route.params as { logFilePath: string };
   const [logContent, setLogContent] = useState('Loading log content...');
 
   useEffect(() => {
@@ -13,8 +13,9 @@ export const LogContentScreen = ({ route }: ScreenBaseProps) => {
         const content = await RNFS.readFile(logFilePath, 'utf8');
         setLogContent(content);
       } catch (error) {
-        setLogContent(`Error reading log file: ${error.message}`);
-        console.error('Error reading log file:', error);
+        const errorMessage = (error instanceof Error) ? error.message : String(error);
+        setLogContent(`Error reading log file: ${errorMessage}`);
+        console.error('Error reading log file:', errorMessage);
       }
     };
 

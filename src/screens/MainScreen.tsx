@@ -4,13 +4,14 @@ import { logger } from '../common/utils/logger/logger';
 import { ScreenNames } from '../navigation';
 import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
 
-export const MainScreen = ({ navigation }: ScreenBaseProps) => {
+export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
 
   return (
     <View style={{flex: 1, alignItems: 'center', padding: 16}}>
       <Text>Main Screen</Text>
       <Button title='Log Info' onPress={() => {
         logger.info('Log Info button pressed', { exampleData: 'This is some data' });
+        console.log('Log Info button pressed', { exampleData: 'This is some data' });
        }} />
       <Button title='View Logs' onPress={() => {
         navigation.navigate(ScreenNames.LogViewer);

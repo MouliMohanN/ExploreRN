@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { getLogFilePaths } from '../common/utils/logger/logFileName';
-import { ScreenNames } from '../../navigation';
+import { ScreenNames } from '../navigation';
+import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
 
-export const LogViewerScreen = () => {
+export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
   const [logFiles, setLogFiles] = useState<string[]>([]);
-  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchLogFiles = async () => {
