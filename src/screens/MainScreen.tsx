@@ -1,11 +1,10 @@
 import {Text, View} from 'react-native';
 import { Button } from '../common/components/Button';
 import { logger } from '../common/utils/logger/logger';
-import { useNavigation } from '@react-navigation/native';
-import { ScreenNames } from '../../navigation';
+import { ScreenNames } from '../navigation';
+import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
 
-export const MainScreen = () => {
-  const navigation = useNavigation();
+export const MainScreen = ({ navigation }: ScreenBaseProps) => {
 
   return (
     <View style={{flex: 1, alignItems: 'center', padding: 16}}>
