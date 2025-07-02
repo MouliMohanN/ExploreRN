@@ -5,6 +5,7 @@ const config: LoggerConfig = {
   loggers: ['console'], // Default to console logging
   fileConfig: {
     logRetentionHours: 24, // Default to 24 hours
+    cleanupDelayMs: 20000, // Default to 20 seconds
   },
 };
 

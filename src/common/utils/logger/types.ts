@@ -11,6 +11,7 @@ export interface ConsoleLoggerConfig {
 
 export interface FileLoggerConfig {
   logRetentionHours?: number; // Number of hours to retain log files
+  cleanupDelayMs?: number; // Delay in milliseconds before cleaning old logs
 }
 
 export interface NetworkLoggerConfig {
