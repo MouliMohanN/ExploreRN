@@ -24,10 +24,7 @@ const log = (level: LogLevel, message: string, data?: any) => {
   });
 };
 
-// Initial cleanup when logger is initialized, with a delay to avoid blocking startup
-setTimeout(() => {
-  cleanOldLogs(currentConfig);
-}, currentConfig.fileConfig?.cleanupDelayMs || 500); // Use configurable delay, default to 500ms
+
 
 export const logger = {
   debug: (message: string, data?: any) => log(LogLevel.DEBUG, message, data),
