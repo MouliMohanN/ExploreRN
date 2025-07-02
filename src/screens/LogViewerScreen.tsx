@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getLogFilePaths } from '../common/utils/logger/logFileName';
 import { ScreenNames } from '../navigation';
 import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
@@ -59,37 +60,93 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
     }
   };
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity onPress={onShareAll} style={styles.headerButton}>
-          <Text style={styles.headerButtonText}>Share All</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation, onShareAll]);
+  const onDeleteAllLogs = () => {
+    Alert.alert(
+      'Delete All Logs',
+      'Are you sure you want to delete all log files? This action cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              for (const filePath of logFiles) {
+                await RNFS.unlink(filePath);
+              }
+              fetchLogFiles(); // Refresh the list
+              Alert.alert('Success', 'All log files deleted.');
+            } catch (error) {
+              const errorMessage = (error instanceof Error) ? error.message : String(error);
+              Alert.alert('Delete Error', `Failed to delete all log files: ${errorMessage}`);
+              console.error('Failed to delete all log files:', errorMessage);
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
-  const renderItem = ({ item }: { item: string }) => (
-    <View style={styles.logItemContainer}>
-      <TouchableOpacity
-        style={styles.logItem}
-        onPress={() => navigation.navigate(ScreenNames.LogContent, { logFilePath: item })}
-      >
-        <Text style={styles.logItemText}>{item.split('/').pop()}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => onShareIndividual(item)} style={styles.shareIndividualButton}>
-        <Text style={styles.shareIndividualButtonText}>Share</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  const onDeleteIndividualLog = (filePath: string) => {
+    const fileName = filePath.split('/').pop();
+    Alert.alert(
+      'Delete Log File',
+      `Are you sure you want to delete ${fileName}? This action cannot be undone.`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await RNFS.unlink(filePath);
+              fetchLogFiles(); // Refresh the list
+              Alert.alert('Success', `${fileName} deleted.`);
+            } catch (error) {
+              const errorMessage = (error instanceof Error) ? error.message : String(error);
+              Alert.alert('Delete Error', `Failed to delete ${fileName}: ${errorMessage}`);
+              console.error('Failed to delete log file:', errorMessage);
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Available Log Files</Text>
+      <View style={styles.topButtonsContainer}>
+        <TouchableOpacity onPress={onShareAll} style={styles.topButton}>
+          <Text style={styles.topButtonText}>Share All</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onDeleteAllLogs} style={styles.topButton}>
+          <Text style={styles.topButtonText}>Delete All</Text>
+        </TouchableOpacity>
+      </View>
       {logFiles.length > 0 ? (
         <FlatList
           data={logFiles}
-          renderItem={renderItem}
+          renderItem={({ item }) => (
+            <View style={styles.logItemContainer}>
+              <TouchableOpacity
+                style={styles.logItem}
+                onPress={() => navigation.navigate(ScreenNames.LogContent, { logFilePath: item })}
+              >
+                <Text style={styles.logItemText}>{item.split('/').pop()}</Text>
+              </TouchableOpacity>
+              <View style={styles.logItemActions}>
+                <TouchableOpacity onPress={() => onShareIndividual(item)} style={styles.actionButton}>
+                  <Icon name="share-variant" size={20} color="#333" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => onDeleteIndividualLog(item)} style={[styles.actionButton, styles.deleteButton]}>
+                  <Icon name="delete" size={20} color="#fff" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
           keyExtractor={item => item}
           style={styles.listContainer}
         />
@@ -110,6 +167,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  topButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10,
+    width: '100%',
+  },
+  topButton: {
+    padding: 10,
+    backgroundColor: '#007AFF',
+    borderRadius: 5,
+  },
+  topButtonText: {
+    color: '#fff',
+    fontSize: 16,
   },
   listContainer: {
     flex: 1,
@@ -133,21 +205,21 @@ const styles = StyleSheet.create({
   logItemText: {
     fontSize: 14,
   },
-  headerButton: {
-    marginRight: 10,
-    padding: 5,
+  logItemActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  headerButtonText: {
-    color: '#007AFF',
-    fontSize: 16,
-  },
-  shareIndividualButton: {
+  actionButton: {
     padding: 8,
     backgroundColor: '#e0e0e0',
     borderRadius: 5,
+    marginLeft: 8,
   },
-  shareIndividualButtonText: {
+  actionButtonText: {
     fontSize: 12,
     color: '#333',
+  },
+  deleteButton: {
+    backgroundColor: '#ff4d4d',
   },
 });
