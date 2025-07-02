@@ -11,7 +11,7 @@ export const cleanOldLogs = async (config: LoggerConfig) => {
     for (const filePath of logFiles) {
       const fileName = filePath.split('/').pop();
       if (fileName) {
-        // Extract timestamp from filename: appName_YYYY-MM-DD_HH-MM-SS.log
+        // Extract timestamp from filename: appName_YYYY-MM-DD_HH-MM-SS.txt
         const parts = fileName.split('_');
         if (parts.length === 3) {
           const datePart = parts[1]; // YYYY-MM-DD

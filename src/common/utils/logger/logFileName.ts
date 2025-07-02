@@ -11,7 +11,7 @@ export const generateLogFileName = () => {
   const minutes = now.getMinutes().toString().padStart(2, '0');
   const seconds = now.getSeconds().toString().padStart(2, '0');
 
-  const fileName = `${appName}_${year}-${month}-${day}_${hours}-${minutes}-${seconds}.log`;
+  const fileName = `${appName}_${year}-${month}-${day}_${hours}-${minutes}-${seconds}.txt`;
 
   return `${RNFS.DocumentDirectoryPath}/${fileName}`;
 };
@@ -20,7 +20,7 @@ export const getLogFilePaths = async () => {
   const appName = app.name;
   try {
     const files = await RNFS.readDir(RNFS.DocumentDirectoryPath);
-    const logFiles = files.filter(file => file.name.startsWith(appName) && file.name.endsWith('.log'))
+    const logFiles = files.filter(file => file.name.startsWith(appName) && file.name.endsWith('.txt'))
                           .sort((a, b) => {
                             // Sort by modification time (mtime) in descending order (newest first)
                             return b.mtime.getTime() - a.mtime.getTime();
