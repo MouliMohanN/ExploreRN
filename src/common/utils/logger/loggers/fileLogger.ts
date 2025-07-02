@@ -6,7 +6,8 @@ const logFilePath = generateLogFileName();
 
 export const fileLogger = async (level: LogLevel, message: string, data?: any, config?: FileLoggerConfig) => {
   const timestamp = new Date().toISOString();
-  const logEntry = `[${timestamp}] [${LogLevel[level]}] ${message} ${data ? JSON.stringify(data) : ''}\n`;
+  const logSeparator = config?.logSeparator || '\n\n';
+  const logEntry = `[${timestamp}] [${LogLevel[level]}] ${message} ${data ? JSON.stringify(data) : ''}${logSeparator}`;
 
   try {
     await RNFS.appendFile(logFilePath, logEntry, 'utf8');

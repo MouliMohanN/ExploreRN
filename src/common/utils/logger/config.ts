@@ -6,6 +6,7 @@ const config: LoggerConfig = {
   fileConfig: {
     logRetentionHours: 24, // Default to 24 hours
     cleanupDelayMs: 20000, // Default to 20 seconds
+    logSeparator: '\n', // Default to newline character
   },
 };
 
