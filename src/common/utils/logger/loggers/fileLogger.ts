@@ -1,7 +1,15 @@
 import { LogLevel, LogFunction } from '../types';
+import RNFS from 'react-native-fs';
 
-export const fileLogger: LogFunction = (level, message, data?) => {
-  // TODO: Implement actual file logging (e.g., using a native module or a library like 'react-native-fs')
-  // This is a placeholder.
-  // console.log(`[FILE] ${LogLevel[level]}: ${message}`, ...args);
+const logFilePath = `${RNFS.DocumentDirectoryPath}/app.log`;
+
+export const fileLogger: LogFunction = async (level, message, data?) => {
+  const timestamp = new Date().toISOString();
+  const logEntry = `[${timestamp}] [${LogLevel[level]}] ${message} ${data ? JSON.stringify(data) : ''}\n`;
+
+  try {
+    await RNFS.appendFile(logFilePath, logEntry, 'utf8');
+  } catch (error) {
+    console.error('Failed to write to log file:', error);
+  }
 };
