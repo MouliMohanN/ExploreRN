@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getLogFilePaths } from '../common/utils/logger/logFileName';
+import { getLogFilePaths } from '../common/utils/logger/utils/logFileName';
 import { ScreenNames } from '../navigation';
 import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
 import Share from 'react-native-share';

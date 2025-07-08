@@ -2,8 +2,7 @@ import { LogLevel, ConsoleLoggerConfig, FileLoggerConfig, NetworkLoggerConfig } 
 import { consoleLogger } from './loggers/consoleLogger';
 import { fileLogger } from './loggers/fileLogger';
 import { networkLogger } from './loggers/networkLogger';
-import { currentConfig, setLoggerConfig } from './configManager';
-import { cleanOldLogs } from './logCleaner';
+import { currentConfig, setLoggerConfig } from './config/configManager';
 
 const loggersMap = {
   console: (level: LogLevel, message: string, data?: any) => consoleLogger(level, message, data, currentConfig.consoleConfig as ConsoleLoggerConfig),

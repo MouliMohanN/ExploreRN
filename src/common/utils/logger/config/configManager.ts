@@ -1,6 +1,6 @@
-import { LoggerConfig } from './types';
+import { LoggerConfig } from '../types';
 import defaultConfig from './config';
-import { cleanOldLogs } from './logCleaner';
+import { cleanOldLogs } from '../utils/logCleaner';
 
 export let currentConfig: LoggerConfig = { ...defaultConfig };
 

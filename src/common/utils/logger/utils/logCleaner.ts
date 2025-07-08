@@ -1,6 +1,6 @@
 import RNFS from 'react-native-fs';
 import { getLogFilePaths } from './logFileName';
-import { LoggerConfig } from './types';
+import { LoggerConfig } from '../types';
 
 export const cleanOldLogs = async (config: LoggerConfig) => {
   const retentionHours = config.fileConfig?.logRetentionHours || 24; // Default to 24 hours if not set

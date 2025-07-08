@@ -1,5 +1,5 @@
 import RNFS from 'react-native-fs';
-import app from '../../../../app.json';
+import app from '../../../../../app.json';
 
 export const generateLogFileName = () => {
   const appName = app.name;

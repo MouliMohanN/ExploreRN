@@ -1,4 +1,4 @@
-import { LogLevel, LoggerConfig } from './types';
+import { LogLevel, LoggerConfig } from '../types';
 
 const config: LoggerConfig = {
   logLevel: LogLevel.INFO, // Default log level

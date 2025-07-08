@@ -1,6 +1,6 @@
 import { LogLevel, FileLoggerConfig } from '../types';
 import RNFS from 'react-native-fs';
-import { generateLogFileName } from '../logFileName';
+import { generateLogFileName } from '../utils/logFileName';
 
 const logFilePath = generateLogFileName();
 
