@@ -1,4 +1,3 @@
-
 module.exports = {
   experimentalTernaries: true,
   tabWidth: 2,

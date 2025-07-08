@@ -1,7 +1,7 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {MainScreen} from '../screens/MainScreen';
-import {LogViewerScreen} from '../screens/LogViewerScreen';
-import {LogContentScreen} from '../screens/LogContentScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { LogContentScreen } from '../screens/LogContentScreen';
+import { LogViewerScreen } from '../screens/LogViewerScreen';
+import { MainScreen } from '../screens/MainScreen';
 
 export const ScreenNames = {
   Main: 'Main',

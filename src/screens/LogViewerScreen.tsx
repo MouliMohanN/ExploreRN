@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getLogFilePaths } from '../common/utils/logger/utils/logFileName';
-import { ScreenNames } from '../navigation';
-import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
-import Share from 'react-native-share';
+import React, { useEffect, useState } from 'react';
+import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RNFS from 'react-native-fs';
+import Share from 'react-native-share';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
+import { getLogFilePaths } from '../common/utils/logger/loggers/file/utils/logFileName';
+import { ScreenNames } from '../navigation';
 
 export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
   const [logFiles, setLogFiles] = useState<string[]>([]);
@@ -26,7 +26,7 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
         return;
       }
 
-      const fileUris = logFiles.map(filePath => `file://${filePath}`);
+      const fileUris = logFiles.map((filePath) => `file://${filePath}`);
 
       const shareOptions = {
         title: 'Share All Log Files',
@@ -37,7 +37,7 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
 
       await Share.open(shareOptions);
     } catch (error) {
-      const errorMessage = (error instanceof Error) ? error.message : String(error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
       Alert.alert('Share Error', `Failed to share all log files: ${errorMessage}`);
       console.error('Failed to share all log files:', errorMessage);
     }
@@ -54,7 +54,7 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
       };
       await Share.open(shareOptions);
     } catch (error) {
-      const errorMessage = (error instanceof Error) ? error.message : String(error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
       Alert.alert('Share Error', `Failed to share log file: ${errorMessage}`);
       console.error('Failed to share log file:', errorMessage);
     }
@@ -77,14 +77,14 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
               fetchLogFiles(); // Refresh the list
               Alert.alert('Success', 'All log files deleted.');
             } catch (error) {
-              const errorMessage = (error instanceof Error) ? error.message : String(error);
+              const errorMessage = error instanceof Error ? error.message : String(error);
               Alert.alert('Delete Error', `Failed to delete all log files: ${errorMessage}`);
               console.error('Failed to delete all log files:', errorMessage);
             }
           },
         },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
   };
 
@@ -104,14 +104,14 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
               fetchLogFiles(); // Refresh the list
               Alert.alert('Success', `${fileName} deleted.`);
             } catch (error) {
-              const errorMessage = (error instanceof Error) ? error.message : String(error);
+              const errorMessage = error instanceof Error ? error.message : String(error);
               Alert.alert('Delete Error', `Failed to delete ${fileName}: ${errorMessage}`);
               console.error('Failed to delete log file:', errorMessage);
             }
           },
         },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
   };
 
@@ -126,7 +126,7 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
           <Text style={styles.topButtonText}>Delete All</Text>
         </TouchableOpacity>
       </View>
-      {logFiles.length > 0 ? (
+      {logFiles.length > 0 ?
         <FlatList
           data={logFiles}
           renderItem={({ item }) => (
@@ -139,20 +139,21 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
               </TouchableOpacity>
               <View style={styles.logItemActions}>
                 <TouchableOpacity onPress={() => onShareIndividual(item)} style={styles.actionButton}>
-                  <Icon name="share-variant" size={20} color="#333" />
+                  <Icon name='share-variant' size={20} color='#333' />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => onDeleteIndividualLog(item)} style={[styles.actionButton, styles.deleteButton]}>
-                  <Icon name="delete" size={20} color="#fff" />
+                <TouchableOpacity
+                  onPress={() => onDeleteIndividualLog(item)}
+                  style={[styles.actionButton, styles.deleteButton]}
+                >
+                  <Icon name='delete' size={20} color='#fff' />
                 </TouchableOpacity>
               </View>
             </View>
           )}
-          keyExtractor={item => item}
+          keyExtractor={(item) => item}
           style={styles.listContainer}
         />
-      ) : (
-        <Text>No log files found.</Text>
-      )}
+      : <Text>No log files found.</Text>}
     </View>
   );
 };
