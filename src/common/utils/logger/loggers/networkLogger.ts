@@ -1,5 +1,5 @@
 import { NetworkLoggerConfig } from '../types/types';
-import { defaultLogLevelConfig, ILogger } from './Logger';
+import { defaultLogLevelConfig, ILogger } from './iLogger';
 
 // export const networkLogger = async (level: LogLevelConfig, message: string, data?: any, config?: NetworkLoggerConfig) => {
 //   try {

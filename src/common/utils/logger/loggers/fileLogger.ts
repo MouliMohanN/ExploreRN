@@ -1,7 +1,7 @@
 import RNFS from 'react-native-fs';
 import app from '../../../../../app.json';
 import { FileLoggerConfig, LogLevel } from '../types/types';
-import { ILogger, defaultLogLevelConfig } from './Logger';
+import { ILogger, defaultLogLevelConfig } from './iLogger';
 
 const PrivateUtils = {
   generateLogFileName: () => {

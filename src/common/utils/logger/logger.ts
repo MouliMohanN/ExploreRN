@@ -1,5 +1,5 @@
 import { currentConfig, setLoggerConfig } from './config/configManager';
-import { ILogger, LogMapper } from './loggers/Logger';
+import { ILogger, LogMapper } from './loggers/iLogger';
 import { LogLevel } from './types/types';
 
 const log = (level: LogLevel, message: string, data?: any) => {

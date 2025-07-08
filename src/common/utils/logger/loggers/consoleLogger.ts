@@ -1,12 +1,11 @@
 import { ConsoleLoggerConfig } from '../types/types';
-import { defaultLogLevelConfig, ILogger } from './Logger';
+import { defaultLogLevelConfig, ILogger } from './iLogger';
 
 
 export const defaultConsoleLoggerConfig: ConsoleLoggerConfig = {
   logLevel: { ...defaultLogLevelConfig },
 };
 
-let config = defaultConsoleLoggerConfig;
 
 export const ConsoleLogger: ILogger = {
   info: (message: string, data?: any) => {
@@ -33,6 +32,5 @@ export const ConsoleLogger: ILogger = {
   },
 
   setConfig: (updatedConfig: ConsoleLoggerConfig) => { 
-    config = updatedConfig
   },
 };
