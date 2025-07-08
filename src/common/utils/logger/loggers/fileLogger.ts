@@ -1,7 +1,7 @@
 import RNFS from 'react-native-fs';
 import app from '../../../../../app.json';
 import { FileLoggerConfig, LogLevel } from '../types/types';
-import { ILogger, defaultLogLevelConfig } from './iLogger';
+import { LoggerContract, defaultLogLevelConfig } from './LoggerContract';
 
 const PrivateUtils = {
   generateLogFileName: () => {
@@ -96,32 +96,43 @@ const log = async (level: LogLevel, message: string, data?: any, config?: FileLo
   }
 };
 
-export const FileLogger: ILogger = {
+export const getLogFilePaths = async () => {
+  return PrivateUtils.getLogFilePaths();
+};
+
+export const FileLogger: LoggerContract = {
   info: async (message: string, data?: any) => {
+    if (!config?.logLevel?.info) return; // Check if logging is enabled for INFO level
     log('info', message, data);
   },
 
   debug: async (message: string, data?: any) => {
+    if (!config?.logLevel?.debug) return; // Check if logging is enabled for DEBUG level
     log('debug', message, data);
   },
 
   warn: async (message: string, data?: any) => {
+    if (!config?.logLevel?.warn) return; // Check if logging is enabled for WARN level
     log('warn', message, data);
   },
 
   error: async (message: string, data?: any) => {
+    if (!config?.logLevel?.error) return; // Check if logging is enabled for ERROR level
     log('error', message, data);
   },
 
   navigationStack: async (message: string, data?: any) => {
+    if (!config?.logLevel?.navigationStack) return; // Check if logging is enabled for navigation stack
     log('navigationStack', message, data);
   },
 
   networkIO: async (message: string, data?: any) => {
+    if (!config?.logLevel?.networkIO) return; // Check if logging is enabled for network I/O
     log('networkIO', message, data);
   },
 
   redux: async (message: string, data?: any) => {
+    if (!config?.logLevel?.redux) return; // Check if logging is enabled for Redux actions
     log('redux', message, data);
   },
 

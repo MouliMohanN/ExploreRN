@@ -1,5 +1,5 @@
 import { currentConfig, setLoggerConfig } from './config/configManager';
-import { ILogger, LogMapper } from './loggers/iLogger';
+import { LoggerContract, LogMapper } from './loggers/LoggerContract';
 import { LogLevel } from './types/types';
 
 const log = (level: LogLevel, message: string, data?: any) => {
@@ -12,7 +12,7 @@ const log = (level: LogLevel, message: string, data?: any) => {
   });
 };
 
-export const logger: ILogger = {
+export const logger: Omit<LoggerContract, 'setConfig' | 'cleanUp'> = {
   debug: (message: string, data?: any) => log('debug', message, data),
   info: (message: string, data?: any) => log('info', message, data),
   warn: (message: string, data?: any) => log('warn', message, data),

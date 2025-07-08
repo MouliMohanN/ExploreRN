@@ -12,7 +12,7 @@ const App = () => {
         console: {
           logLevel: {
             info: false, // Log INFO level messages
-            debug: true, // Do not log DEBUG level messages by default
+            debug: true, // Log DEBUG level messages
             warn: true, // Log WARN level messages
             error: true, // Log ERROR level messages
           },

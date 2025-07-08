@@ -1,5 +1,5 @@
 import { NetworkLoggerConfig } from '../types/types';
-import { defaultLogLevelConfig, ILogger } from './iLogger';
+import { defaultLogLevelConfig, LoggerContract } from './LoggerContract';
 
 // export const networkLogger = async (level: LogLevelConfig, message: string, data?: any, config?: NetworkLoggerConfig) => {
 //   try {
@@ -26,7 +26,7 @@ export const defaultNetworkLoggerConfig: NetworkLoggerConfig = {
   logLevel: { ...defaultLogLevelConfig },
 };
 
-export const NetworkLogger: ILogger = {
+export const NetworkLogger: LoggerContract = {
   info: async (_message: string, _data?: any) => {
     // TODO: Implement network logging logic
   },
@@ -48,4 +48,10 @@ export const NetworkLogger: ILogger = {
   redux: async (_message: string, _data?: any) => {
     // TODO: Implement network logging logic
   },
+  setConfig: (_updatedConfig: NetworkLoggerConfig) => {
+    // TODO: Implement network logging logic
+  },
+  cleanUp: () => {  
+    // TODO: Implement network logging logic
+  }
 };

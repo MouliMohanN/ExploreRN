@@ -1,4 +1,4 @@
-import { LogMapper } from '../loggers/iLogger';
+import { LogMapper } from '../loggers/LoggerContract';
 import { defaultConsoleLoggerConfig } from '../loggers/consoleLogger';
 import { defaultFileLoggerConfig } from '../loggers/fileLogger';
 import { defaultNetworkLoggerConfig } from '../loggers/networkLogger';
@@ -21,7 +21,7 @@ export const setLoggerConfig = (newConfig: Partial<LoggerConfig>) => {
 
   currentConfig.loggers.forEach((loggerName) => {
     const logger = LogMapper[loggerName];
-    logger.setConfig?.(currentConfig.loggersConfig?.[loggerName]);
-    logger?.cleanUp?.();
+    logger.setConfig(currentConfig.loggersConfig?.[loggerName]);
+    logger.cleanUp();
   });
 };

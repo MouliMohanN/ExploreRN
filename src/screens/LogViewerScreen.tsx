@@ -4,7 +4,7 @@ import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
-import { getLogFilePaths } from '../common/utils/logger/loggers/file/utils/logFileName';
+import { getLogFilePaths } from '../common/utils/logger/loggers/fileLogger';
 import { ScreenNames } from '../navigation';
 
 export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
