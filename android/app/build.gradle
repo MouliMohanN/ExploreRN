@@ -132,10 +132,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
-    dexOptions {
-        preDexLibraries true
-        javaMaxHeapSize "4g"
-    }
+    
     splits {
         abi {
             enable true
