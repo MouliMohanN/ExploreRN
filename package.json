@@ -31,6 +31,7 @@
     "adb-uninstall": "adb uninstall com.awesomeproject",
     "clean-install-android": "remove-node-modules && npm install -f && npm run android",
     "clean-install-android-release": "remove-node-modules && npm install -f && cd android && gradlew installRelease && cd ..",
+    "android-release": "cd android && gradlew installRelease && cd ..",
     "clean-gradle": "cd android && gradlew clean && cd ..",
     "generate-spec": "cd android && gradlew generateCodegenArtifactsFromSchema && cd ..",
     "rn-info": "npx react-native-info"
