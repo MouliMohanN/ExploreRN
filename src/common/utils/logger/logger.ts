@@ -1,36 +1,25 @@
-import { LogLevel, ConsoleLoggerConfig, FileLoggerConfig, NetworkLoggerConfig } from './types';
-import { consoleLogger } from './loggers/consoleLogger';
-import { fileLogger } from './loggers/fileLogger';
-import { networkLogger } from './loggers/networkLogger';
-import { currentConfig, setLoggerConfig } from './configManager';
-import { cleanOldLogs } from './logCleaner';
-
-const loggersMap = {
-  console: (level: LogLevel, message: string, data?: any) => consoleLogger(level, message, data, currentConfig.consoleConfig as ConsoleLoggerConfig),
-  file: (level: LogLevel, message: string, data?: any) => fileLogger(level, message, data, currentConfig.fileConfig as FileLoggerConfig),
-  network: (level: LogLevel, message: string, data?: any) => networkLogger(level, message, data, currentConfig.networkConfig as NetworkLoggerConfig),
-};
+import { currentConfig, setLoggerConfig } from './config/configManager';
+import { LoggerContract, LogMapper } from './loggers/LoggerContract';
+import { LogLevel } from './types/types';
 
 const log = (level: LogLevel, message: string, data?: any) => {
-  if (level < currentConfig.logLevel) {
+  if (!currentConfig.shouldLog) {
     return;
   }
 
-  currentConfig.loggers.forEach(loggerName => {
-    const loggerFunc = loggersMap[loggerName];
-    if (loggerFunc) {
-      loggerFunc(level, message, data);
-    }
+  currentConfig.loggers.forEach((loggerName) => {
+    LogMapper[loggerName][level](message, data);
   });
 };
 
-
-
-export const logger = {
-  debug: (message: string, data?: any) => log(LogLevel.DEBUG, message, data),
-  info: (message: string, data?: any) => log(LogLevel.INFO, message, data),
-  warn: (message: string, data?: any) => log(LogLevel.WARN, message, data),
-  error: (message: string, data?: any) => log(LogLevel.ERROR, message, data),
+export const logger: Omit<LoggerContract, 'setConfig' | 'cleanUp'> = {
+  debug: (message: string, data?: any) => log('debug', message, data),
+  info: (message: string, data?: any) => log('info', message, data),
+  warn: (message: string, data?: any) => log('warn', message, data),
+  error: (message: string, data?: any) => log('error', message, data),
+  navigationStack: (message: string, data?: any) => log('navigationStack', message, data),
+  networkIO: (message: string, data?: any) => log('networkIO', message, data),
+  redux: (message: string, data?: any) => log('redux', message, data),
 };
 
 export { setLoggerConfig };

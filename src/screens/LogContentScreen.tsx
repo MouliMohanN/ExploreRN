@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
@@ -22,7 +22,7 @@ export const LogContentScreen = ({ route, navigation }: ScreenBaseProps) => {
       };
       await Share.open(shareOptions);
     } catch (error) {
-      const errorMessage = (error instanceof Error) ? error.message : String(error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
       Alert.alert('Share Error', `Failed to share log file: ${errorMessage}`);
       console.error('Failed to share log file:', errorMessage);
     }
@@ -44,7 +44,7 @@ export const LogContentScreen = ({ route, navigation }: ScreenBaseProps) => {
         const content = await RNFS.readFile(logFilePath, 'utf8');
         setLogContent(content);
       } catch (error) {
-        const errorMessage = (error instanceof Error) ? error.message : String(error);
+        const errorMessage = error instanceof Error ? error.message : String(error);
         setLogContent(`Error reading log file: ${errorMessage}`);
         console.error('Error reading log file:', errorMessage);
       }
