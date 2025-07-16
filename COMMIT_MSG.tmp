@@ -1,0 +1,7 @@
+feat(android): Enable ABI splitting for smaller APKs
+
+This commit enables ABI splitting in the Android build process to generate separate APKs for different CPU architectures. This will result in smaller APK sizes for users, as they will only download the native code required for their specific device.
+
+- Enabled the ABI split in `android/app/build.gradle`.
+- Included the following architectures: armeabi-v7a, arm64-v8a, x86, x86_64.
+- Disabled the universal APK to ensure that only the split APKs are generated.
