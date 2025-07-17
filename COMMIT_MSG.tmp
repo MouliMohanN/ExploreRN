@@ -1,7 +1,20 @@
-feat(android): Enable ABI splitting for smaller APKs
+feat: Add debugInstallAbi script and refine app launch/connection
 
-This commit enables ABI splitting in the Android build process to generate separate APKs for different CPU architectures. This will result in smaller APK sizes for users, as they will only download the native code required for their specific device.
+This commit introduces a new script `scripts/useCase/fastDebugBuild/debugInstallAbi.ts` to automate the installation of ABI-specific debug APKs and refines the process of launching and connecting to the app.
 
-- Enabled the ABI split in `android/app/build.gradle`.
-- Included the following architectures: armeabi-v7a, arm64-v8a, x86, x86_64.
-- Disabled the universal APK to ensure that only the split APKs are generated.
+Key changes include:
+- **New `debugInstallAbi.ts` script**:
+    - Automatically starts the Metro server if not already running.
+    - Detects the connected Android device's ABI.
+    - Checks for a pre-built debug APK matching the device's ABI.
+    - If a matching APK is found, it installs the APK.
+    - After installation, it attempts to open the app and connect to Metro using `npm run adb-open-app` and `npm run adb-connect` respectively, with their outputs logged for debugging.
+    - If no pre-built APK is found, it falls back to executing `npx react-native run-android` to build and install the app.
+    - Includes comprehensive error handling and cleanup for child processes (Metro and `react-native run-android`).
+- **`package.json` updates**:
+    - Added a new `install-abi-apk` script to easily run the `debugInstallAbi.ts` script.
+    - Updated `adb-open-app`, `adb-close-app`, and `adb-uninstall` scripts to use the correct package name `com.explorern`.
+    - Removed the `--active-arch-only` flag from the `android` script.
+- **Removed Force-Stop**: The `adb shell am force-stop` command was removed from the app launch sequence in `debugInstallAbi.ts`.
+
+These changes aim to provide a more streamlined and robust workflow for Android development, particularly for ABI-specific builds and app launching.
