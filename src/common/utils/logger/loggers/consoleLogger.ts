@@ -1,7 +1,6 @@
 import { ConsoleLoggerConfig } from '../types/types';
 import { defaultLogLevelConfig, LoggerContract } from './LoggerContract';
 
-
 export const defaultConsoleLoggerConfig: ConsoleLoggerConfig = {
   logLevel: { ...defaultLogLevelConfig },
 };
@@ -39,8 +38,8 @@ export const ConsoleLogger: LoggerContract = {
     console.info(`[REDUX] ${message}`, data);
   },
 
-  setConfig: (updatedConfig: ConsoleLoggerConfig) => { 
-    config = updatedConfig
+  setConfig: (updatedConfig: ConsoleLoggerConfig) => {
+    config = updatedConfig;
   },
 
   cleanUp: () => {

@@ -51,7 +51,7 @@ export const NetworkLogger: LoggerContract = {
   setConfig: (_updatedConfig: NetworkLoggerConfig) => {
     // TODO: Implement network logging logic
   },
-  cleanUp: () => {  
+  cleanUp: () => {
     // TODO: Implement network logging logic
-  }
+  },
 };

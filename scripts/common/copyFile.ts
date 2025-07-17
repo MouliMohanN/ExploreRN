@@ -5,7 +5,7 @@ import * as path from 'path';
 const args = process.argv.slice(2);
 const params: Record<string, string> = {};
 
-args.forEach(arg => {
+args.forEach((arg) => {
   const [key, value] = arg.replace(/^--/, '').split('=');
   if (key && value) {
     params[key] = value;
