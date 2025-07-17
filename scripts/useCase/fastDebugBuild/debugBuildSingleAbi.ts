@@ -1,7 +1,8 @@
-const { exec, ChildProcess } = require('child_process');
+const { exec, spawn, ChildProcess } = require('child_process');
 const { promisify } = require('util');
 const path = require('path');
 const fs = require('fs');
+const net = require('net');
 
 const execAsync = promisify(exec);
 
@@ -13,6 +14,20 @@ const DEBUG_BUILD_GRADLE_PATH = path.join(SCRIPT_DIR, 'config', 'debugBuild.grad
 let metroProcess: import('child_process').ChildProcess | null = null;
 let androidBuildProcess: import('child_process').ChildProcess | null = null;
 let originalBuildGradleContent: string | null = null;
+
+const isMetroRunning = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const client = new net.Socket();
+    client.once('connect', () => {
+      client.end();
+      resolve(true);
+    });
+    client.once('error', () => {
+      resolve(false);
+    });
+    client.connect(8081, '127.0.0.1');
+  });
+};
 
 const cleanup = () => {
   console.log('\nInitiating cleanup...');
@@ -36,7 +51,7 @@ const cleanup = () => {
       console.error('Failed to revert android/app/build.gradle:', writeError);
     }
   }
-  
+
   console.log('Cleanup finished. Exiting.');
   process.exit();
 };
@@ -47,13 +62,14 @@ process.on('SIGTERM', cleanup);
 
 const run = async () => {
   try {
-    // 1. Start Metro bundler
-    console.log('Starting Metro bundler in the background...');
-    metroProcess = exec('npm start', { cwd: ROOT_DIR });
-
-    // Give metro a moment to start up.
-    console.log('Waiting for Metro bundler to initialize (8s)...');
-    await new Promise(resolve => setTimeout(resolve, 8000));
+    // 1. Check and Start Metro bundler
+    const metroAlreadyRunning = await isMetroRunning();
+    if (metroAlreadyRunning) {
+      console.log('Metro bundler is already running. Skipping start.');
+    } else {
+      console.log('Starting Metro bundler in the background...');
+      metroProcess = exec('npm start', { cwd: ROOT_DIR });
+    }
 
     // 2. Backup the original build.gradle
     console.log('Backing up original android/app/build.gradle...');
@@ -66,18 +82,22 @@ const run = async () => {
 
     // 4. Run the android app
     console.log('Building and running the app on the connected device (active architecture only)...');
-    androidBuildProcess = exec('npx react-native run-android --active-arch-only', { cwd: ROOT_DIR });
+    androidBuildProcess = spawn('npx react-native run-android --active-arch-only', [], {
+      cwd: ROOT_DIR,
+      stdio: 'inherit',
+      shell: true,
+    });
 
     if (!androidBuildProcess) {
       throw new Error('Failed to start Android build process.');
     }
 
     await new Promise<void>((resolve, reject) => {
-      androidBuildProcess!.on('exit', (code: number | null, signal: string | null) => {
+      androidBuildProcess!.on('close', (code: number | null) => {
         if (code === 0) {
           resolve();
         } else {
-          reject(new Error(`Android build process exited with code ${code || signal}`));
+          reject(new Error(`Android build process exited with code ${code}`));
         }
       });
       androidBuildProcess!.on('error', (err: Error) => {
@@ -86,10 +106,9 @@ const run = async () => {
     });
 
     console.log('Build successful. Now you can start debugging.');
-
   } catch (error: any) {
     if (!error.killed) {
-        console.error('An error occurred during the build process:', error);
+      console.error('An error occurred during the build process:', error);
     }
   } finally {
     cleanup();
