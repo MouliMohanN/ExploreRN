@@ -9,7 +9,7 @@ const execAsync = promisify(exec);
 const ROOT_DIR = path.join(__dirname, '..', '..', '..');
 const SCRIPT_DIR = __dirname;
 const APP_BUILD_GRADLE_PATH = path.join(ROOT_DIR, 'android', 'app', 'build.gradle');
-const DEBUG_BUILD_GRADLE_PATH = path.join(SCRIPT_DIR, 'config', 'debugBuild.gradle');
+const DEBUG_BUILD_GRADLE_PATH = path.join(SCRIPT_DIR, 'config', 'debugBuildSingleAbi.gradle');
 
 let metroProcess: import('child_process').ChildProcess | null = null;
 let androidBuildProcess: import('child_process').ChildProcess | null = null;
