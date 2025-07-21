@@ -66,8 +66,6 @@ const PrivateUtils = {
   },
 };
 
-
-
 export const defaultFileLoggerConfig: FileLoggerConfig = {
   logLevel: { ...defaultLogLevelConfig },
   logRetentionHours: 24, // Default to 24 hours
