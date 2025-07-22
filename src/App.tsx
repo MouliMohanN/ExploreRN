@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { RootStack, RootStackScreens, ScreenNames } from './navigation';
+import { RootStack, RootStackScreens, ScreenNames } from './common/navigation';
 
 const App = () => {
   useEffect(() => {

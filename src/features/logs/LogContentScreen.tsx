@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
-import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
+import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 
 export const LogContentScreen = ({ route, navigation }: ScreenBaseProps) => {
   const { logFilePath } = route.params as { logFilePath: string };

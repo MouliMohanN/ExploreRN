@@ -3,9 +3,9 @@ import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
-import { getLogFilePaths } from '../common/utils/logger/loggers/fileLogger';
-import { ScreenNames } from '../navigation';
+import { ScreenNames } from '../../common/navigation';
+import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import { getLogFilePaths } from '../../common/utils/logger/loggers/fileLogger';
 
 export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
   const [logFiles, setLogFiles] = useState<string[]>([]);

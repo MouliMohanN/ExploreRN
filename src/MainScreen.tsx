@@ -1,8 +1,8 @@
 import { Text, View } from 'react-native';
-import { Button } from '../common/components/Button';
-import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
-import { logger } from '../common/utils/logger/logger';
-import { ScreenNames } from '../navigation';
+import { Button } from './common/components/Button';
+import { ScreenNames } from './common/navigation';
+import { ScreenBaseProps } from './common/types/ScreenBaseProps';
+import { logger } from './common/utils/logger/logger';
 
 export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
   return (
