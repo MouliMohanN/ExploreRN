@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -25,10 +25,15 @@ const Tab = createMaterialTopTabNavigator();
 // };
 
 export const TabViewReactNavigationScreen: React.FC<ScreenBaseProps> = ({}) => {
+  const [count, setCount] = useState(0);
   return (
     <Tab.Navigator screenOptions={{ lazy: true }}>
-      <Tab.Screen name='screen1' component={TabViewScreen1} />
-      <Tab.Screen name='screen2' component={TabViewScreen2} />
+      <Tab.Screen name='screen1'>
+        {(props) => <TabViewScreen1 {...props} count={count} setCount={setCount} />}
+      </Tab.Screen>
+      <Tab.Screen name='screen2'>
+        {(props) => <TabViewScreen2 {...props} count={count} setCount={setCount} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };
