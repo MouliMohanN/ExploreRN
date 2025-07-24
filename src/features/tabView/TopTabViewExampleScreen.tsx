@@ -138,7 +138,8 @@ export const TopTabViewExampleScreen: React.FC = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        swipeEnabled={true}
+        swipeEnabled={false}
+        pageLimit={1}
       />
     </View>
   );

@@ -1,7 +1,7 @@
-import type { StyleProp, ViewStyle, TextStyle } from 'react-native';
-import type { SharedValue } from 'react-native-reanimated';
-import type PagerView from 'react-native-pager-view';
 import type { RefObject } from 'react';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type PagerView from 'react-native-pager-view';
+import type { SharedValue } from 'react-native-reanimated';
 
 export type TabConfig = {
   key: string;

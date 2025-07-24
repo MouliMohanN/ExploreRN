@@ -1,5 +1,4 @@
-import type { StyleProp, ViewStyle, TextStyle } from 'react-native';
-import type { SharedValue } from 'react-native-reanimated';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type TabConfigV2 = {
   key: string;
@@ -18,11 +17,13 @@ export type TopTabViewV2Props = {
   activeTabTextStyle?: StyleProp<TextStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
+  pageLimit?: number;
+  swipeEnabled?: boolean;
 };
 
 export type TabBarProps = {
   tabs: TabConfigV2[];
-  currentIndex: number; // Changed from SharedValue<number>
+  currentIndex: number;
   onTabPress: (index: number) => void;
   tabBarStyle?: StyleProp<ViewStyle>;
   tabItemStyle?: StyleProp<ViewStyle>;
@@ -34,6 +35,9 @@ export type TabBarProps = {
 
 export type TabContentV2Props = {
   tabs: TabConfigV2[];
-  currentIndex: number; // Changed from SharedValue<number>
+  currentIndex: number;
+  onIndexChange: (index: number) => void;
   contentContainerStyle?: StyleProp<ViewStyle>;
+  pageLimit?: number;
+  swipeEnabled?: boolean;
 };

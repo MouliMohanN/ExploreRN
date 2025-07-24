@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming, useSharedValue, withSpring } from 'react-native-reanimated';
+import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import type { TabBarProps } from './typesV2';
 
 const { width } = Dimensions.get('window');
@@ -19,9 +19,11 @@ export const TabBarV2: React.FC<TabBarProps> = ({
   const indicatorAnimatedStyle = useAnimatedStyle(() => {
     const tabWidth = width / tabs.length;
     return {
-      transform: [{
-        translateX: withTiming(currentIndex * tabWidth, { duration: 200 }) // Use currentIndex directly
-      }],
+      transform: [
+        {
+          translateX: withTiming(currentIndex * tabWidth, { duration: 200 }),
+        },
+      ],
       width: tabWidth,
     };
   });
@@ -30,10 +32,10 @@ export const TabBarV2: React.FC<TabBarProps> = ({
     <View style={[styles.tabBar, tabBarStyle]}>
       {tabs.map((tab, index) => {
         const textAnimatedStyle = useAnimatedStyle(() => {
-          const isActive = currentIndex === index; // Use currentIndex directly
+          const isActive = currentIndex === index;
           return {
-            fontWeight: isActive ? 'bold' : 'normal',
-            color: isActive ? '#007AFF' : '#333',
+            fontWeight: withSpring(isActive ? 'bold' : 'normal'),
+            color: withTiming(isActive ? '#007AFF' : '#333'),
           };
         });
 
@@ -48,18 +50,14 @@ export const TabBarV2: React.FC<TabBarProps> = ({
         return (
           <TouchableOpacity
             key={tab.key}
-            style={[styles.tabItem, tabItemStyle, currentIndex === index && activeTabItemStyle]} // Use currentIndex directly
+            style={[styles.tabItem, tabItemStyle, currentIndex === index && activeTabItemStyle]}
             onPressIn={() => (scale.value = withSpring(0.95))}
             onPressOut={() => (scale.value = withSpring(1))}
             onPress={() => onTabPress(index)}
           >
             <Animated.View style={touchableAnimatedStyle}>
               <Animated.Text
-                style={[
-                  styles.tabText,
-                  tabTextStyle,
-                  textAnimatedStyle,
-                ]}
+                style={[styles.tabText, tabTextStyle, textAnimatedStyle, currentIndex === index && activeTabTextStyle]}
               >
                 {tab.title}
               </Animated.Text>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { TabBarV2 } from './TabBarV2';
 import { TabContentV2 } from './TabContentV2';
 import type { TopTabViewV2Props } from './typesV2';
@@ -15,13 +15,18 @@ export const TopTabViewV2: React.FC<TopTabViewV2Props> = ({
   activeTabTextStyle,
   indicatorStyle,
   contentContainerStyle,
+  pageLimit = 0,
+  swipeEnabled = true,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
-  const handleTabPress = (index: number) => {
-    setCurrentIndex(index);
-    onTabChange?.(index);
-  };
+  const handleTabPress = useCallback(
+    (index: number) => {
+      setCurrentIndex(index);
+      onTabChange?.(index);
+    },
+    [onTabChange],
+  );
 
   if (!tabs || tabs.length === 0) {
     return (
@@ -47,7 +52,10 @@ export const TopTabViewV2: React.FC<TopTabViewV2Props> = ({
       <TabContentV2
         tabs={tabs}
         currentIndex={currentIndex}
+        onIndexChange={handleTabPress}
         contentContainerStyle={contentContainerStyle}
+        pageLimit={pageLimit}
+        swipeEnabled={swipeEnabled}
       />
     </View>
   );
