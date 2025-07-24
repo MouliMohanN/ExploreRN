@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming, SharedValue } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, withTiming, SharedValue, useSharedValue, withSpring } from 'react-native-reanimated';
 import type { TabBarProps } from './types';
 
 const { width } = Dimensions.get('window');
@@ -37,21 +37,33 @@ export const TabBar: React.FC<TabBarProps> = ({
           };
         });
 
+        const scale = useSharedValue(1);
+
+        const touchableAnimatedStyle = useAnimatedStyle(() => {
+          return {
+            transform: [{ scale: scale.value }],
+          };
+        });
+
         return (
           <TouchableOpacity
             key={tab.key}
             style={[styles.tabItem, tabItemStyle, currentIndex.value === index && activeTabItemStyle]}
+            onPressIn={() => (scale.value = withSpring(0.95))}
+            onPressOut={() => (scale.value = withSpring(1))}
             onPress={() => onTabPress(index)}
           >
-            <Animated.Text
-              style={[
-                styles.tabText,
-                tabTextStyle,
-                textAnimatedStyle,
-              ]}
-            >
-              {tab.title}
-            </Animated.Text>
+            <Animated.View style={touchableAnimatedStyle}>
+              <Animated.Text
+                style={[
+                  styles.tabText,
+                  tabTextStyle,
+                  textAnimatedStyle,
+                ]}
+              >
+                {tab.title}
+              </Animated.Text>
+            </Animated.View>
           </TouchableOpacity>
         );
       })}

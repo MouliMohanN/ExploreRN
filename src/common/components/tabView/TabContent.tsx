@@ -9,6 +9,8 @@ export const TabContent: React.FC<TabContentProps> = ({
   swipeEnabled,
   contentContainerStyle,
   pagerViewRef,
+  offscreenPageLimit = 1,
+  onPageSelected, // New prop
 }) => {
   return (
     <PagerView
@@ -17,9 +19,12 @@ export const TabContent: React.FC<TabContentProps> = ({
       initialPage={currentIndex.value}
       scrollEnabled={swipeEnabled}
       onPageSelected={(e) => {
+        console.log('TabContent: PagerView onPageSelected - position:', e.nativeEvent.position);
         // Update the shared currentIndex when the user swipes
         currentIndex.value = e.nativeEvent.position;
+        onPageSelected?.(e.nativeEvent.position); // Call the exposed prop
       }}
+      offscreenPageLimit={offscreenPageLimit}
     >
       {tabs.map((tab) => {
         const Component = tab.component;

@@ -21,6 +21,8 @@ export type TopTabViewProps = {
   indicatorStyle?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
   swipeEnabled?: boolean;
+  offscreenPageLimit?: number; // New prop for preloading
+  onPageSelected?: (index: number) => void; // New prop for PagerView's onPageSelected
 };
 
 export type TabBarProps = {
@@ -41,4 +43,6 @@ export type TabContentProps = {
   swipeEnabled?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
   pagerViewRef: RefObject<PagerView>;
+  offscreenPageLimit?: number; // New prop for preloading
+  onPageSelected?: (index: number) => void; // New prop for PagerView's onPageSelected
 };
