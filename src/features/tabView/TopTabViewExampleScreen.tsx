@@ -32,21 +32,29 @@ export const TopTabViewExampleScreen: React.FC = () => {
       <TopTabView
         tabs={tabs}
         initialIndex={0}
-        tabBarOptions={{
+        tabBarStyle={{
           backgroundColor: '#e0e0e0',
-          activeLabelColor: '#007AFF',
-          inactiveLabelColor: '#888',
-          indicatorColor: '#007AFF',
-          indicatorHeight: 4,
-          style: { borderBottomWidth: 0 },
-          itemStyle: { paddingVertical: 10 },
-          labelStyle: { fontSize: 18 },
-          activeLabelStyle: { fontWeight: 'bold' },
+          borderBottomWidth: 0,
         }}
-        contentOptions={{
-          style: { backgroundColor: '#f9f9f9' },
-          sceneStyle: { justifyContent: 'center', alignItems: 'center' },
+        tabItemStyle={{
+          paddingVertical: 10,
         }}
+        tabTextStyle={{
+          fontSize: 18,
+        }}
+        activeTabTextStyle={{
+          fontWeight: 'bold',
+        }}
+        indicatorStyle={{
+          backgroundColor: '#007AFF',
+          height: 4,
+        }}
+        contentContainerStyle={{
+          backgroundColor: '#f9f9f9',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        swipeEnabled={true}
       />
     </View>
   );

@@ -1,41 +1,53 @@
-import React, { useState } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useSharedValue } from 'react-native-reanimated';
+import { TabBar } from './TabBar';
+import { TabContent } from './TabContent';
+import type { TopTabViewProps } from './types';
+import PagerView from 'react-native-pager-view';
 
-Dimensions.get('window');
+export const TopTabView: React.FC<TopTabViewProps> = ({
+  tabs,
+  initialIndex = 0,
+  onTabChange,
+  tabBarStyle,
+  tabItemStyle,
+  activeTabItemStyle,
+  tabTextStyle,
+  activeTabTextStyle,
+  indicatorStyle,
+  contentContainerStyle,
+  swipeEnabled = true,
+}) => {
+  const currentIndex = useSharedValue(initialIndex);
+  const pagerViewRef = useRef<PagerView>(null);
 
-interface TabConfig {
-  key: string;
-  title: string;
-  component: React.ComponentType<any>;
-}
-
-interface TopTabViewProps {
-  tabs: TabConfig[];
-  initialIndex?: number;
-}
-
-export const TopTabView: React.FC<TopTabViewProps> = ({ tabs, initialIndex = 0 }) => {
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
-
-  const renderScene = () => {
-    const ActiveComponent = tabs[currentIndex].component;
-    return <ActiveComponent />;
+  const handleTabPress = (index: number) => {
+    currentIndex.value = index;
+    pagerViewRef.current?.setPage(index); // Directly tell PagerView to change page
+    onTabChange?.(index);
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.tabBar}>
-        {tabs.map((tab, index) => (
-          <TouchableOpacity
-            key={tab.key}
-            style={[styles.tabItem, currentIndex === index && styles.activeTabItem]}
-            onPress={() => setCurrentIndex(index)}
-          >
-            <Text style={[styles.tabText, currentIndex === index && styles.activeTabText]}>{tab.title}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.content}>{renderScene()}</View>
+      <TabBar
+        tabs={tabs}
+        currentIndex={currentIndex}
+        onTabPress={handleTabPress}
+        tabBarStyle={tabBarStyle}
+        tabItemStyle={tabItemStyle}
+        activeTabItemStyle={activeTabItemStyle}
+        tabTextStyle={tabTextStyle}
+        activeTabTextStyle={activeTabTextStyle}
+        indicatorStyle={indicatorStyle}
+      />
+      <TabContent
+        tabs={tabs}
+        currentIndex={currentIndex}
+        swipeEnabled={swipeEnabled}
+        contentContainerStyle={contentContainerStyle}
+        pagerViewRef={pagerViewRef} // Pass the ref down to TabContent
+      />
     </View>
   );
 };
@@ -43,34 +55,5 @@ export const TopTabView: React.FC<TopTabViewProps> = ({ tabs, initialIndex = 0 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  tabBar: {
-    flexDirection: 'row',
-    backgroundColor: '#f0f0f0',
-    height: 50,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  tabItem: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  activeTabItem: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#007AFF',
-  },
-  tabText: {
-    fontSize: 16,
-    color: '#333',
-  },
-  activeTabText: {
-    fontWeight: 'bold',
-    color: '#007AFF',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
