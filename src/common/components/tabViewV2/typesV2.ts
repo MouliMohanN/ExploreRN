@@ -3,7 +3,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 export type TabConfigV2 = {
   key: string;
   title: string;
-  component: React.ComponentType<any>;
+  component: React.FC<{ isFocused?: boolean }>;
 };
 
 export type TopTabViewV2Props = {
