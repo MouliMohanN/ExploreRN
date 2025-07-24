@@ -4,6 +4,7 @@ import { LogContentScreen } from '../../features/logs/LogContentScreen';
 import { LogViewerScreen } from '../../features/logs/LogViewerScreen';
 import { TabViewReactNavigationScreen } from '../../features/tabView/TabViewReactNavigationScreen';
 import { TabViewReanimatedScreen } from '../../features/tabView/TabViewReanimatedScreen';
+import { TopTabViewExampleScreen } from '../../features/tabView/TopTabViewExampleScreen';
 
 const LogFeatureScreen = {
   LogViewer: 'LogViewer',
@@ -13,6 +14,7 @@ const LogFeatureScreen = {
 const TabViewFeatureScreen = {
   TabViewReactNavigation: 'TabViewReactNavigation',
   TabViewReanimated: 'TabViewReanimated',
+  TabViewTop: 'TabViewTop',
 };
 
 export const ScreenNames = {
@@ -57,6 +59,14 @@ const TabViewFeatureScreens = [
     options: {
       headerShown: true,
       title: 'Reanimated TabView',
+    },
+  },
+  {
+    name: ScreenNames.TabViewTop,
+    component: TopTabViewExampleScreen,
+    options: {
+      headerShown: true,
+      title: 'Top TabView',
     },
   },
 ];

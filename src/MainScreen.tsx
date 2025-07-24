@@ -40,6 +40,12 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
             navigation.navigate(ScreenNames.TabViewReanimated);
           }}
         />
+        <Button
+          title='Top TabView'
+          onPress={() => {
+            navigation.navigate(ScreenNames.TabViewTop);
+          }}
+        />
       </>
     );
   };
