@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TopTabView } from '../../common/components/tabView/TopTabView';
+import { TopTabViewV2 } from '../../common/components/tabViewV2/TopTabViewV2';
 
 // Define TabScreen components outside the main component for better reusability and performance
 const TabScreen1 = () => {
@@ -112,7 +112,7 @@ export const TopTabViewExampleScreen: React.FC = () => {
       <Text style={localStyles.activeTabInfo}>
         {/* Active Tab: {tabs[activeTabIndex].title} (Index: {activeTabIndex}) */}
       </Text>
-      <TopTabView
+      <TopTabViewV2
         tabs={tabs}
         initialIndex={0}
         onTabChange={handlePageSelected} // Pass the state setter to onTabChange
