@@ -41,9 +41,15 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
           }}
         />
         <Button
-          title='Top TabView'
+          title='Top TabView - ViewPager'
           onPress={() => {
-            navigation.navigate(ScreenNames.TabViewTop);
+            navigation.navigate(ScreenNames.TabViewTopPagerView);
+          }}
+        />
+        <Button
+          title='Top TabView - GuestureHandler'
+          onPress={() => {
+            navigation.navigate(ScreenNames.TabViewTopGuestureHandler);
           }}
         />
       </>

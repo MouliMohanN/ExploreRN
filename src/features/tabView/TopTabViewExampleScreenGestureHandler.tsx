@@ -93,7 +93,7 @@ const TabScreen6 = () => {
   );
 };
 
-export const TopTabViewExampleScreen: React.FC = () => {
+export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
   const tabs = [
     { key: 'tab1', title: 'First', component: TabScreen1 },
     { key: 'tab2', title: 'Second', component: TabScreen2 },
@@ -104,7 +104,7 @@ export const TopTabViewExampleScreen: React.FC = () => {
   ];
 
   const handlePageSelected = (index: number) => {
-    console.log('TopTabViewExampleScreen: onPageSelected received index:', index);
+    console.log('TopTabViewExampleScreenGestureHandler: onPageSelected received index:', index);
   };
 
   return (

@@ -4,7 +4,8 @@ import { LogContentScreen } from '../../features/logs/LogContentScreen';
 import { LogViewerScreen } from '../../features/logs/LogViewerScreen';
 import { TabViewReactNavigationScreen } from '../../features/tabView/TabViewReactNavigationScreen';
 import { TabViewReanimatedScreen } from '../../features/tabView/TabViewReanimatedScreen';
-import { TopTabViewExampleScreen } from '../../features/tabView/TopTabViewExampleScreen';
+import { TopTabViewExampleScreenGestureHandler } from '../../features/tabView/TopTabViewExampleScreenGestureHandler';
+import { TopTabViewExampleScreenPagerView } from '../../features/tabView/TopTabViewExampleScreenPagerView';
 
 const LogFeatureScreen = {
   LogViewer: 'LogViewer',
@@ -14,7 +15,8 @@ const LogFeatureScreen = {
 const TabViewFeatureScreen = {
   TabViewReactNavigation: 'TabViewReactNavigation',
   TabViewReanimated: 'TabViewReanimated',
-  TabViewTop: 'TabViewTop',
+  TabViewTopPagerView: 'TabViewTopPagerView',
+  TabViewTopGuestureHandler: 'TabViewTopGuestureHandler',
 };
 
 export const ScreenNames = {
@@ -62,8 +64,16 @@ const TabViewFeatureScreens = [
     },
   },
   {
-    name: ScreenNames.TabViewTop,
-    component: TopTabViewExampleScreen,
+    name: ScreenNames.TabViewTopPagerView,
+    component: TopTabViewExampleScreenPagerView,
+    options: {
+      headerShown: true,
+      title: 'Top TabView',
+    },
+  },
+  {
+    name: ScreenNames.TabViewTopGuestureHandler,
+    component: TopTabViewExampleScreenGestureHandler,
     options: {
       headerShown: true,
       title: 'Top TabView',
