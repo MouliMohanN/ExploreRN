@@ -27,7 +27,7 @@ export const TabContentV2: React.FC<TabContentV2Props> = ({
   });
 
   React.useEffect(() => {
-    translationX.value = withSpring(-width * currentIndex);
+    translationX.value = withSpring(-width * currentIndex, { damping: 500, stiffness: 1000 });
   }, [currentIndex, translationX]);
 
   const panGesture = Gesture.Pan()
@@ -37,21 +37,23 @@ export const TabContentV2: React.FC<TabContentV2Props> = ({
     })
     .onEnd((e) => {
       'worklet';
+      let targetIndex = currentIndex;
       if (
         Math.abs(e.translationX) > SWIPE_THRESHOLD ||
         (Math.abs(e.velocityX) > 500 && Math.abs(e.translationX) > width * 0.1)
       ) {
-        const newIndex = e.translationX < 0 ? currentIndex + 1 : currentIndex - 1;
-        if (newIndex >= 0 && newIndex < tabs.length) {
-          runOnJS(onIndexChange)(newIndex);
-        } else {
-          translationX.value = withSpring(-width * currentIndex);
-        }
+        targetIndex = e.translationX < 0 ? currentIndex + 1 : currentIndex - 1;
+      }
+
+      if (targetIndex >= 0 && targetIndex < tabs.length) {
+        translationX.value = withSpring(-width * targetIndex, { damping: 500, stiffness: 1000 });
+        runOnJS(onIndexChange)(targetIndex);
       } else {
-        translationX.value = withSpring(-width * currentIndex);
+        translationX.value = withSpring(-width * currentIndex, { damping: 500, stiffness: 1000 });
       }
     });
 
+  console.log('TabContentV2 rendered');
   const content = (
     <Animated.View style={[styles.contentContainer, animatedStyle]}>
       {tabs.map((tab, index) => {
