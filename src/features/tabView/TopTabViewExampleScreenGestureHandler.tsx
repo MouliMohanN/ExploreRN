@@ -136,7 +136,7 @@ export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        swipeEnabled={false}
+        swipeEnabled={true}
         pageLimit={1}
       />
     </View>

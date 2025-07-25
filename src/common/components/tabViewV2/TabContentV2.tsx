@@ -15,25 +15,25 @@ export const TabContentV2: React.FC<TabContentV2Props> = ({
   pageLimit = 0,
   swipeEnabled = true,
 }) => {
-  const x = useSharedValue(0);
+  const translationX = useSharedValue(0);
 
   const animatedStyle = useAnimatedStyle(() => {
     'worklet';
     return {
-      transform: [{ translateX: x.value }],
+      transform: [{ translateX: translationX.value }],
       width: width * tabs.length,
       flexDirection: 'row',
     };
   });
 
   React.useEffect(() => {
-    x.value = withSpring(-width * currentIndex);
-  }, [currentIndex, x]);
+    translationX.value = withSpring(-width * currentIndex);
+  }, [currentIndex, translationX]);
 
   const panGesture = Gesture.Pan()
     .onUpdate((e) => {
       'worklet';
-      x.value = -width * currentIndex + e.translationX;
+      translationX.value = -width * currentIndex + e.translationX;
     })
     .onEnd((e) => {
       'worklet';
@@ -45,10 +45,10 @@ export const TabContentV2: React.FC<TabContentV2Props> = ({
         if (newIndex >= 0 && newIndex < tabs.length) {
           runOnJS(onIndexChange)(newIndex);
         } else {
-          x.value = withSpring(-width * currentIndex);
+          translationX.value = withSpring(-width * currentIndex);
         }
       } else {
-        x.value = withSpring(-width * currentIndex);
+        translationX.value = withSpring(-width * currentIndex);
       }
     });
 
