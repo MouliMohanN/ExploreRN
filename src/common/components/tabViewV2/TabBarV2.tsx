@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { LayoutChangeEvent, NativeScrollEvent, Pressable, StyleSheet, View } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
@@ -19,7 +19,6 @@ interface TabItemProps {
   activeTabItemStyle?: TabBarProps['activeTabItemStyle'];
   tabTextStyle?: TabBarProps['tabTextStyle'];
   activeTabTextStyle?: TabBarProps['activeTabTextStyle'];
-  tabBarRef: React.RefObject<Animated.FlatList>;
 }
 
 const TabItem: React.FC<TabItemProps> = ({
@@ -32,7 +31,6 @@ const TabItem: React.FC<TabItemProps> = ({
   activeTabItemStyle,
   tabTextStyle,
   activeTabTextStyle,
-  tabBarRef,
 }) => {
   const textAnimatedStyle = useAnimatedStyle(() => {
     const isActive = currentIndex === index;
@@ -63,11 +61,6 @@ const TabItem: React.FC<TabItemProps> = ({
       onPressOut={() => (scale.value = withSpring(1))}
       onPress={() => {
         onTabPress(index);
-        tabBarRef.current?.scrollToIndex({
-          index,
-          animated: true,
-          viewPosition: 0.5,
-        });
       }}
       onLayout={onLayout}
     >
@@ -100,6 +93,10 @@ export const TabBarV2: React.FC<TabBarProps> = ({
   const tabBarIndex = useRef(0);
   const allTabsWidth = useRef<{ [key: number]: TabLayout }>({});
 
+  useEffect(() => {
+    updateTabBar(currentIndex);
+  }, [currentIndex]);
+
   const onScroll = useAnimatedScrollHandler((event: NativeScrollEvent) => {
     scrollX.value = event.contentOffset.x;
     console.log('onScroll', event.contentOffset.x);
@@ -125,8 +122,13 @@ export const TabBarV2: React.FC<TabBarProps> = ({
     };
   });
 
-  const onTabPressInternal = (index: number) => {
-    const { width } = allTabsWidth.current[index];
+  const updateTabBar = (index: number) => {
+    console.log('updateTabBar', allTabsWidth.current, index);
+    const tabLayout = allTabsWidth.current[index];
+    if (!tabLayout?.width) {
+      return;
+    }
+    const width = tabLayout.width;
     tabBarIndex.current = index;
     tabBarWidth.value = width;
     const tabBarXValue = getTabBarxValue();
@@ -135,6 +137,15 @@ export const TabBarV2: React.FC<TabBarProps> = ({
       `onTabPressInternal index: ${index}, width: ${width}, tabBarX.value: ${tabBarX.value}, tabBarXValue: ${tabBarXValue}, diff: ${tabBarX.value - tabBarXValue}`,
       allTabsWidth.current,
     );
+    tabBarRef.current?.scrollToIndex({
+      index,
+      animated: true,
+      viewPosition: 0.5,
+    });
+  };
+
+  const onTabPressInternal = (index: number) => {
+    updateTabBar(index);
     onTabPress(index);
   };
 
@@ -166,7 +177,6 @@ export const TabBarV2: React.FC<TabBarProps> = ({
             activeTabItemStyle={activeTabItemStyle}
             tabTextStyle={tabTextStyle}
             activeTabTextStyle={activeTabTextStyle}
-            tabBarRef={tabBarRef}
           />
         )}
         keyExtractor={(item) => item.key}
