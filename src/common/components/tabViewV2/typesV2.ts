@@ -41,3 +41,8 @@ export type TabContentV2Props = {
   pageLimit?: number;
   swipeEnabled?: boolean;
 };
+
+export type TabLayout = {
+  x: number;
+  width: number;
+};
