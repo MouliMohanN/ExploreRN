@@ -24,7 +24,6 @@ export const TopTabView: React.FC<TopTabViewProps> = ({
   const pagerViewRef = useRef<PagerView>(null);
 
   const handleTabPress = (index: number) => {
-    console.log('TopTabView: Tab pressed, new index:', index);
     currentIndex.value = index;
     if (pagerViewRef.current) {
       console.log('TopTabView: Calling pagerViewRef.current.setPage(', index, ')');

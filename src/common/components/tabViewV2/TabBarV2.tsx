@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Dimensions, NativeScrollEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, NativeScrollEvent, StyleSheet, Pressable, View } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
@@ -52,7 +52,7 @@ const TabItem: React.FC<TabItemProps> = ({
   });
 
   return (
-    <TouchableOpacity
+    <Pressable
       key={tab.key}
       style={[styles.tabItem, { width: TAB_ITEM_WIDTH }, tabItemStyle, currentIndex === index && activeTabItemStyle]}
       onPressIn={() => (scale.value = withSpring(0.95))}
@@ -73,7 +73,7 @@ const TabItem: React.FC<TabItemProps> = ({
           {tab.title}
         </Animated.Text>
       </Animated.View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

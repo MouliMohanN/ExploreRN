@@ -109,9 +109,6 @@ export const TopTabViewExampleScreen: React.FC = () => {
 
   return (
     <View style={localStyles.container}>
-      <Text style={localStyles.activeTabInfo}>
-        {/* Active Tab: {tabs[activeTabIndex].title} (Index: {activeTabIndex}) */}
-      </Text>
       <TopTabViewV2
         tabs={tabs}
         initialIndex={0}
@@ -122,6 +119,7 @@ export const TopTabViewExampleScreen: React.FC = () => {
         }}
         tabItemStyle={{
           paddingVertical: 10,
+          paddingHorizontal: 20,
         }}
         tabTextStyle={{
           fontSize: 18,
