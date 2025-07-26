@@ -126,22 +126,26 @@ export const TabBarV2: React.FC<TabBarProps> = ({
     console.log('updateTabBar', allTabsWidth.current, index);
     const tabLayout = allTabsWidth.current[index];
     if (!tabLayout?.width) {
+      // If layout not available, retry after a short delay
+      setTimeout(() => updateTabBar(index), 50); // Retry after 50ms
       return;
     }
     const width = tabLayout.width;
     tabBarIndex.current = index;
-    tabBarWidth.value = width;
     const tabBarXValue = getTabBarxValue();
-    tabBarX.value = tabBarXValue;
-    console.log(
-      `onTabPressInternal index: ${index}, width: ${width}, tabBarX.value: ${tabBarX.value}, tabBarXValue: ${tabBarXValue}, diff: ${tabBarX.value - tabBarXValue}`,
-      allTabsWidth.current,
-    );
+
+    // First, initiate the scroll
     tabBarRef.current?.scrollToIndex({
       index,
-      animated: true,
+      animated: false,
       viewPosition: 0.5,
     });
+
+    // Then, after a short delay, animate the indicator
+    setTimeout(() => {
+      tabBarWidth.value = width;
+      tabBarX.value = tabBarXValue;
+    }, 100); // Adjust delay as needed for visual smoothness
   };
 
   const onTabPressInternal = (index: number) => {

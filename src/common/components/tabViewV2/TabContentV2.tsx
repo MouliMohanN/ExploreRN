@@ -12,7 +12,7 @@ export const TabContentV2: React.FC<TabContentV2Props> = ({
   currentIndex,
   onIndexChange,
   contentContainerStyle,
-  pageLimit = 0,
+  pageLimit = 1,
   swipeEnabled = true,
 }) => {
   const translationX = useSharedValue(0);
@@ -58,11 +58,12 @@ export const TabContentV2: React.FC<TabContentV2Props> = ({
     <Animated.View style={[styles.contentContainer, animatedStyle]}>
       {tabs.map((tab, index) => {
         const isFocused = currentIndex === index;
-        const isAdjacent = Math.abs(currentIndex - index) <= pageLimit;
-
+        const isAdjacent = Math.abs(currentIndex - index) < pageLimit;
+        const Component = tab.component;
         return (
           <View key={index} style={[styles.page, contentContainerStyle]}>
-            {isAdjacent ? React.createElement(tab.component, { isFocused }) : <View />}
+            {isAdjacent ? React.createElement(Component, { isFocused }) : <View />}
+            {/* <Component isFocused={isFocused} /> */}
           </View>
         );
       })}
