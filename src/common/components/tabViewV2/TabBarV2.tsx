@@ -94,7 +94,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
   const allTabsWidth = useRef<{ [key: number]: TabLayout }>({});
 
   useEffect(() => {
-    updateTabBar(currentIndex);
+    updateTabBar(currentIndex, true);
   }, [currentIndex]);
 
   const onScroll = useAnimatedScrollHandler((event: NativeScrollEvent) => {
@@ -122,7 +122,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
     };
   });
 
-  const updateTabBar = (index: number) => {
+  const updateTabBar = (index: number, isSwipe = false) => {
     console.log('updateTabBar', allTabsWidth.current, index);
     const tabLayout = allTabsWidth.current[index];
     if (!tabLayout?.width) {
@@ -137,7 +137,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
     // First, initiate the scroll
     tabBarRef.current?.scrollToIndex({
       index,
-      animated: false,
+      animated: isSwipe,
       viewPosition: 0.5,
     });
 
