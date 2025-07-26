@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TopTabView } from '../../common/components/tabView/TopTabView';
 
@@ -94,6 +94,15 @@ const TabScreen6 = () => {
 };
 
 export const TopTabViewExampleScreenPagerView: React.FC = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+    });
+
+    return () => clearInterval(interval);
+  }, []);
   const tabs = [
     { key: 'tab1', title: 'First', component: TabScreen1 },
     { key: 'tab2', title: 'Second', component: TabScreen2 },
@@ -109,6 +118,7 @@ export const TopTabViewExampleScreenPagerView: React.FC = () => {
 
   return (
     <View style={localStyles.container}>
+      <Text style={localStyles.counterText}>Count: {count}</Text>
       <TopTabView
         tabs={tabs}
         initialIndex={0}
@@ -163,5 +173,12 @@ const localStyles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     backgroundColor: '#f0f0f0',
+  },
+  counterText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 10,
+    backgroundColor: '#ffe0b2',
   },
 });
