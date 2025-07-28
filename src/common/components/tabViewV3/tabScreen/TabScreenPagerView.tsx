@@ -21,7 +21,6 @@ export const TabScreenPagerView: React.FC<TabScreenPagerViewProps> = ({
       initialPage={currentIndex}
       scrollEnabled={swipeEnabled}
       onPageSelected={(e) => {
-        console.log('TabContent: PagerView onPageSelected - position:', e.nativeEvent.position);
         onPageSelected?.(e.nativeEvent.position);
       }}
     >

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { CaruouselTabs } from '../../common/components/tabViewV3/CaruouselTabs';
+import { CarouselTabs } from '../../common/components/tabViewV3/CaruouselTabs';
 import { TabConfig } from '../../common/components/tabViewV3/types';
 
 const TabScreen1 = () => {
@@ -124,12 +124,32 @@ export const CarouselTabsExampleScreen = () => {
     { key: 'tab6', renderTabBarItem, component: TabScreen6 },
   ];
 
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+    });
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handlePageSelected = (index: number) => {
+    console.log('CarouselTabsExampleScreen: onPageSelected received index:', index);
+  };
+
+  console.log('CarouselTabsExampleScreen rendered');
+
   return (
-    <CaruouselTabs
-      tabs={tabs}
-      tabBarIndicatorStyle={{ backgroundColor: '#007AFF', height: 4 }}
-      tabScreenContainerStyle={{ flex: 1 }}
-    />
+    <View style={{ flex: 1 }}>
+      <Text style={Styles.counterText}>Count: {count}</Text>
+      <CarouselTabs
+        tabs={tabs}
+        tabBarIndicatorStyle={{ backgroundColor: '#007AFF', height: 4 }}
+        tabScreenContainerStyle={{ flex: 1 }}
+        onPageSelected={handlePageSelected}
+      />
+    </View>
   );
 };
 
@@ -142,5 +162,12 @@ const Styles = StyleSheet.create({
   tabText: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  counterText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 10,
+    backgroundColor: '#ffe0b2',
   },
 });
