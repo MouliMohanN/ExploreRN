@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TopTabViewV2 } from '../../common/components/tabViewV2/TopTabViewV2';
 
@@ -94,15 +94,15 @@ const TabScreen6 = () => {
 };
 
 export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((prevCount) => prevCount + 1);
-    });
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCount((prevCount) => prevCount + 1);
+  //   });
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const tabs = [
     { key: 'tab1', title: 'First', component: TabScreen1 },
@@ -117,9 +117,11 @@ export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
     console.log('TopTabViewExampleScreenGestureHandler: onPageSelected received index:', index);
   };
 
+  console.log('TopTabViewExampleScreenGestureHandler rendered');
+
   return (
     <View style={localStyles.container}>
-      <Text style={localStyles.counterText}>Count: {count}</Text>
+      {/* <Text style={localStyles.counterText}>Count: {count}</Text> */}
       <TopTabViewV2
         tabs={tabs}
         initialIndex={0}
