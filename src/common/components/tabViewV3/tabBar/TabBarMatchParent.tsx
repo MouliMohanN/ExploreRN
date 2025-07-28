@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { TabBarProps } from '../types';
@@ -12,21 +12,25 @@ export const TabBarMatchParent: React.FC<TabBarProps> = ({
   const { width } = Dimensions.get('window');
   const tabWidth = width / tabs.length;
 
-  const [activeIndex, setActiveIndex] = useState(currentIndex.value);
+  const activeIndex = useSharedValue(currentIndex);
 
   const indicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
         {
-          translateX: withTiming(currentIndex.value * tabWidth, { duration: 200 }),
+          translateX: withTiming(activeIndex.value * tabWidth, { duration: 200 }),
         },
       ],
       width: tabWidth,
     };
   });
 
+  useEffect(() => {
+    activeIndex.value = currentIndex;
+  }, [currentIndex]);
+
   const onTabPress = (index: number) => {
-    setActiveIndex(index);
+    activeIndex.value = index;
     onTabPressProp(index);
   };
 
@@ -50,7 +54,7 @@ export const TabBarMatchParent: React.FC<TabBarProps> = ({
             onPress={() => onTabPress(index)}
           >
             <Animated.View style={touchableAnimatedStyle}>
-              {tab.renderTabBarItem(tab.key, activeIndex === index)}
+              {tab.renderTabBarItem(tab.key, currentIndex === index)}
             </Animated.View>
           </Pressable>
         );

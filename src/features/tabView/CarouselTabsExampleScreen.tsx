@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { CaruouselTabs } from '../../common/components/tabViewV3/CaruouselTabs';
 import { TabConfig } from '../../common/components/tabViewV3/types';
-import { localStyles } from './TopTabViewExampleScreenGestureHandler';
 
 const TabScreen1 = () => {
   console.log('TabScreen1 rendered');
@@ -13,8 +12,8 @@ const TabScreen1 = () => {
     };
   }, []);
   return (
-    <View style={localStyles.tabContent}>
-      <Text style={localStyles.tabText}>Content of Tab 1</Text>
+    <View style={Styles.tabContent}>
+      <Text style={Styles.tabText}>Content of Tab 1</Text>
     </View>
   );
 };
@@ -28,8 +27,8 @@ const TabScreen2 = () => {
     };
   }, []);
   return (
-    <View style={localStyles.tabContent}>
-      <Text style={localStyles.tabText}>Content of Tab 2</Text>
+    <View style={Styles.tabContent}>
+      <Text style={Styles.tabText}>Content of Tab 2</Text>
     </View>
   );
 };
@@ -43,8 +42,8 @@ const TabScreen3 = () => {
     };
   }, []);
   return (
-    <View style={localStyles.tabContent}>
-      <Text style={localStyles.tabText}>Content of Tab 3</Text>
+    <View style={Styles.tabContent}>
+      <Text style={Styles.tabText}>Content of Tab 3</Text>
     </View>
   );
 };
@@ -58,8 +57,8 @@ const TabScreen4 = () => {
     };
   }, []);
   return (
-    <View style={localStyles.tabContent}>
-      <Text style={localStyles.tabText}>Content of Tab 4</Text>
+    <View style={Styles.tabContent}>
+      <Text style={Styles.tabText}>Content of Tab 4</Text>
     </View>
   );
 };
@@ -73,8 +72,8 @@ const TabScreen5 = () => {
     };
   }, []);
   return (
-    <View style={localStyles.tabContent}>
-      <Text style={localStyles.tabText}>Content of Tab 5</Text>
+    <View style={Styles.tabContent}>
+      <Text style={Styles.tabText}>Content of Tab 5</Text>
     </View>
   );
 };
@@ -88,8 +87,8 @@ const TabScreen6 = () => {
     };
   }, []);
   return (
-    <View style={localStyles.tabContent}>
-      <Text style={localStyles.tabText}>Content of Tab 6</Text>
+    <View style={Styles.tabContent}>
+      <Text style={Styles.tabText}>Content of Tab 6</Text>
     </View>
   );
 };
@@ -133,3 +132,15 @@ export const CarouselTabsExampleScreen = () => {
     />
   );
 };
+
+const Styles = StyleSheet.create({
+  tabContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tabText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+});

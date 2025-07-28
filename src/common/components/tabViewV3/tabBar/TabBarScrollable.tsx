@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { LayoutChangeEvent, NativeScrollEvent, Pressable, StyleSheet, View } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
@@ -17,12 +17,12 @@ type TabLayout = {
 type TabItemProps = {
   tab: TabConfig;
   index: number;
-  activeIndex: number;
+  currentIndex: number;
   onTabPress: (index: number) => void;
   onTabLayout: (index: number, tabLayout: TabLayout) => void;
 };
 
-const TabItem: React.FC<TabItemProps> = ({ tab, index, activeIndex, onTabPress, onTabLayout }) => {
+const TabItem: React.FC<TabItemProps> = ({ tab, index, currentIndex, onTabPress, onTabLayout }) => {
   const scale = useSharedValue(1);
 
   const touchableAnimatedStyle = useAnimatedStyle(() => {
@@ -48,7 +48,7 @@ const TabItem: React.FC<TabItemProps> = ({ tab, index, activeIndex, onTabPress, 
       onLayout={onLayout}
     >
       <Animated.View style={touchableAnimatedStyle}>
-        {tab.renderTabBarItem(tab.key, activeIndex === index)}
+        {tab.renderTabBarItem(tab.key, currentIndex === index)}
       </Animated.View>
     </Pressable>
   );
@@ -60,7 +60,6 @@ export const TabBarScrollable: React.FC<TabBarProps> = ({
   onTabPress: onTabPressProp,
   tabIndicatorStyle,
 }) => {
-  const [activeIndex, setActiveIndex] = useState(currentIndex.value);
   const tabBarRef = useRef<Animated.FlatList>(null);
   const scrollX = useSharedValue(0);
   const tabBarWidth = useSharedValue(0);
@@ -80,8 +79,8 @@ export const TabBarScrollable: React.FC<TabBarProps> = ({
   });
 
   useEffect(() => {
-    updateTabBar(activeIndex, true);
-  }, [activeIndex]);
+    updateTabBar(currentIndex, true);
+  }, [currentIndex]);
 
   const onScroll = useAnimatedScrollHandler((event: NativeScrollEvent) => {
     scrollX.value = event.contentOffset.x;
@@ -126,13 +125,12 @@ export const TabBarScrollable: React.FC<TabBarProps> = ({
   const onTabPressInternal = (index: number) => {
     updateTabBar(index);
     onTabPressProp(index);
-    setActiveIndex(index);
   };
 
   const onTabLayout = (index: number, tabLayout: TabLayout) => {
     console.log('onTabLayout', index, tabLayout);
     allTabsWidth.current[index] = tabLayout;
-    if (index === activeIndex) {
+    if (index === currentIndex) {
       tabBarWidth.value = tabLayout.width;
       tabBarX.value = getTabBarxValue();
     }
@@ -149,7 +147,7 @@ export const TabBarScrollable: React.FC<TabBarProps> = ({
           <TabItem
             tab={item}
             index={index}
-            activeIndex={activeIndex}
+            currentIndex={currentIndex}
             onTabPress={onTabPressInternal}
             onTabLayout={onTabLayout}
           />

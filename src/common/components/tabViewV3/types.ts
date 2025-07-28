@@ -14,14 +14,14 @@ type TabIndicatorStyle = {
 
 export type TabBarProps = {
   tabs: TabConfig[];
-  currentIndex: SharedValue<number>;
+  currentIndex: number;
   onTabPress: (index: number) => void;
   tabIndicatorStyle?: TabIndicatorStyle;
 };
 
 export type TabScreenProps = {
   tabs: TabConfig[];
-  currentIndex: SharedValue<number>;
+  currentIndex: number;
   swipeEnabled?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
   onPageSelected?: (index: number) => void;

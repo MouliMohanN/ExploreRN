@@ -42,7 +42,7 @@ export type TabContentProps = {
   currentIndex: SharedValue<number>;
   swipeEnabled?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
-  pagerViewRef: RefObject<PagerView>;
+  pagerViewRef: RefObject<PagerView | null>;
   offscreenPageLimit?: number; // New prop for preloading
   onPageSelected?: (index: number) => void; // New prop for PagerView's onPageSelected
 };
