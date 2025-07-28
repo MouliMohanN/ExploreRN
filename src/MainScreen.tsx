@@ -52,6 +52,12 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
             navigation.navigate(ScreenNames.TabViewTopGuestureHandler);
           }}
         />
+        <Button
+          title='Carousel Tabs'
+          onPress={() => {
+            navigation.navigate(ScreenNames.CarouselTabs);
+          }}
+        />
       </>
     );
   };

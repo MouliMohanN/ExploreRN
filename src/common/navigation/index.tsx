@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainScreen } from '../../MainScreen';
 import { LogContentScreen } from '../../features/logs/LogContentScreen';
 import { LogViewerScreen } from '../../features/logs/LogViewerScreen';
+import { CarouselTabsExampleScreen } from '../../features/tabView/CarouselTabsExampleScreen';
 import { TabViewReactNavigationScreen } from '../../features/tabView/TabViewReactNavigationScreen';
 import { TabViewReanimatedScreen } from '../../features/tabView/TabViewReanimatedScreen';
 import { TopTabViewExampleScreenGestureHandler } from '../../features/tabView/TopTabViewExampleScreenGestureHandler';
@@ -17,6 +18,7 @@ const TabViewFeatureScreen = {
   TabViewReanimated: 'TabViewReanimated',
   TabViewTopPagerView: 'TabViewTopPagerView',
   TabViewTopGuestureHandler: 'TabViewTopGuestureHandler',
+  CarouselTabs: 'CarouselTabs',
 };
 
 export const ScreenNames = {
@@ -77,6 +79,14 @@ const TabViewFeatureScreens = [
     options: {
       headerShown: true,
       title: 'Top TabView',
+    },
+  },
+  {
+    name: ScreenNames.CarouselTabs,
+    component: CarouselTabsExampleScreen,
+    options: {
+      headerShown: true,
+      title: 'Carousel Tabs',
     },
   },
 ];
