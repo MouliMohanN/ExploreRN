@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { BackHandler } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { TabBarMatchParent } from './tabBar/TabBarMatchParent';
 import { TabBarScrollable } from './tabBar/TabBarScrollable';
@@ -17,6 +18,7 @@ const CarouselTabsWrapper: React.FC<CarouselTabsProps> = ({
   tabBarType = 'scrollable',
   tabScreenType = 'PagerView',
   offscreenPageLimit = 1,
+  shouldHandleBackPressBehavior = true,
 
   onPageSelected: onPageSelectedCallback,
 }) => {
@@ -30,6 +32,20 @@ const CarouselTabsWrapper: React.FC<CarouselTabsProps> = ({
       pagerViewRef.current.setPage(index);
     }
   };
+
+  useEffect(() => {
+    const onBackPress = () => {
+      if (shouldHandleBackPressBehavior && currentIndex !== initialIndex) {
+        onTabPress(initialIndex);
+        return true;
+      }
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => backHandler.remove();
+  }, [shouldHandleBackPressBehavior, currentIndex, initialIndex, onTabPress]);
 
   const onPageSelected = (index: number) => {
     if (index !== currentIndex) {
@@ -97,18 +113,18 @@ const CarouselTabsWrapper: React.FC<CarouselTabsProps> = ({
   );
 };
 
-const areEqual = (_prevProps: CarouselTabsProps, _nextProps: CarouselTabsProps) => {
+const areEqual = (prevProps: CarouselTabsProps, nextProps: CarouselTabsProps) => {
   return (
-    // prevProps.tabs === nextProps.tabs &&
-    // prevProps.tabBarIndicatorStyle === nextProps.tabBarIndicatorStyle &&
-    // prevProps.tabScreenContainerStyle === nextProps.tabScreenContainerStyle &&
-    // prevProps.initialIndex === nextProps.initialIndex &&
-    // prevProps.swipeEnabled === nextProps.swipeEnabled &&
-    // prevProps.tabBarPosition === nextProps.tabBarPosition &&
-    // prevProps.tabBarType === nextProps.tabBarType &&
-    // prevProps.tabScreenType === nextProps.tabScreenType &&
-    // prevProps.offscreenPageLimit === nextProps.offscreenPageLimit &&
-    true
+    prevProps.tabs === nextProps.tabs &&
+    prevProps.tabBarIndicatorStyle === nextProps.tabBarIndicatorStyle &&
+    prevProps.tabScreenContainerStyle === nextProps.tabScreenContainerStyle &&
+    prevProps.initialIndex === nextProps.initialIndex &&
+    prevProps.swipeEnabled === nextProps.swipeEnabled &&
+    prevProps.tabBarPosition === nextProps.tabBarPosition &&
+    prevProps.tabBarType === nextProps.tabBarType &&
+    prevProps.tabScreenType === nextProps.tabScreenType &&
+    prevProps.offscreenPageLimit === nextProps.offscreenPageLimit &&
+    prevProps.shouldHandleBackPressBehavior === nextProps.shouldHandleBackPressBehavior
   );
 };
 
