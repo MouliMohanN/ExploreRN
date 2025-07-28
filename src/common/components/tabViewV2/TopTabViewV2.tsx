@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TabBarV2 } from './TabBarV2';
 import { TabContentV2 } from './TabContentV2';
 import type { TopTabViewV2Props } from './typesV2';
@@ -27,14 +27,6 @@ export const TopTabViewV2: React.FC<TopTabViewV2Props> = ({
     },
     [onTabChange],
   );
-
-  if (!tabs || tabs.length === 0) {
-    return (
-      <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No tabs configured.</Text>
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
@@ -64,14 +56,5 @@ export const TopTabViewV2: React.FC<TopTabViewV2Props> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  emptyText: {
-    fontSize: 18,
-    color: 'gray',
   },
 });

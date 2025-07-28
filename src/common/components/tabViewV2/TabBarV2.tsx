@@ -57,7 +57,7 @@ const TabItem: React.FC<TabItemProps> = ({
     <Pressable
       key={tab.key}
       style={[styles.tabItem, tabItemStyle, currentIndex === index && activeTabItemStyle]}
-      onPressIn={() => (scale.value = withSpring(0.95))}
+      onPressIn={() => (scale.value = withSpring(0.75))}
       onPressOut={() => (scale.value = withSpring(1))}
       onPress={() => {
         onTabPress(index);
@@ -79,7 +79,6 @@ export const TabBarV2: React.FC<TabBarProps> = ({
   tabs,
   currentIndex,
   onTabPress,
-  tabBarStyle,
   tabItemStyle,
   activeTabItemStyle,
   tabTextStyle,
@@ -115,7 +114,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
     return {
       transform: [
         {
-          translateX: withTiming(tabBarX.value - scrollX.value, { duration: 250 }),
+          translateX: withTiming(tabBarX.value - scrollX.value, { duration: 100 }),
         },
       ],
       width: tabBarWidth.value,
@@ -163,7 +162,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
   };
 
   return (
-    <View style={[styles.tabBarContainer, tabBarStyle]}>
+    <View>
       <Animated.FlatList
         ref={tabBarRef}
         data={tabs}
