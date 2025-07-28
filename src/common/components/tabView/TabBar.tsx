@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import type { TabBarProps } from './types';
 
@@ -48,7 +48,7 @@ export const TabBar: React.FC<TabBarProps> = ({
         });
 
         return (
-          <TouchableOpacity
+          <Pressable
             key={tab.key}
             style={[styles.tabItem, tabItemStyle, currentIndex.value === index && activeTabItemStyle]}
             onPressIn={() => (scale.value = withSpring(0.95))}
@@ -58,7 +58,7 @@ export const TabBar: React.FC<TabBarProps> = ({
             <Animated.View style={touchableAnimatedStyle}>
               <Animated.Text style={[styles.tabText, tabTextStyle, textAnimatedStyle]}>{tab.title}</Animated.Text>
             </Animated.View>
-          </TouchableOpacity>
+          </Pressable>
         );
       })}
       <Animated.View style={[styles.indicator, indicatorStyle, indicatorAnimatedStyle]} />
