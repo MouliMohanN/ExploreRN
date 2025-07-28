@@ -9,6 +9,7 @@ type TabScreenGestureHandlerProps = TabScreenProps & {
 };
 
 const { width } = Dimensions.get('window');
+const SWIPE_THRESHOLD = width * 0.2;
 
 export const TabScreenGestureHandler: React.FC<TabScreenGestureHandlerProps> = ({
   tabs,
@@ -18,7 +19,6 @@ export const TabScreenGestureHandler: React.FC<TabScreenGestureHandlerProps> = (
   contentContainerStyle,
   onPageSelected,
 }) => {
-  const SWIPE_THRESHOLD = width * 0.2;
   const translationX = useSharedValue(0);
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -34,32 +34,34 @@ export const TabScreenGestureHandler: React.FC<TabScreenGestureHandlerProps> = (
     translationX.value = withSpring(-width * currentIndex, { damping: 500, stiffness: 1000 });
   }, [currentIndex, translationX]);
 
-  const panGesture = Gesture.Pan()
-    .onUpdate((e) => {
-      'worklet';
-      translationX.value = -width * currentIndex + e.translationX;
-    })
-    .onEnd((e) => {
-      'worklet';
-      let targetIndex = currentIndex;
-      if (
-        Math.abs(e.translationX) > SWIPE_THRESHOLD ||
-        (Math.abs(e.velocityX) > 500 && Math.abs(e.translationX) > width * 0.1)
-      ) {
-        targetIndex = e.translationX < 0 ? currentIndex + 1 : currentIndex - 1;
-      }
+  const panGesture =
+    swipeEnabled ?
+      Gesture.Pan()
+        .onUpdate((e) => {
+          'worklet';
+          translationX.value = -width * currentIndex + e.translationX;
+        })
+        .onEnd((e) => {
+          'worklet';
+          let targetIndex = currentIndex;
+          if (
+            Math.abs(e.translationX) > SWIPE_THRESHOLD ||
+            (Math.abs(e.velocityX) > 500 && Math.abs(e.translationX) > width * 0.1)
+          ) {
+            targetIndex = e.translationX < 0 ? currentIndex + 1 : currentIndex - 1;
+          }
 
-      if (targetIndex >= 0 && targetIndex < tabs.length) {
-        translationX.value = withSpring(-width * targetIndex, { damping: 500, stiffness: 1000 });
-        if (onPageSelected) {
-          runOnJS(onPageSelected)(targetIndex);
-        }
-      } else {
-        translationX.value = withSpring(-width * currentIndex, { damping: 500, stiffness: 1000 });
-      }
-    });
+          if (targetIndex >= 0 && targetIndex < tabs.length) {
+            translationX.value = withSpring(-width * targetIndex, { damping: 500, stiffness: 1000 });
+            if (onPageSelected) {
+              runOnJS(onPageSelected)(targetIndex);
+            }
+          } else {
+            translationX.value = withSpring(-width * currentIndex, { damping: 500, stiffness: 1000 });
+          }
+        })
+    : null;
 
-  console.log('TabContentV2 rendered');
   const content = (
     <Animated.View style={[styles.contentContainer, animatedStyle]}>
       {tabs.map((tab, index) => {
@@ -76,7 +78,7 @@ export const TabScreenGestureHandler: React.FC<TabScreenGestureHandlerProps> = (
     </Animated.View>
   );
 
-  return swipeEnabled ? <GestureDetector gesture={panGesture}>{content}</GestureDetector> : content;
+  return swipeEnabled ? <GestureDetector gesture={panGesture!}>{content}</GestureDetector> : content;
 };
 
 const styles = StyleSheet.create({
