@@ -6,7 +6,7 @@ import { TabScreenGestureHandler } from './tabScreen/TabScreenGestureHandler';
 import { TabScreenPagerView } from './tabScreen/TabScreenPagerView';
 import { CarouselTabsProps } from './types';
 
-export const CaruouselTabs: React.FC<CarouselTabsProps> = ({
+const CarouselTabsWrapper: React.FC<CarouselTabsProps> = ({
   tabs,
   tabBarIndicatorStyle,
   tabScreenContainerStyle,
@@ -15,9 +15,8 @@ export const CaruouselTabs: React.FC<CarouselTabsProps> = ({
   swipeEnabled = true,
   tabBarPosition = 'top',
   tabBarType = 'scrollable',
-  tabScreenType = 'gestureHandler',
+  tabScreenType = 'PagerView',
   offscreenPageLimit = 1,
-  shouldHandleBackPressBehavior = true,
 
   onPageSelected: onPageSelectedCallback,
 }) => {
@@ -33,7 +32,9 @@ export const CaruouselTabs: React.FC<CarouselTabsProps> = ({
   };
 
   const onPageSelected = (index: number) => {
-    setCurrentIndex(index);
+    if (index !== currentIndex) {
+      setCurrentIndex(index);
+    }
     onPageSelectedCallback?.(index);
   };
 
@@ -85,6 +86,8 @@ export const CaruouselTabs: React.FC<CarouselTabsProps> = ({
     return renderGestureHandler();
   };
 
+  console.log('CaruouselTabs render');
+
   return (
     <>
       {renderTabBar(tabBarPosition === 'top')}
@@ -93,3 +96,20 @@ export const CaruouselTabs: React.FC<CarouselTabsProps> = ({
     </>
   );
 };
+
+const areEqual = (_prevProps: CarouselTabsProps, _nextProps: CarouselTabsProps) => {
+  return (
+    // prevProps.tabs === nextProps.tabs &&
+    // prevProps.tabBarIndicatorStyle === nextProps.tabBarIndicatorStyle &&
+    // prevProps.tabScreenContainerStyle === nextProps.tabScreenContainerStyle &&
+    // prevProps.initialIndex === nextProps.initialIndex &&
+    // prevProps.swipeEnabled === nextProps.swipeEnabled &&
+    // prevProps.tabBarPosition === nextProps.tabBarPosition &&
+    // prevProps.tabBarType === nextProps.tabBarType &&
+    // prevProps.tabScreenType === nextProps.tabScreenType &&
+    // prevProps.offscreenPageLimit === nextProps.offscreenPageLimit &&
+    true
+  );
+};
+
+export const CarouselTabs = React.memo(CarouselTabsWrapper, areEqual);
