@@ -7,30 +7,33 @@ type WebSocketProps = {
     onerror: (event: WebSocketErrorEvent) => void;
 };
 
-export const initWebSocket = (url: string = 'ws://host.com/path', callback: WebSocketProps) => {
+export const initWebSocket = (url: string, callback: WebSocketProps): WebSocket => {
   const ws = new WebSocket(url);
 
+    console.log('WebSocket client connecting');
 ws.onopen = () => {
   // connection opened
-    ws.send('something'); // send a message
     callback.onopen();
+    console.log('WebSocket client onOpen');
 };
 
 ws.onmessage = e => {
   // a message was received
-    console.log(e.data);
+    console.log('onMessage', e.data);
     callback.onmessage(e);
 };
 
 ws.onerror = e => {
   // an error occurred
-    console.log(e.message);
+    console.log('onError', e.message);
     callback.onerror(e);
 };
 
 ws.onclose = e => {
   // connection closed
-    console.log(e.code, e.reason);
+    console.log('onClose', e.code, e.reason);
     callback.onclose(e);
-};
+    };
+    
+    return ws;
 };
