@@ -5,7 +5,15 @@ import { ScreenBaseProps } from './common/types/ScreenBaseProps';
 import { logger } from './common/utils/logger/logger';
 
 export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
+  const features = {
+    log: false,
+    tabView: false,
+    webSockets: true,
+  };
   const renderLogFeature = () => {
+    if (!features.log) {
+      return null;
+    }
     return (
       <>
         <Button
@@ -26,6 +34,9 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
   };
 
   const renderTabViewFeature = () => {
+    if (!features.tabView) {
+      return null;
+    }
     return (
       <>
         <Button
@@ -62,11 +73,28 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderWebSockets = () => {
+    if (!features.webSockets) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='WebSockets'
+          onPress={() => {
+            navigation.navigate(ScreenNames.WebSockets);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
       {renderLogFeature()}
       {renderTabViewFeature()}
+      {renderWebSockets()}
     </View>
   );
 };
