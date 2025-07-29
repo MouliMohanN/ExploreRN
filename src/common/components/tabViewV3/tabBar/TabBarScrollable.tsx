@@ -74,7 +74,7 @@ export const TabBarScrollable: React.FC<TabBarProps> = ({
           translateX: withTiming(tabBarX.value - scrollX.value, { duration: 100 }),
         },
       ],
-      width: tabBarWidth.value,
+      width: withTiming(tabBarWidth.value, { duration: 100 }),
     };
   });
 
