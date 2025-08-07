@@ -36,7 +36,8 @@
     "android-release": "cd android && gradlew installRelease && cd ..",
     "clean-gradle": "cd android && gradlew clean && cd ..",
     "generate-spec": "cd android && gradlew generateCodegenArtifactsFromSchema && cd ..",
-    "rn-info": "npx react-native-info"
+    "rn-info": "npx react-native-info",
+    "move-mouse": "ts-node scripts/useCase/moveMouse/moveMouse.ts"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.4.2",
@@ -81,7 +82,8 @@
     "react-test-renderer": "19.1.0",
     "ts-node": "^10.9.2",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.38.0"
+    "typescript-eslint": "8.38.0",
+    "robotjs": "^0.6.0"
   },
   "engines": {
     "node": ">=18"
