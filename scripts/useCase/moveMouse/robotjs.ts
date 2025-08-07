@@ -16,6 +16,7 @@
 // Import the robotjs library.
 // The default import is used here to correctly handle the CommonJS module format of robotjs.
 import robot from 'robotjs';
+import { MoveMouseConstants } from './constants.ts';
 
 let movementTimeout: NodeJS.Timeout | null = null;
 
@@ -54,8 +55,8 @@ function moveMouseRandomly(): void {
 // --- Script Execution ---
 
 // Define the minimum and maximum interval time in milliseconds.
-const minIntervalTime: number = 1000 * 30; // 30 second
-const maxIntervalTime: number = 1000 * 60 * 4; // 4 minutes
+const minIntervalTime: number = MoveMouseConstants.minIntervalTime; // 30 second
+const maxIntervalTime: number = MoveMouseConstants.maxIntervalTime; // 4 minutes
 
 /**
  * The main loop function. It moves the mouse, then schedules the next move
