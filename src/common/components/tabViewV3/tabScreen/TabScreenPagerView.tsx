@@ -27,7 +27,7 @@ export const TabScreenPagerView: React.FC<TabScreenPagerViewProps> = ({
       {tabs.map((tab) => {
         const Component = tab.component;
         return (
-          <View key={tab.key} >
+          <View key={tab.key}>
             <Component />
           </View>
         );
@@ -35,4 +35,3 @@ export const TabScreenPagerView: React.FC<TabScreenPagerViewProps> = ({
     </PagerView>
   );
 };
-

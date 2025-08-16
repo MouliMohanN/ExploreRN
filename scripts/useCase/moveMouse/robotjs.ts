@@ -41,10 +41,9 @@ function moveMouseRandomly(): void {
 
     // Use robotjs to smoothly move the mouse to the new random coordinates.
     robot.moveMouse(randomX, randomY);
-
   } catch (error) {
-    console.error("An error occurred:", error);
-    console.error("Please ensure you have a graphical environment running.");
+    console.error('An error occurred:', error);
+    console.error('Please ensure you have a graphical environment running.');
     // Stop the loop if an error occurs to prevent repeated failures.
     if (movementTimeout) {
       clearTimeout(movementTimeout);
@@ -76,10 +75,11 @@ function randomMouseLoop(): void {
   movementTimeout = setTimeout(randomMouseLoop, randomDelay);
 }
 
-
-console.log("Starting random mouse movement...");
-console.log(`The mouse will move at random intervals between ${minIntervalTime / 1000} and ${maxIntervalTime / 1000} seconds.`);
-console.log("Press Ctrl+C in this terminal to stop the script.");
+console.log('Starting random mouse movement...');
+console.log(
+  `The mouse will move at random intervals between ${minIntervalTime / 1000} and ${maxIntervalTime / 1000} seconds.`,
+);
+console.log('Press Ctrl+C in this terminal to stop the script.');
 
 // Start the loop.
 randomMouseLoop();

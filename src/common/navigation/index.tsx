@@ -1,129 +1,19 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainScreen } from '../../MainScreen';
-import { LogContentScreen } from '../../features/logs/LogContentScreen';
-import { LogViewerScreen } from '../../features/logs/LogViewerScreen';
-import { CarouselTabsExampleScreen } from '../../features/tabView/CarouselTabsExampleScreen';
-import { TabViewReactNavigationScreen } from '../../features/tabView/TabViewReactNavigationScreen';
-import { TabViewReanimatedScreen } from '../../features/tabView/TabViewReanimatedScreen';
-import { TopTabViewExampleScreenGestureHandler } from '../../features/tabView/TopTabViewExampleScreenGestureHandler';
-import { TopTabViewExampleScreenPagerView } from '../../features/tabView/TopTabViewExampleScreenPagerView';
-import { WebSocketsScreen } from '../../features/webSockets/WebSocketsScreen';
-import { EventBusScreen } from '../../features/eventBus/EvenBusScreen';
-
-const LogFeatureScreen = {
-  LogViewer: 'LogViewer',
-  LogContent: 'LogContent',
-};
-
-const TabViewFeatureScreen = {
-  TabViewReactNavigation: 'TabViewReactNavigation',
-  TabViewReanimated: 'TabViewReanimated',
-  TabViewTopPagerView: 'TabViewTopPagerView',
-  TabViewTopGuestureHandler: 'TabViewTopGuestureHandler',
-  CarouselTabs: 'CarouselTabs',
-};
-
-const WebSocketsFeatureScreen = {
-  WebSockets: 'WebSockets',
-};
-
-const EventBusFeatureScreen = {
-  EventBus: 'EventBus',
-}
+import { EventBusFeatureScreen, EventBusFeatureScreens } from './eventBus';
+import { LogFeatureScreen, LogFeatureScreens } from './logFeature';
+import { TabViewFeatureScreen, TabViewFeatureScreens } from './tabViewFeature';
+import { WebSocketsFeatureScreen, WebSocketsFeatureScreens } from './webSockets';
 
 export const ScreenNames = {
   Main: 'Main',
   ...LogFeatureScreen,
   ...TabViewFeatureScreen,
   ...WebSocketsFeatureScreen,
-  ...EventBusFeatureScreen
+  ...EventBusFeatureScreen,
 };
 
 export const RootStack = createNativeStackNavigator();
-
-const LogFeatureScreens = [
-  {
-    name: ScreenNames.LogViewer,
-    component: LogViewerScreen,
-    options: {
-      headerShown: true,
-      title: 'Available Logs',
-    },
-  },
-  {
-    name: ScreenNames.LogContent,
-    component: LogContentScreen,
-    options: {
-      headerShown: true,
-      title: 'Log Content',
-    },
-  },
-];
-
-const TabViewFeatureScreens = [
-  {
-    name: ScreenNames.TabViewReactNavigation,
-    component: TabViewReactNavigationScreen,
-    options: {
-      headerShown: true,
-      title: 'React Navigation TabView',
-    },
-  },
-  {
-    name: ScreenNames.TabViewReanimated,
-    component: TabViewReanimatedScreen,
-    options: {
-      headerShown: true,
-      title: 'Reanimated TabView',
-    },
-  },
-  {
-    name: ScreenNames.TabViewTopPagerView,
-    component: TopTabViewExampleScreenPagerView,
-    options: {
-      headerShown: true,
-      title: 'Top TabView',
-    },
-  },
-  {
-    name: ScreenNames.TabViewTopGuestureHandler,
-    component: TopTabViewExampleScreenGestureHandler,
-    options: {
-      headerShown: true,
-      title: 'Top TabView',
-    },
-  },
-  {
-    name: ScreenNames.CarouselTabs,
-    component: CarouselTabsExampleScreen,
-    options: {
-      headerShown: true,
-      title: 'Carousel Tabs',
-    },
-  },
-];
-
-const WebSocketsFeatureScreens = [
-  {
-    name: ScreenNames.WebSockets,
-    component: WebSocketsScreen,
-    options: {
-      headerShown: true,
-      title: 'WebSockets',
-    },
-  },
-];
-
-const EventBusFeatureScreens = [
-  {
-    name: ScreenNames.EventBus,
-    component: EventBusScreen,
-    options: {
-      headerShown: true,
-      title: 'EventBus',
-    },
-  },
-];
 
 export const RootStackScreens = [
   {
@@ -136,5 +26,5 @@ export const RootStackScreens = [
   ...LogFeatureScreens,
   ...TabViewFeatureScreens,
   ...WebSocketsFeatureScreens,
-  ...EventBusFeatureScreens
+  ...EventBusFeatureScreens,
 ];

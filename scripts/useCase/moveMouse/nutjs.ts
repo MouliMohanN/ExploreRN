@@ -1,6 +1,6 @@
 // Import necessary functions from nut-js
-import { mouse, screen } from "@nut-tree-fork/nut-js";
-import { MoveMouseConstants } from "./constants.ts";
+import { mouse, screen } from '@nut-tree-fork/nut-js';
+import { MoveMouseConstants } from './constants.ts';
 
 // Define the screen boundaries
 // screen.config.autoDelayMs = 0; // Move instantly
@@ -14,12 +14,9 @@ async function moveMouseRandomly() {
     const randomY = Math.floor(Math.random() * screenHeight);
 
     console.log(`Moving mouse to: (${randomX}, ${randomY})`);
-    await mouse.move([
-      { x: randomX, y: randomY }
-    ]);
-
+    await mouse.move([{ x: randomX, y: randomY }]);
   } catch (error) {
-    console.error("An error occurred:", error);
+    console.error('An error occurred:', error);
   }
 }
 
@@ -37,6 +34,6 @@ async function randomMouseLoop() {
   setTimeout(randomMouseLoop, randomDelay);
 }
 
-console.log("Starting random mouse movement with nut.js...");
-console.log("Press Ctrl+C to stop.");
+console.log('Starting random mouse movement with nut.js...');
+console.log('Press Ctrl+C to stop.');
 randomMouseLoop();

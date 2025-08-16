@@ -153,4 +153,4 @@ export type CarouselTabsProps = {
   onPageSelected?: (index: number) => void;
   // #endregion
 };
-''
+('');

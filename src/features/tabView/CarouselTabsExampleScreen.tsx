@@ -27,7 +27,7 @@ const TabScreen1: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
 
   console.log('TabScreen1 rendered');
   return (
-    <View >
+    <View>
       <Text style={Styles.tabText}>Content of {tabTitle}</Text>
       <Text style={Styles.tabDetailsText}>Index: {tabIndex}</Text>
       <Text style={Styles.tabDetailsText}>Render: {shouldRender ? 'Yes' : 'No'}</Text>

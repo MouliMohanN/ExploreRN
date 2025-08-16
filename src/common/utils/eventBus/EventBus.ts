@@ -1,4 +1,4 @@
-import { AppEvents } from "./events";
+import { AppEvents } from './events';
 
 // eventBus.ts
 type Listener<T> = (value: T) => void;
@@ -13,10 +13,7 @@ function createEventBus<EventMap extends Record<string, any>>() {
     [K in keyof EventMap]?: ChannelData<EventMap[K]>;
   } = {};
 
-  function subscribe<K extends keyof EventMap>(
-    eventName: K,
-    listener: Listener<EventMap[K]>
-  ): () => void {
+  function subscribe<K extends keyof EventMap>(eventName: K, listener: Listener<EventMap[K]>): () => void {
     if (!channels[eventName]) {
       channels[eventName] = { listeners: new Set() };
     }
@@ -24,24 +21,18 @@ function createEventBus<EventMap extends Record<string, any>>() {
     channels[eventName]!.listeners.add(listener);
 
     // Deliver last value immediately if available
-    if ("lastValue" in channels[eventName]!) {
+    if ('lastValue' in channels[eventName]!) {
       listener(channels[eventName]!.lastValue as EventMap[K]);
     }
 
     return () => unsubscribe(eventName, listener);
   }
 
-  function unsubscribe<K extends keyof EventMap>(
-    eventName: K,
-    listener: Listener<EventMap[K]>
-  ): void {
+  function unsubscribe<K extends keyof EventMap>(eventName: K, listener: Listener<EventMap[K]>): void {
     channels[eventName]?.listeners.delete(listener);
   }
 
-  function publish<K extends keyof EventMap>(
-    eventName: K,
-    value: EventMap[K]
-  ): void {
+  function publish<K extends keyof EventMap>(eventName: K, value: EventMap[K]): void {
     if (!channels[eventName]) {
       channels[eventName] = { listeners: new Set(), lastValue: value };
       return;
@@ -54,6 +45,5 @@ function createEventBus<EventMap extends Record<string, any>>() {
 
   return Object.freeze({ subscribe, unsubscribe, publish });
 }
-
 
 export const AppEventBus = createEventBus<AppEvents>();
