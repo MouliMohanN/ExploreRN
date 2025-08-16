@@ -1,4 +1,4 @@
-import { AppEvents } from './events';
+import { AppEvents } from './AppEvents';
 
 // eventBus.ts
 type Listener<T> = (value: T) => void;

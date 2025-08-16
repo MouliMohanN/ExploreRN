@@ -2,6 +2,9 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     "types": ["node"],
-    "jsx": "react-native"
-  }
+    "jsx": "react-native",
+    "paths": {
+      "@AppEvents": ["./src/common/utils/eventBus/AppEvents.ts"],
+    }
+  },
 }
