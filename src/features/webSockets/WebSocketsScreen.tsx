@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import { ScreenConfig } from '../../common/navigation/conventions';
 import { initWebSocket } from './service';
 
-export const WebSocketsScreen: React.FC<ScreenBaseProps> = () => {
+export default function WebSocketsScreen() {
   const webSocket = initWebSocket('wss://ws.coinapi.io/v1/', {
     onopen: () => {
       webSocket.send(
@@ -24,4 +25,14 @@ export const WebSocketsScreen: React.FC<ScreenBaseProps> = () => {
       <Text>WebSocketsScreen</Text>
     </View>
   );
+}
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'WebSockets',
+  component: WebSocketsScreen,
+  options: {
+    title: 'WebSockets Demo',
+    headerShown: true,
+  },
 };

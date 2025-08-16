@@ -9,6 +9,8 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     log: false,
     tabView: true,
     webSockets: false,
+    eventBus: true,
+    screenSystemDemo: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -90,12 +92,31 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
   };
 
   const renderEventBus = () => {
+    if (!features.eventBus) {
+      return null;
+    }
     return (
       <>
         <Button
           title='EventBus'
           onPress={() => {
             navigation.navigate(ScreenNames.EventBus);
+          }}
+        />
+      </>
+    );
+  };
+
+  const renderScreenSystemDemo = () => {
+    if (!features.screenSystemDemo) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='🆕 Screen System Demo'
+          onPress={() => {
+            navigation.navigate(ScreenNames.ScreenSystemDemo);
           }}
         />
       </>
@@ -109,6 +130,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
       {renderTabViewFeature()}
       {renderWebSockets()}
       {renderEventBus()}
+      {renderScreenSystemDemo()}
     </View>
   );
 };

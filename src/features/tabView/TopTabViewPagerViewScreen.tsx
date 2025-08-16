@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TopTabViewV2 } from '../../common/components/tabViewV2/TopTabViewV2';
+import { TopTabView } from '../../common/components/tabView/TopTabView';
+import { ScreenConfig } from '../../common/navigation/conventions';
 
 // Define TabScreen components outside the main component for better reusability and performance
 const TabScreen1 = () => {
@@ -93,7 +94,7 @@ const TabScreen6 = () => {
   );
 };
 
-export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
+export default function TopTabViewExampleScreenPagerView() {
   // const [count, setCount] = useState(0);
 
   // useEffect(() => {
@@ -103,7 +104,6 @@ export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
 
   //   return () => clearInterval(interval);
   // }, []);
-
   const tabs = [
     { key: 'tab1', title: 'First', component: TabScreen1 },
     { key: 'tab2', title: 'Second', component: TabScreen2 },
@@ -114,15 +114,15 @@ export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
   ];
 
   const handlePageSelected = (index: number) => {
-    console.log('TopTabViewExampleScreenGestureHandler: onPageSelected received index:', index);
+    console.log('TopTabViewExampleScreenPagerView: onPageSelected received index:', index);
   };
 
-  console.log('TopTabViewExampleScreenGestureHandler rendered');
+  console.log('TopTabViewExampleScreenPagerView rendered');
 
   return (
     <View style={localStyles.container}>
       {/* <Text style={localStyles.counterText}>Count: {count}</Text> */}
-      <TopTabViewV2
+      <TopTabView
         tabs={tabs}
         initialIndex={0}
         onTabChange={handlePageSelected} // Pass the state setter to onTabChange
@@ -154,6 +154,16 @@ export const TopTabViewExampleScreenGestureHandler: React.FC = () => {
       />
     </View>
   );
+}
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'TabViewTopPagerView',
+  component: TopTabViewExampleScreenPagerView,
+  options: {
+    title: 'Top TabView - ViewPager',
+    headerShown: true,
+  },
 };
 
 const localStyles = StyleSheet.create({

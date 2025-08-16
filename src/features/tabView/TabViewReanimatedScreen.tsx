@@ -2,6 +2,7 @@ import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as TabView from 'reanimated-tab-view';
+import { ScreenConfig } from '../../common/navigation/conventions';
 import { CounterContext, useCounter } from './CounterContext';
 import { TabViewScreen1 } from './screens/TabViewScreen1';
 import { TabViewScreen2 } from './screens/TabViewScreen2';
@@ -15,7 +16,7 @@ const tabs = [
   { key: 'screen6', title: 'Screen 6', component: TabViewScreen2 },
 ];
 
-export function TabViewReanimatedScreen() {
+export default function TabViewReanimatedScreen() {
   const [index, setIndex] = React.useState(0);
   const { count, setCount } = useCounter();
 
@@ -48,3 +49,13 @@ export function TabViewReanimatedScreen() {
     </GestureHandlerRootView>
   );
 }
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'TabViewReanimated',
+  component: TabViewReanimatedScreen,
+  options: {
+    title: 'Reanimated TabView',
+    headerShown: true,
+  },
+};

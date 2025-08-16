@@ -3,8 +3,9 @@ import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import { ScreenConfig } from '../../common/navigation/conventions';
 
-export const LogContentScreen = ({ route, navigation }: ScreenBaseProps) => {
+export default function LogContentScreen({ route, navigation }: ScreenBaseProps) {
   const { logFilePath } = route.params as { logFilePath: string };
   const [logContent, setLogContent] = useState('Loading log content...');
 
@@ -95,3 +96,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'LogContent',
+  component: LogContentScreen,
+  options: {
+    headerShown: true,
+    title: 'Log Content',
+  },
+};

@@ -1,30 +1,27 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getAllScreens, getScreenNames } from './generated/screenRegistry';
 import { MainScreen } from '../../MainScreen';
-import { EventBusFeatureScreen, EventBusFeatureScreens } from './eventBus';
-import { LogFeatureScreen, LogFeatureScreens } from './logFeature';
-import { TabViewFeatureScreen, TabViewFeatureScreens } from './tabViewFeature';
-import { WebSocketsFeatureScreen, WebSocketsFeatureScreens } from './webSockets';
 
+// Auto-discovered screen names - no manual management needed!
 export const ScreenNames = {
   Main: 'Main',
-  ...LogFeatureScreen,
-  ...TabViewFeatureScreen,
-  ...WebSocketsFeatureScreen,
-  ...EventBusFeatureScreen,
+  ...getScreenNames(),
 };
 
 export const RootStack = createNativeStackNavigator();
 
+// Auto-discovered screens + Main screen - no manual management needed!
 export const RootStackScreens = [
   {
-    name: ScreenNames.Main,
+    name: 'Main',
     component: MainScreen,
     options: {
       headerShown: true,
     },
   },
-  ...LogFeatureScreens,
-  ...TabViewFeatureScreens,
-  ...WebSocketsFeatureScreens,
-  ...EventBusFeatureScreens,
+  ...getAllScreens().map(screenConfig => ({
+    name: screenConfig.name,
+    component: screenConfig.component,
+    options: screenConfig.options || {},
+  })),
 ];

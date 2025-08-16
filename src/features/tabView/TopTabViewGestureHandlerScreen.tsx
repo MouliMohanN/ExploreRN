@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TopTabView } from '../../common/components/tabView/TopTabView';
+import { TopTabViewV2 } from '../../common/components/tabViewV2/TopTabViewV2';
+import { ScreenConfig } from '../../common/navigation/conventions';
 
 // Define TabScreen components outside the main component for better reusability and performance
 const TabScreen1 = () => {
@@ -93,7 +94,7 @@ const TabScreen6 = () => {
   );
 };
 
-export const TopTabViewExampleScreenPagerView: React.FC = () => {
+export default function TopTabViewExampleScreenGestureHandler() {
   // const [count, setCount] = useState(0);
 
   // useEffect(() => {
@@ -103,6 +104,7 @@ export const TopTabViewExampleScreenPagerView: React.FC = () => {
 
   //   return () => clearInterval(interval);
   // }, []);
+
   const tabs = [
     { key: 'tab1', title: 'First', component: TabScreen1 },
     { key: 'tab2', title: 'Second', component: TabScreen2 },
@@ -113,15 +115,15 @@ export const TopTabViewExampleScreenPagerView: React.FC = () => {
   ];
 
   const handlePageSelected = (index: number) => {
-    console.log('TopTabViewExampleScreenPagerView: onPageSelected received index:', index);
+    console.log('TopTabViewExampleScreenGestureHandler: onPageSelected received index:', index);
   };
 
-  console.log('TopTabViewExampleScreenPagerView rendered');
+  console.log('TopTabViewExampleScreenGestureHandler rendered');
 
   return (
     <View style={localStyles.container}>
       {/* <Text style={localStyles.counterText}>Count: {count}</Text> */}
-      <TopTabView
+      <TopTabViewV2
         tabs={tabs}
         initialIndex={0}
         onTabChange={handlePageSelected} // Pass the state setter to onTabChange
@@ -153,6 +155,16 @@ export const TopTabViewExampleScreenPagerView: React.FC = () => {
       />
     </View>
   );
+}
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'TabViewTopGuestureHandler',
+  component: TopTabViewExampleScreenGestureHandler,
+  options: {
+    title: 'Top TabView - Gesture Handler',
+    headerShown: true,
+  },
 };
 
 const localStyles = StyleSheet.create({

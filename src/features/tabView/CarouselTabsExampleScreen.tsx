@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { CarouselTabs } from '../../common/components/tabViewV3/CarouselTabs';
 import { TabConfig } from '../../common/components/tabViewV3/types';
+import { ScreenConfig } from '../../common/navigation/conventions';
 import { ActiveTabContext, ActiveTabContextValue } from './ActiveTabContext';
 import { CounterContext } from './CounterContext';
 import { useTabScreenData } from './useTabScreenData';
@@ -171,7 +172,7 @@ const TabScreen6: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
 
 // --- Main Screen Component ---
 
-export const CarouselTabsExampleScreen = () => {
+export default function CarouselTabsExampleScreen() {
   const tabItems = useMemo(
     () => [
       { key: 'tab1', title: 'First' },
@@ -245,6 +246,16 @@ export const CarouselTabsExampleScreen = () => {
       </ActiveTabContext.Provider>
     </CounterContext.Provider>
   );
+};
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'CarouselTabs',
+  component: CarouselTabsExampleScreen,
+  options: {
+    title: 'Carousel Tabs Example',
+    headerShown: true,
+  },
 };
 
 const Styles = StyleSheet.create({

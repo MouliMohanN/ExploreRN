@@ -2,6 +2,7 @@ import React from 'react';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import { ScreenConfig } from '../../common/navigation/conventions';
 import { CounterContext, useCounter } from './CounterContext';
 import { TabViewScreen1 } from './screens/TabViewScreen1';
 import { TabViewScreen2 } from './screens/TabViewScreen2';
@@ -17,7 +18,7 @@ const tabs = [
   { name: 'screen6', component: TabViewScreen2 },
 ];
 
-export const TabViewReactNavigationScreen: React.FC<ScreenBaseProps> = () => {
+export default function TabViewReactNavigationScreen() {
   const { count, setCount } = useCounter();
   return (
     <CounterContext.Provider value={{ count, setCount }}>
@@ -28,4 +29,14 @@ export const TabViewReactNavigationScreen: React.FC<ScreenBaseProps> = () => {
       </Tab.Navigator>
     </CounterContext.Provider>
   );
+}
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'TabViewReactNavigation',
+  component: TabViewReactNavigationScreen,
+  options: {
+    title: 'React Navigation TabView',
+    headerShown: true,
+  },
 };
