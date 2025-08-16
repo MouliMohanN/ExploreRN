@@ -1,0 +1,13 @@
+### Kill Metro server
+
+#### Find the Process ID (PID): Open your terminal and run this command:
+
+`lsof -i :8081`
+
+#### Stop the Process: Use the kill command with the PID you found. For example, if the PID is 98765:
+
+`kill -9 98765`
+
+---
+
+### Other commands
