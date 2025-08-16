@@ -7,8 +7,8 @@ import { logger } from './common/utils/logger/logger';
 export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
   const features = {
     log: false,
-    tabView: false,
-    webSockets: true,
+    tabView: true,
+    webSockets: false,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -89,12 +89,26 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderEventBus = () => {
+    return (
+      <>
+        <Button
+          title='EventBus'
+          onPress={() => {
+            navigation.navigate(ScreenNames.EventBus);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
       {renderLogFeature()}
       {renderTabViewFeature()}
       {renderWebSockets()}
+      {renderEventBus()}
     </View>
   );
 };

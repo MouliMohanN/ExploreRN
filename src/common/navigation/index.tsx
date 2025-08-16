@@ -8,6 +8,7 @@ import { TabViewReanimatedScreen } from '../../features/tabView/TabViewReanimate
 import { TopTabViewExampleScreenGestureHandler } from '../../features/tabView/TopTabViewExampleScreenGestureHandler';
 import { TopTabViewExampleScreenPagerView } from '../../features/tabView/TopTabViewExampleScreenPagerView';
 import { WebSocketsScreen } from '../../features/webSockets/WebSocketsScreen';
+import { EventBusScreen } from '../../features/eventBus/EvenBusScreen';
 
 const LogFeatureScreen = {
   LogViewer: 'LogViewer',
@@ -26,11 +27,16 @@ const WebSocketsFeatureScreen = {
   WebSockets: 'WebSockets',
 };
 
+const EventBusFeatureScreen = {
+  EventBus: 'EventBus',
+}
+
 export const ScreenNames = {
   Main: 'Main',
   ...LogFeatureScreen,
   ...TabViewFeatureScreen,
   ...WebSocketsFeatureScreen,
+  ...EventBusFeatureScreen
 };
 
 export const RootStack = createNativeStackNavigator();
@@ -108,6 +114,17 @@ const WebSocketsFeatureScreens = [
   },
 ];
 
+const EventBusFeatureScreens = [
+  {
+    name: ScreenNames.EventBus,
+    component: EventBusScreen,
+    options: {
+      headerShown: true,
+      title: 'EventBus',
+    },
+  },
+];
+
 export const RootStackScreens = [
   {
     name: ScreenNames.Main,
@@ -119,4 +136,5 @@ export const RootStackScreens = [
   ...LogFeatureScreens,
   ...TabViewFeatureScreens,
   ...WebSocketsFeatureScreens,
+  ...EventBusFeatureScreens
 ];
