@@ -64,7 +64,7 @@ export type TabScreenProps = {
   tabs: TabConfig[];
   currentIndex: number;
   swipeEnabled?: boolean;
-  contentContainerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle: StyleProp<ViewStyle>;
   onPageSelected?: (index: number) => void;
 };
 
