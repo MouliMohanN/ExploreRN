@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { RootStack, RootStackScreens, ScreenNames } from './navigation';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { RootStack, RootStackScreens, ScreenNames } from './common/navigation';
 
 const App = () => {
   useEffect(() => {
@@ -32,18 +33,20 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName={ScreenNames.Main}>
-        {RootStackScreens.map((screen) => (
-          <RootStack.Screen
-            key={screen.name}
-            name={screen.name}
-            component={screen.component}
-            options={screen.options}
-          />
-        ))}
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <RootStack.Navigator initialRouteName={ScreenNames.Main}>
+          {RootStackScreens.map((screen) => (
+            <RootStack.Screen
+              key={screen.name}
+              name={screen.name}
+              component={screen.component}
+              options={screen.options}
+            />
+          ))}
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 };
 

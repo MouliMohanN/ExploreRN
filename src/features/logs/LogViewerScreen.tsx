@@ -3,11 +3,11 @@ import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ScreenBaseProps } from '../common/types/ScreenBaseProps';
-import { getLogFilePaths } from '../common/utils/logger/loggers/fileLogger';
-import { ScreenNames } from '../navigation';
+import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import { ScreenConfig } from '../../common/navigation/conventions';
+import { getLogFilePaths } from '../../common/utils/logger/loggers/fileLogger';
 
-export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
+export default function LogViewerScreen({ navigation }: ScreenBaseProps) {
   const [logFiles, setLogFiles] = useState<string[]>([]);
 
   const fetchLogFiles = async () => {
@@ -133,7 +133,7 @@ export const LogViewerScreen = ({ navigation }: ScreenBaseProps) => {
             <View style={styles.logItemContainer}>
               <TouchableOpacity
                 style={styles.logItem}
-                onPress={() => navigation.navigate(ScreenNames.LogContent, { logFilePath: item })}
+                onPress={() => navigation.navigate('LogContent', { logFilePath: item })}
               >
                 <Text style={styles.logItemText}>{item.split('/').pop()}</Text>
               </TouchableOpacity>
@@ -224,3 +224,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff4d4d',
   },
 });
+
+// Screen configuration for auto-discovery
+export const screenConfig: ScreenConfig = {
+  name: 'LogViewer',
+  component: LogViewerScreen,
+  options: {
+    headerShown: true,
+    title: 'Available Logs',
+  },
+};
