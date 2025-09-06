@@ -10,7 +10,7 @@ export interface Spec extends TurboModule {
   /**
    * Enable or disable Brotli compression support
    */
-  setEnabled(enabled: boolean): Promise<void>;
+  setEnabled(enabled: boolean): Promise<boolean>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('NetworkBrotli');

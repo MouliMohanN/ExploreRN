@@ -3,6 +3,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View
 import { Button } from '../../common/components/Button';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import NetworkBrotli from '../../specs/NetworkBrotli';
 
 interface TestResult {
   url: string;
@@ -15,10 +16,10 @@ interface TestResult {
 }
 
 export default function BrotliScreen({}: ScreenBaseProps): React.ReactElement {
-  const [isEnabled, setIsEnabled] = useState<boolean>(true);
+  const [] = useState<boolean>(true);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [enableBrotli] = useState<boolean>(false);
+  const [enableBrotli, setEnabledBrotli] = useState<boolean>(false);
 
   const runTests = async () => {
     setLoading(true);
@@ -90,13 +91,18 @@ export default function BrotliScreen({}: ScreenBaseProps): React.ReactElement {
     setTestResults(results);
     setLoading(false);
   };
+    
+    const toggleBrotli = async () => {
+      const value =  await NetworkBrotli.setEnabled(!enableBrotli);
+      setEnabledBrotli(value);
+    }
 
   return (
     <View>
       <ScrollView>
-        <Text style={styles.title}>{`Brotli status: ${isEnabled ? 'enabled' : 'disabled'}`}</Text>
+        <Text style={styles.title}>{`Brotli status: ${enableBrotli ? 'enabled' : 'disabled'}`}</Text>
 
-        <Button title='toggle Brotli' onPress={() => setIsEnabled(!isEnabled)} />
+        <Button title='toggle Brotli' onPress={toggleBrotli} />
 
         {testResults.length > 0 && (
           <View style={styles.section}>
