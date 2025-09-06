@@ -15,7 +15,7 @@ You requested a **zero-runtime overhead, auto-discovery screen system** that eli
 ✅ **Convention-Based** - Simple file naming and export conventions  
 ✅ **Type-Safe** - Full TypeScript support with auto-generated types  
 ✅ **Fast Rebuilds** - Only regenerates when screen files change  
-✅ **Developer Control** - Full control over screen names and options  
+✅ **Developer Control** - Full control over screen names and options
 
 ## How It Works
 
@@ -60,6 +60,7 @@ export const screenConfig: ScreenConfig = {
 ### 2. That's It!
 
 The build system will automatically:
+
 - Discover your screen
 - Generate the registry
 - Make it available in `ScreenNames`
@@ -67,18 +68,21 @@ The build system will automatically:
 ## File Conventions
 
 ### Naming Convention
+
 - Files must end with `Screen.tsx` or `Screen.ts`
 - Located anywhere under `src/features/*/`
 - Can be nested in subfolders
 
 ### Export Convention
+
 - **Default export**: Your React component
 - **Named export**: `screenConfig` object following the `ScreenConfig` interface
 
 ### Valid Examples
+
 ```
 src/features/auth/LoginScreen.tsx
-src/features/auth/signup/SignupScreen.tsx  
+src/features/auth/signup/SignupScreen.tsx
 src/features/profile/settings/SettingsScreen.tsx
 src/features/shop/ProductDetailScreen.tsx
 ```
@@ -98,7 +102,7 @@ export interface ScreenConfig {
 The build system now supports **any valid React Navigation option** generically:
 
 - **Strings**: `title: 'My Screen'`, `headerBackTitle: 'Back'`
-- **Booleans**: `headerShown: true`, `gestureEnabled: false` 
+- **Booleans**: `headerShown: true`, `gestureEnabled: false`
 - **Numbers**: `headerTitleAlign: 'center'`, `fontSize: 18`, `elevation: 4`
 - **Nested Objects**: `headerStyle: { backgroundColor: '#fff' }`
 - **Arrays**: `tabBarActiveTintColor: ['#fff', '#000']` (simple arrays)
@@ -106,6 +110,7 @@ The build system now supports **any valid React Navigation option** generically:
 ### Examples
 
 #### Simple Options
+
 ```typescript
 export const screenConfig: ScreenConfig = {
   name: 'Login',
@@ -119,6 +124,7 @@ export const screenConfig: ScreenConfig = {
 ```
 
 #### Complex Nested Options
+
 ```typescript
 export const screenConfig: ScreenConfig = {
   name: 'Profile',
@@ -147,19 +153,25 @@ export const screenConfig: ScreenConfig = {
 ## Build Scripts
 
 ### Generate Registry
+
 ```bash
 npm run screens:generate
 ```
+
 Scans and generates the screen registry once.
 
 ### Watch Mode (Development)
+
 ```bash
 npm run screens:watch
 ```
+
 Continuously watches for changes and regenerates the registry automatically.
 
 ### Auto-Generate (Production)
+
 The registry is automatically generated before starting the app:
+
 ```bash
 npm start  # Automatically runs screens:generate first
 ```
@@ -177,25 +189,31 @@ navigation.navigate(ScreenNames.ProductDetail, { productId: '123' });
 ## Generated Files
 
 ### `src/common/navigation/generated/screenRegistry.ts`
+
 This is the auto-generated registry file. **DO NOT EDIT** it manually.
 
 It contains:
+
 - `SCREENS`: Pre-computed array of all screen configurations
-- `SCREEN_NAMES`: Pre-computed object mapping screen names  
+- `SCREEN_NAMES`: Pre-computed object mapping screen names
 - `SCREENS_BY_GROUP`: Pre-computed screens grouped by feature
 - Helper functions with zero runtime computation
 
 ## Advanced Features
 
 ### Grouping
+
 Screens are automatically grouped by their feature directory:
+
 ```typescript
 // Screens in src/features/auth/ will be in the 'auth' group
 getScreensByGroup('auth'); // Returns all auth screens
 ```
 
 ### TypeScript Support
+
 Full type safety with auto-completion:
+
 ```typescript
 // ScreenNames is fully typed
 navigation.navigate(ScreenNames.Login); // ✅ Autocomplete works
@@ -205,17 +223,21 @@ navigation.navigate(ScreenNames.InvalidScreen); // ❌ TypeScript error
 ## Troubleshooting
 
 ### Screen Not Found
+
 1. Verify file naming: Must end with `Screen.tsx` or `Screen.ts`
 2. Check export: Must have `export const screenConfig: ScreenConfig`
 3. Regenerate registry: `npm run screens:generate`
 
 ### Build Errors
+
 1. Check syntax in your `screenConfig` export
 2. Ensure all imports are valid
 3. Run `npm run screens:generate` to see detailed error messages
 
 ### Performance
+
 The system has zero runtime overhead:
+
 - No file system scanning at runtime
 - No dynamic imports
 - Pre-computed data structures
@@ -231,7 +253,7 @@ The system has zero runtime overhead:
 ## Best Practices
 
 1. **Consistent Naming**: Use descriptive, consistent screen names
-2. **Feature Organization**: Group related screens in feature directories  
+2. **Feature Organization**: Group related screens in feature directories
 3. **Configuration**: Keep screen options simple and focused
 4. **Development**: Use watch mode during development
 5. **Production**: Always run generation before deployment

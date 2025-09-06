@@ -9,8 +9,9 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     log: false,
     tabView: false,
     webSockets: false,
-    eventBus: true,
+    eventBus: false,
     screenSystemDemo: true,
+    brotli: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -123,6 +124,22 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderBrotli = () => {
+    if (!features.brotli) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Brotli'
+          onPress={() => {
+            navigation.navigate(ScreenNames.Brotli);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
@@ -131,6 +148,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
       {renderWebSockets()}
       {renderEventBus()}
       {renderScreenSystemDemo()}
+      {renderBrotli()}
     </View>
   );
 };

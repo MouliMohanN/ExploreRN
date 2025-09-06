@@ -10,4 +10,16 @@
 
 ---
 
-### Other commands
+### Open Terminal
+
+#### iterm2
+
+`open -a iTerm .`
+
+#### Warp
+
+`shift+command+c`
+
+### Delete git branches
+
+`git branch | grep -v "develop" | xargs git branch -D`

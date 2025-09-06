@@ -246,7 +246,7 @@ export default function CarouselTabsExampleScreen() {
       </ActiveTabContext.Provider>
     </CounterContext.Provider>
   );
-};
+}
 
 // Screen configuration for auto-discovery
 export const screenConfig: ScreenConfig = {

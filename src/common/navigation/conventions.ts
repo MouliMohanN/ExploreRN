@@ -1,12 +1,12 @@
 /**
  * Screen Discovery Conventions
- * 
+ *
  * This file defines the conventions that screens must follow for auto-discovery.
  * The build-time scanner will look for these patterns and generate the registry.
  */
 
-import { ComponentType } from 'react';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import { ComponentType } from 'react';
 import { ScreenBaseProps } from '../types/ScreenBaseProps';
 
 /**
@@ -25,19 +25,19 @@ export interface ScreenConfig {
  * - Screen files must end with 'Screen.tsx' or 'Screen.ts'
  * - Located in src/features/<feature-name>/
  * - Can be nested in subfolders within features
- * 
+ *
  * Export conventions:
  * - Default export: The React component
  * - Named export 'screenConfig': The ScreenConfig object
- * 
+ *
  * Example:
  * ```typescript
  * // src/features/auth/LoginScreen.tsx
- * 
+ *
  * export default function LoginScreen({ navigation }: ScreenBaseProps) {
  *   return <View>...</View>;
  * }
- * 
+ *
  * export const screenConfig: ScreenConfig = {
  *   name: 'Login',
  *   component: LoginScreen,

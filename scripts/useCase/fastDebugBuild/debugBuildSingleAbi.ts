@@ -63,13 +63,13 @@ process.on('SIGTERM', cleanup);
 const run = async () => {
   try {
     // 1. Check and Start Metro bundler
-    const metroAlreadyRunning = await isMetroRunning();
-    if (metroAlreadyRunning) {
-      console.log('Metro bundler is already running. Skipping start.');
-    } else {
-      console.log('Starting Metro bundler in the background...');
-      metroProcess = exec('npm start', { cwd: ROOT_DIR });
-    }
+    // const metroAlreadyRunning = await isMetroRunning();
+    // if (metroAlreadyRunning) {
+    //   console.log('Metro bundler is already running. Skipping start.');
+    // } else {
+    //   console.log('Starting Metro bundler in the background...');
+    //   metroProcess = exec('npm start', { cwd: ROOT_DIR });
+    // }
 
     // 2. Backup the original build.gradle
     console.log('Backing up original android/app/build.gradle...');

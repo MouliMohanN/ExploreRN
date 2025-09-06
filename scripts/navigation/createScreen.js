@@ -2,7 +2,7 @@
 
 /**
  * Screen Template Generator
- * 
+ *
  * A CLI tool to quickly create new screens following the conventions
  */
 
