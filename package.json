@@ -11,13 +11,13 @@
     "ts:check": "tsc -p . --noEmit",
     "prettier:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
     "prettier:write": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
-    "build:release:android": "cd android && gradlew assembleRelease cd ..",
+    "build:release:android": "cd android && ./gradlew assembleRelease cd ..",
     "build:release:ios": "cd ios && pod install && cd .. && xcodebuild ONLY_ACTIVE_ARCH=YES -workspace ios/AwesomeProject.xcworkspace -UseNewBuildSystem=YES -scheme AwesomeProject -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet",
     "detox:test:android": "detox test --config-path .detoxrc-ci.js --configuration android.emu.release --cleanup",
     "detox:test:ios": "detox test --config-path .detoxrc-ci.js --configuration ios.sim.release --cleanup",
     "fingerprint:android": "npx expo-updates fingerprint:generate --platform android | jq -r '.hash' | xargs -n 1 echo 'fingerprint:'",
     "fingerprint:ios": "npx expo-updates fingerprint:generate --platform ios | jq -r '.hash' | xargs -n 1 echo 'fingerprint:'",
-    "build:debug:android": "cd android && gradlew assembleDebug",
+    "build:debug:android": "cd android && ./gradlew assembleDebug",
     "fast-build": "ts-node scripts/useCase/fastDebugBuild/debugBuildSingleAbi.ts",
     "build:debug:ios": "cd ios && pod install && cd .. && xcodebuild ONLY_ACTIVE_ARCH=YES -workspace ios/AwesomeProject.xcworkspace -UseNewBuildSystem=YES -scheme AwesomeProject -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build -quiet",
     "maestro:test": "maestro test --debug-output maestro-debug-output .maestro",
@@ -32,10 +32,11 @@
     "adb-uninstall": "adb uninstall com.explorern",
     "install-abi-apk": "ts-node scripts/useCase/fastDebugBuild/debugInstallAbi.ts",
     "clean-install-android": "rm -rf node_modules && npm install -f && npm run fast-build",
-    "clean-install-android-release": "cd android && gradlew installRelease && cd ..",
-    "android-release": "cd android && gradlew installRelease && cd ..",
-    "clean-gradle": "cd android && gradlew clean && cd ..",
-    "generate-spec": "cd android && gradlew generateCodegenArtifactsFromSchema && cd ..",
+    "clean-install-android-release": "cd android && ./gradlew installRelease && cd ..",
+    "android-release": "cd android && ./gradlew installRelease && cd ..",
+    "clean-gradle": "cd android && ./gradlew clean && cd ..",
+    "gradle-tasks": "cd android && ./gradlew tasks && cd ..",
+    "generate-spec": "cd android && ./gradlew generateCodegenArtifactsFromSchema && cd ..",
     "rn-info": "npx react-native-info",
     "move-mouse-robotjs": "ts-node scripts/useCase/moveMouse/robotjs.ts",
     "move-mouse-nutjs": "ts-node scripts/useCase/moveMouse/nutjs.ts",
@@ -43,6 +44,14 @@
     "screens:watch": "node scripts/navigation/screenScanner.js --watch",
     "create-screen": "node scripts/navigation/createScreen.js",
     "prestart": "npm run screens:generate"
+  },
+  "codegenConfig": {
+    "name": "NetworkBrotliSpec",
+    "type": "modules",
+    "jsSrcsDir": "src/specs",
+    "android": {
+      "javaPackageName": "com.explorern.modules"
+    }
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "7.4.2",

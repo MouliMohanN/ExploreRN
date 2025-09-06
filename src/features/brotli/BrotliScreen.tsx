@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button } from '../../common/components/Button';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 
@@ -17,6 +18,7 @@ export default function BrotliScreen({}: ScreenBaseProps): React.ReactElement {
   const [isEnabled, setIsEnabled] = useState<boolean>(true);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [enableBrotli] = useState<boolean>(false);
 
   const runTests = async () => {
     setLoading(true);
@@ -50,12 +52,13 @@ export default function BrotliScreen({}: ScreenBaseProps): React.ReactElement {
     for (const test of testUrls) {
       try {
         const startTime = Date.now();
+        const encoding = enableBrotli ? 'br, gzip, deflate' : 'gzip, deflate';
 
         const response = await fetch(test.url, {
           method: test.method,
           headers: {
             Accept: 'application/json',
-            'Accept-Encoding': 'br, gzip, deflate',
+            'Accept-Encoding': encoding,
           },
         });
 
@@ -90,37 +93,45 @@ export default function BrotliScreen({}: ScreenBaseProps): React.ReactElement {
 
   return (
     <View>
-      <Text>Brotli</Text>
+      <ScrollView>
+        <Text style={styles.title}>{`Brotli status: ${isEnabled ? 'enabled' : 'disabled'}`}</Text>
 
-      {testResults.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Test Results</Text>
-          {testResults.map((result, index) => (
-            <View key={index} style={styles.testResult}>
-              <Text style={styles.testUrl}>{result.url}</Text>
-              <View style={styles.testDetails}>
-                <Text style={[styles.testStatus, { color: result.success ? '#4CAF50' : '#F44336' }]}>
-                  {result.success ? '✓ Success' : '✗ Failed'}
-                </Text>
-                {result.success && (
-                  <>
-                    <Text style={styles.testDetail}>Size: {result.responseSize} bytes</Text>
-                    <Text style={styles.testDetail}>Time: {result.responseTime}ms</Text>
-                    <Text style={styles.testDetail}>Encoding: {result.contentEncoding}</Text>
-                  </>
-                )}
-                {result.error && <Text style={styles.errorText}>Error: {result.error}</Text>}
+        <Button title='toggle Brotli' onPress={() => setIsEnabled(!isEnabled)} />
+
+        {testResults.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Test Results</Text>
+            {testResults.map((result, index) => (
+              <View key={index} style={styles.testResult}>
+                <Text style={styles.testUrl}>{result.url}</Text>
+                <View style={styles.testDetails}>
+                  <Text style={[styles.testStatus, { color: result.success ? '#4CAF50' : '#F44336' }]}>
+                    {result.success ? '✓ Success' : '✗ Failed'}
+                  </Text>
+                  {result.success && (
+                    <>
+                      <Text style={styles.testDetail}>Size: {result.responseSize} bytes</Text>
+                      <Text style={styles.testDetail}>Time: {result.responseTime}ms</Text>
+                      <Text style={styles.testDetail}>Encoding: {result.contentEncoding}</Text>
+                    </>
+                  )}
+                  {result.error && <Text style={styles.errorText}>Error: {result.error}</Text>}
+                </View>
               </View>
-            </View>
-          ))}
-        </View>
-      )}
+            ))}
+          </View>
+        )}
 
-      <TouchableOpacity style={[styles.button, loading && styles.buttonDisabled]} onPress={runTests} disabled={loading}>
-        {loading ?
-          <ActivityIndicator color='white' size='small' />
-        : <Text style={styles.buttonText}>Run Network Tests</Text>}
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, loading && styles.buttonDisabled]}
+          onPress={runTests}
+          disabled={loading}
+        >
+          {loading ?
+            <ActivityIndicator color='white' size='small' />
+          : <Text style={styles.buttonText}>Run Network Tests</Text>}
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
