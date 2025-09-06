@@ -31,7 +31,7 @@
     "adb-connect-dev-tools": "adb reverse tcp:8097 tcp:8097",
     "adb-uninstall": "adb uninstall com.explorern",
     "install-abi-apk": "ts-node scripts/useCase/fastDebugBuild/debugInstallAbi.ts",
-    "clean-install-android": "rm -rf node_modules && npm install -f && npm run fast-build",
+    "clean-install-android": "rm -rf node_modules && rm -rf package-lock.json && npm install -f && npm run fast-build",
     "clean-install-android-release": "cd android && ./gradlew installRelease && cd ..",
     "android-release": "cd android && ./gradlew installRelease && cd ..",
     "clean-gradle": "cd android && ./gradlew clean && cd ..",
