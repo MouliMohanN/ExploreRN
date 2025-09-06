@@ -46,7 +46,7 @@
     "prestart": "npm run screens:generate"
   },
   "codegenConfig": {
-    "name": "NetworkBrotliSpec",
+    "name": "NetworkBrotli",
     "type": "modules",
     "jsSrcsDir": "src/specs",
     "android": {
