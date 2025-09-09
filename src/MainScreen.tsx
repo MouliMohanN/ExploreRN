@@ -9,8 +9,9 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     log: false,
     tabView: false,
     webSockets: false,
-    eventBus: true,
+    eventBus: false,
     screenSystemDemo: true,
+    react19: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -123,6 +124,22 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderReact19 = () => {
+    if (!features.react19) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='React 19'
+          onPress={() => {
+            navigation.navigate(ScreenNames.react19Home);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
@@ -131,6 +148,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
       {renderWebSockets()}
       {renderEventBus()}
       {renderScreenSystemDemo()}
+      {renderReact19()}
     </View>
   );
 };
