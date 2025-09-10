@@ -1,4 +1,4 @@
-import React, { useOptimistic, useState } from 'react';
+import React, { useOptimistic, useState, useTransition } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 
 async function apiToggleLike(id: number, liked: boolean) {
@@ -36,10 +36,15 @@ export default function UseOptimisticExample(): React.ReactElement {
 
 function OptimisticRow({ item, onCommit }: { item: { id: number; liked: boolean; text: string }; onCommit: (val: boolean) => void }) {
   const [optimistic, addOptimistic] = useOptimistic(item, (cur, nextLiked: boolean) => ({ ...cur, liked: nextLiked }));
+  const [isPending, startTransition] = useTransition();
 
   const toggle = async () => {
     const next = !optimistic.liked;
-    addOptimistic(next); // instant UI change
+    
+    startTransition(() => {
+      addOptimistic(next); // instant UI change wrapped in transition
+    });
+    
     try {
       const confirmed = await apiToggleLike(item.id, item.liked);
       onCommit(confirmed);
@@ -51,9 +56,13 @@ function OptimisticRow({ item, onCommit }: { item: { id: number; liked: boolean;
   return (
     <View style={styles.row}>
       <Text style={styles.rowText}>{item.text}</Text>
-      <TouchableOpacity style={[styles.likeBtn, optimistic.liked ? styles.liked : styles.unliked]} onPress={toggle}>
+      <TouchableOpacity 
+        style={[styles.likeBtn, optimistic.liked ? styles.liked : styles.unliked, isPending && styles.pending]} 
+        onPress={toggle}
+        disabled={isPending}
+      >
         <Text style={[styles.likeText, optimistic.liked ? styles.likedText : styles.unlikedText]}>
-          {optimistic.liked ? '♥ Liked' : '♡ Like'}
+          {isPending ? '⏳ Processing...' : optimistic.liked ? '♥ Liked' : '♡ Like'}
         </Text>
       </TouchableOpacity>
     </View>
@@ -69,6 +78,7 @@ const styles = StyleSheet.create({
   likeBtn: { paddingVertical: 6, paddingHorizontal: 12, borderRadius: 16, borderWidth: 1 },
   liked: { backgroundColor: '#fee2e2', borderColor: '#fecaca' },
   unliked: { backgroundColor: '#eff6ff', borderColor: '#dbeafe' },
+  pending: { backgroundColor: '#f3f4f6', borderColor: '#d1d5db', opacity: 0.7 },
   likeText: { fontWeight: '700' },
   likedText: { color: '#b91c1c' },
   unlikedText: { color: '#1d4ed8' },

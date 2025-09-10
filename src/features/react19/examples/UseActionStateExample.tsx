@@ -1,11 +1,15 @@
-import React, { useActionState, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import React, { useActionState, useState, useTransition } from 'react';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 // Simple async action that simulates a server call
-async function saveProfile(prev: { message?: string; error?: string } | null, formData: FormData) {
-  const name = formData.get('name') as string;
-  const email = formData.get('email') as string;
-  await new Promise(r => setTimeout(r, 1200));
+// Note: In React Native, FormData.get() might not be available, so we use a custom data structure
+async function saveProfile(
+  _prev: { message?: string; error?: string } | null,
+  formData: { name: string; email: string },
+) {
+  const name = formData.name;
+  const email = formData.email;
+  await new Promise((r) => setTimeout(r, 1200));
   if (!name || !email) return { error: 'Name and email are required' };
   if (!/\S+@\S+\.\S+/.test(email)) return { error: 'Invalid email format' };
   // random failure
@@ -16,13 +20,16 @@ async function saveProfile(prev: { message?: string; error?: string } | null, fo
 export default function UseActionStateExample(): React.ReactElement {
   const [inputs, setInputs] = useState({ name: '', email: '' });
   const [state, submit, pending] = useActionState(saveProfile, null);
+  const [isPending, startTransition] = useTransition();
 
   const onSubmit = () => {
-    const fd = new FormData();
-    fd.append('name', inputs.name);
-    fd.append('email', inputs.email);
-    submit(fd);
+    startTransition(() => {
+      submit({ name: inputs.name, email: inputs.email });
+    });
   };
+
+  // Use either the useActionState pending or useTransition pending
+  const isLoading = pending || isPending;
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -31,30 +38,43 @@ export default function UseActionStateExample(): React.ReactElement {
 
       <View style={styles.card}>
         <TextInput
-          placeholder="Name"
+          placeholder='Name'
           value={inputs.name}
-          onChangeText={(t) => setInputs(p => ({ ...p, name: t }))}
+          onChangeText={(t) => setInputs((p) => ({ ...p, name: t }))}
           style={styles.input}
-          editable={!pending}
+          editable={!isLoading}
         />
         <TextInput
-          placeholder="Email"
+          placeholder='Email'
           value={inputs.email}
-          onChangeText={(t) => setInputs(p => ({ ...p, email: t }))}
+          onChangeText={(t) => setInputs((p) => ({ ...p, email: t }))}
           style={styles.input}
-          editable={!pending}
-          autoCapitalize="none"
-          keyboardType="email-address"
+          editable={!isLoading}
+          autoCapitalize='none'
+          keyboardType='email-address'
         />
-        <TouchableOpacity disabled={pending} onPress={onSubmit} style={[styles.button, pending && styles.buttonDisabled]}>
-          <Text style={styles.buttonText}>{pending ? 'Saving...' : 'Save'}</Text>
+        <TouchableOpacity
+          disabled={isLoading}
+          onPress={onSubmit}
+          style={[styles.button, isLoading && styles.buttonDisabled]}
+        >
+          <Text style={styles.buttonText}>{isLoading ? 'Saving...' : 'Save'}</Text>
         </TouchableOpacity>
-        {state?.message ? <Text style={styles.success}>✅ {state.message}</Text> : null}
-        {state?.error ? <Text style={styles.error}>❌ {state.error}</Text> : null}
+        {state?.message ?
+          <Text style={styles.success}>✅ {state.message}</Text>
+        : null}
+        {state?.error ?
+          <Text style={styles.error}>❌ {state.error}</Text>
+        : null}
       </View>
 
       <View style={styles.hint}>
-        <Text style={styles.hintText}>Tip: You don't need useState/useEffect boilerplate for async submit anymore.</Text>
+        <Text style={styles.hintText}>
+          Tip: You don't need useState/useEffect boilerplate for async submit anymore.
+        </Text>
+        <Text style={styles.hintText}>
+          Note: In React Native, we use startTransition to properly handle pending states.
+        </Text>
       </View>
     </ScrollView>
   );
