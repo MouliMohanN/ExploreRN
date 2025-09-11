@@ -10,7 +10,9 @@ const defaultConfig = getDefaultConfig(__dirname);
  */
 const config = {
   resolver: {
-    unstable_enablePackageExports: false,
+  // Enable package exports so Metro can resolve packages using their modern "exports" field
+  // (React 18/19 use `exports` and Metro may need this flag enabled for correct resolution).
+  unstable_enablePackageExports: true,
   },
 };
 
