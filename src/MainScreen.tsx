@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { Button } from './common/components/Button';
 import { ScreenNames } from './common/navigation';
 import { ScreenBaseProps } from './common/types/ScreenBaseProps';
@@ -12,6 +12,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     eventBus: false,
     screenSystemDemo: true,
     react19: true,
+    typescript: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -140,15 +141,34 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderTypescript = () => {
+    if (!features.typescript) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Typescript'
+          onPress={() => {
+            navigation.navigate(ScreenNames.typescriptHome);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
-      {renderLogFeature()}
-      {renderTabViewFeature()}
-      {renderWebSockets()}
-      {renderEventBus()}
-      {renderScreenSystemDemo()}
-      {renderReact19()}
+      <ScrollView>
+        {renderLogFeature()}
+        {renderTabViewFeature()}
+        {renderWebSockets()}
+        {renderEventBus()}
+        {renderScreenSystemDemo()}
+        {renderReact19()}
+        {renderTypescript()}
+      </ScrollView>
     </View>
   );
 };
