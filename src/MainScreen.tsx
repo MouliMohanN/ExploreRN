@@ -150,7 +150,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         <Button
           title='Typescript'
           onPress={() => {
-            navigation.navigate(ScreenNames.typescriptHome);
+            navigation.navigate(ScreenNames.ModernTypeScriptFeatures);
           }}
         />
       </>

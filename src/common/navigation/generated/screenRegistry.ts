@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-09-11T05:25:35.735Z
+ * Generated on: 2025-09-11T06:55:43.691Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -21,7 +21,7 @@ import TabViewReactNavigationScreen_6, { screenConfig as screenConfig_6 } from '
 import TabViewReanimatedScreen_7, { screenConfig as screenConfig_7 } from '../../../features/tabView/TabViewReanimatedScreen';
 import TopTabViewExampleScreenGestureHandler_8, { screenConfig as screenConfig_8 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
 import TopTabViewExampleScreenPagerView_9, { screenConfig as screenConfig_9 } from '../../../features/tabView/TopTabViewPagerViewScreen';
-import typescriptHomeScreen_10, { screenConfig as screenConfig_10 } from '../../../features/typescript/typescriptHomeScreen';
+import ModernTypeScriptFeaturesScreen_10, { screenConfig as screenConfig_10 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
 import WebSocketsScreen_11, { screenConfig as screenConfig_11 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
@@ -88,7 +88,7 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_10.name,
-    component: typescriptHomeScreen_10,
+    component: ModernTypeScriptFeaturesScreen_10,
     options: screenConfig_10.options || {},
     group: 'typescript',
   },
@@ -112,7 +112,7 @@ export const SCREEN_NAMES = {
   'TabViewReanimated': 'TabViewReanimated',
   'TabViewTopGuestureHandler': 'TabViewTopGuestureHandler',
   'TabViewTopPagerView': 'TabViewTopPagerView',
-  'typescriptHome': 'typescriptHome',
+  'ModernTypeScriptFeatures': 'ModernTypeScriptFeatures',
   'WebSockets': 'WebSockets'
 } as const;
 
