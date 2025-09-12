@@ -76,7 +76,7 @@ react {
 /**
  * Set this to true to Run Proguard on Release builds to minify the Java bytecode.
  */
-def enableProguardInReleaseBuilds = false
+def optimizeReleaseBuilds = false
 
 /**
  * The preferred build flavor of JavaScriptCore (JSC)
@@ -128,12 +128,12 @@ android {
             // FIXME: This is a debug key and should be replaced with a release key.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            minifyEnabled false
-            shrinkResources false
-            crunchPngs false
+            minifyEnabled optimizeReleaseBuilds
+            minifyEnabled optimizeReleaseBuilds
+            shrinkResources optimizeReleaseBuilds
+            crunchPngs optimizeReleaseBuilds
             aaptOptions {
-                cruncherEnabled false
+                cruncherEnabled optimizeReleaseBuilds
             }
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             
@@ -143,7 +143,7 @@ android {
         abi {
             enable true
             reset()
-            include "armeabi-v7a", "arm64-v8a"
+            include "arm64-v8a"
             universalApk false
         }
     }

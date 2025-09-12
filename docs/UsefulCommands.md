@@ -11,3 +11,7 @@
 ---
 
 ### Other commands
+
+#### Install app on specific device when multiple devices are connected via ABD
+
+`adb -s <device_id> install <path_to_your_apk>`
