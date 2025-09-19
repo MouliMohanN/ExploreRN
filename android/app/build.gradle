@@ -139,11 +139,13 @@ android {
             
         }
     }
+
+
     splits {
         abi {
             enable true
             reset()
-            include "armeabi-v7a", "arm64-v8a"
+            include "arm64-v8a"
             universalApk false
         }
     }
@@ -153,7 +155,17 @@ android {
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
-    implementation("com.facebook.react:react-android")
+   implementation("com.facebook.react:react-android")
+
+    // OkHttp BOM for version management (excluding brotli from BOM)
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.1.0")) {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp-brotli'
+    }
+    
+    // OkHttp for networking with Brotli compression
+    implementation("com.squareup.okhttp3:okhttp")
+    // Brotli compression support (currently in alpha)
+    implementation("com.squareup.okhttp3:okhttp-brotli:5.0.0-alpha.16")
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
