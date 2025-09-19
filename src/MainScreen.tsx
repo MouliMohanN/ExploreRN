@@ -13,6 +13,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     screenSystemDemo: true,
     react19: true,
     typescript: true,
+    inputText: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -157,6 +158,22 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderInputText = () => {
+    if (!features.inputText) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Input Text'
+          onPress={() => {
+            navigation.navigate(ScreenNames.InputTextScreen);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
@@ -168,6 +185,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         {renderScreenSystemDemo()}
         {renderReact19()}
         {renderTypescript()}
+        {renderInputText()}
       </ScrollView>
     </View>
   );

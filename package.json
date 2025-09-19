@@ -42,7 +42,7 @@
     "move-mouse-nutjs": "ts-node scripts/useCase/moveMouse/nutjs.ts",
     "screens:generate": "node scripts/navigation/screenScanner.js",
     "screens:watch": "node scripts/navigation/screenScanner.js --watch",
-    "create-screen": "node scripts/navigation/createScreen.js typescript typescriptHome && npm run screens:generate",
+    "create-screen": "node scripts/navigation/createScreen.js inputText InputTextScreen && npm run screens:generate",
     "prestart": "npm run screens:generate"
   },
   "dependencies": {
