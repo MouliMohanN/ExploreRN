@@ -167,7 +167,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         <Button
           title='Input Text'
           onPress={() => {
-            navigation.navigate(ScreenNames.InputTextScreen);
+            navigation.navigate(ScreenNames.InputText);
           }}
         />
       </>

@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-09-19T09:02:01.882Z
+ * Generated on: 2025-09-19T09:04:40.877Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -13,7 +13,7 @@ import { ScreenConfig } from '../conventions';
 // Screen imports
 import ScreenSystemDemoScreen_0, { screenConfig as screenConfig_0 } from '../../../features/demo/ScreenSystemDemoScreen';
 import EventBusScreen_1, { screenConfig as screenConfig_1 } from '../../../features/eventBus/EvenBusScreen';
-import InputTextScreenScreen_2, { screenConfig as screenConfig_2 } from '../../../features/inputText/InputTextScreenScreen';
+import InputTextScreen_2, { screenConfig as screenConfig_2 } from '../../../features/inputText/InputTextScreen';
 import LogContentScreen_3, { screenConfig as screenConfig_3 } from '../../../features/logs/LogContentScreen';
 import LogViewerScreen_4, { screenConfig as screenConfig_4 } from '../../../features/logs/LogViewerScreen';
 import react19HomeScreen_5, { screenConfig as screenConfig_5 } from '../../../features/react19/react19HomeScreen';
@@ -41,7 +41,7 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_2.name,
-    component: InputTextScreenScreen_2,
+    component: InputTextScreen_2,
     options: screenConfig_2.options || {},
     group: 'inputText',
   },
@@ -111,7 +111,7 @@ export const SCREENS: readonly ScreenConfig[] = [
 export const SCREEN_NAMES = {
   'ScreenSystemDemo': 'ScreenSystemDemo',
   'EventBus': 'EventBus',
-  'InputTextScreen': 'InputTextScreen',
+  'InputText': 'InputText',
   'LogContent': 'LogContent',
   'LogViewer': 'LogViewer',
   'react19Home': 'react19Home',
