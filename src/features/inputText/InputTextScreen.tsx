@@ -1,11 +1,45 @@
-import React, { useState, useRef } from 'react';
-import { Text, TextInput, View, StyleSheet, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useRef, useState } from 'react';
+import {
+  Keyboard,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 
 export default function InputTextScreen({}: ScreenBaseProps): React.ReactElement {
   const [numericValue, setNumericValue] = useState('');
   const textInputRef = useRef<TextInput>(null);
+
+  const getTextInputStyle = () => {
+    if (Platform.OS === 'android') {
+      // For Android, always use left alignment but adjust padding when empty
+      return [
+        styles.textInput,
+        {
+          textAlign: 'left',
+          paddingLeft: numericValue ? 16 : '45%',
+          paddingRight: 16,
+          textAlignVertical: 'center',
+        },
+      ];
+    }
+
+    // For iOS, use the original approach
+    return [
+      styles.textInput,
+      {
+        textAlign: numericValue ? 'left' : 'center',
+        textAlignVertical: 'center',
+      },
+    ];
+  };
 
   const handleNumericInput = (text: string) => {
     // Remove any non-numeric characters
@@ -28,10 +62,17 @@ export default function InputTextScreen({}: ScreenBaseProps): React.ReactElement
   };
 
   const handleInputFocus = () => {
-    // Move cursor to the end when input is focused
+    // Move cursor to the end when input is focused and has content
+    // For empty input, let it use the centered alignment
     setTimeout(() => {
-      if (textInputRef.current && numericValue) {
-        textInputRef.current.setSelection(numericValue.length, numericValue.length);
+      if (textInputRef.current) {
+        if (numericValue) {
+          // If has content, move cursor to end
+          textInputRef.current.setSelection(numericValue.length, numericValue.length);
+        } else {
+          // If empty, set cursor to position 0 (will appear centered due to textAlign)
+          textInputRef.current.setSelection(0, 0);
+        }
       }
     }, 0);
   };
@@ -49,43 +90,35 @@ export default function InputTextScreen({}: ScreenBaseProps): React.ReactElement
           {/* Input Card */}
           <View style={styles.card}>
             <Text style={styles.inputLabel}>Enter Amount</Text>
-            <TextInput 
+            <TextInput
               ref={textInputRef}
-              style={styles.textInput}
-              placeholder='0' 
+              style={getTextInputStyle()}
+              placeholder='0'
               placeholderTextColor='#A0A0A0'
               value={numericValue}
               onChangeText={handleNumericInput}
               onFocus={handleInputFocus}
               keyboardType='numeric'
               maxLength={15}
+              multiline={false}
             />
-            
+
             {/* Formatted Display */}
-            {numericValue ? (
+            {numericValue ?
               <View style={styles.displayContainer}>
                 <Text style={styles.displayLabel}>Formatted:</Text>
                 <Text style={styles.displayValue}>{formatNumber(numericValue)}</Text>
               </View>
-            ) : null}
+            : null}
           </View>
 
           {/* Action Buttons */}
           <View style={styles.buttonContainer}>
-            <TouchableOpacity 
-              style={[styles.button, styles.clearButton]}
-              onPress={clearInput}
-              disabled={!numericValue}
-            >
-              <Text style={[styles.buttonText, !numericValue && styles.disabledText]}>
-                Clear
-              </Text>
+            <TouchableOpacity style={[styles.button, styles.clearButton]} onPress={clearInput} disabled={!numericValue}>
+              <Text style={[styles.buttonText, !numericValue && styles.disabledText]}>Clear</Text>
             </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={[styles.button, styles.primaryButton]}
-              disabled={!numericValue}
-            >
+
+            <TouchableOpacity style={[styles.button, styles.primaryButton]} disabled={!numericValue}>
               <Text style={[styles.buttonText, styles.primaryButtonText, !numericValue && styles.disabledText]}>
                 Submit
               </Text>
@@ -159,7 +192,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     backgroundColor: '#F8FAFC',
-    textAlign: 'center',
   },
   displayContainer: {
     marginTop: 16,
