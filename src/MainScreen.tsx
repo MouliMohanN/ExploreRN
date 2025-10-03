@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { Button } from './common/components/Button';
 import { ScreenNames } from './common/navigation';
 import { ScreenBaseProps } from './common/types/ScreenBaseProps';
@@ -9,8 +9,11 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     log: false,
     tabView: false,
     webSockets: false,
-    eventBus: true,
+    eventBus: false,
     screenSystemDemo: true,
+    react19: true,
+    typescript: true,
+    inputText: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -123,14 +126,67 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderReact19 = () => {
+    if (!features.react19) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='React 19'
+          onPress={() => {
+            navigation.navigate(ScreenNames.react19Home);
+          }}
+        />
+      </>
+    );
+  };
+
+  const renderTypescript = () => {
+    if (!features.typescript) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Typescript'
+          onPress={() => {
+            navigation.navigate(ScreenNames.ModernTypeScriptFeatures);
+          }}
+        />
+      </>
+    );
+  };
+
+  const renderInputText = () => {
+    if (!features.inputText) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Input Text'
+          onPress={() => {
+            navigation.navigate(ScreenNames.InputText);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
-      {renderLogFeature()}
-      {renderTabViewFeature()}
-      {renderWebSockets()}
-      {renderEventBus()}
-      {renderScreenSystemDemo()}
+      <ScrollView>
+        {renderLogFeature()}
+        {renderTabViewFeature()}
+        {renderWebSockets()}
+        {renderEventBus()}
+        {renderScreenSystemDemo()}
+        {renderReact19()}
+        {renderTypescript()}
+        {renderInputText()}
+      </ScrollView>
     </View>
   );
 };
