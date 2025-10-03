@@ -10,6 +10,20 @@
 
 ---
 
+### Open Terminal
+
+#### iterm2
+
+`open -a iTerm .`
+
+#### Warp
+
+`shift+command+c`
+
+### Delete git branches
+
+`git branch | grep -v "develop" | xargs git branch -D`
+
 ### Other commands
 
 #### Install app on specific device when multiple devices are connected via ABD
