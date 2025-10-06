@@ -10,7 +10,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     tabView: false,
     webSockets: false,
     eventBus: true,
-    screenSystemDemo: true,
+    screenSystemDemo: false,
     react19: true,
     typescript: false,
     inputText: false,

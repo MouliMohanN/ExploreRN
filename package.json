@@ -42,7 +42,10 @@
     "screens:generate": "node scripts/navigation/screenScanner.js",
     "screens:watch": "node scripts/navigation/screenScanner.js --watch",
     "create-screen": "node scripts/navigation/createScreen.js animations AnimationsHome && npm run screens:generate",
-    "prestart": "npm run screens:generate"
+    "prestart": "npm run screens:generate",
+    "bundle:visualize": "npx react-native-bundle-visualizer --entry-file index.js --platform android --output bundle-visualizer.html",
+    "bundle:visualize:android": "npx react-native-bundle-visualizer --entry-file index.js --platform android --output bundle-visualizer-android.html",
+    "bundle:visualize:ios": "npx react-native-bundle-visualizer --entry-file index.js --platform ios --output bundle-visualizer-ios.html"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.2.6",
