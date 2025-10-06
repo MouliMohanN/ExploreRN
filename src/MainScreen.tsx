@@ -14,6 +14,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     react19: true,
     typescript: false,
     inputText: false,
+    cleanWhatsApp: true,
     animations: true,
   };
   const renderLogFeature = () => {
@@ -175,6 +176,22 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderCleanWhatsApp = () => {
+    if (!features.cleanWhatsApp) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Clean WhatsApp'
+          onPress={() => {
+            navigation.navigate(ScreenNames.CleanWhatsApp);
+          }}
+        />
+      </>
+    );
+  };
+
   const renderAnimations = () => {
     if (!features.animations) {
       return null;
@@ -204,6 +221,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         {renderReact19()}
         {renderTypescript()}
         {renderInputText()}
+        {renderCleanWhatsApp()}
         {renderAnimations()}
       </ScrollView>
     </View>
