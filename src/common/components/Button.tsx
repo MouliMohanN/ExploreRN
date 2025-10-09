@@ -1,11 +1,27 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Button as RNButton } from 'react-native-paper';
+import { StyleProp, StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
+import { Button as RNButton, ButtonProps as RNPButtonProps } from 'react-native-paper';
 
-export const Button = ({ title, onPress }: { title: string; onPress: () => void }) => {
+type Props = Omit<RNPButtonProps, 'children' | 'mode'> & {
+  title?: string;
+  style?: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<TextStyle> | undefined;
+  children?: React.ReactNode;
+  mode?: RNPButtonProps['mode'];
+};
+
+export const Button = ({ title, children, contentStyle, mode = 'contained', style, ...rest }: Props) => {
+  // flatten incoming style to inspect if marginTop/marginVertical already provided
+  const flattened = StyleSheet.flatten(style) as ViewStyle | undefined;
+  const hasMarginTop = !!(flattened && (flattened.marginTop !== undefined || flattened.marginVertical !== undefined));
+
+  const finalStyle = hasMarginTop ? style : StyleSheet.flatten([{ marginTop: 16 }, style]);
+
   return (
-    <RNButton mode='contained' style={{ marginTop: 16 }} onPress={onPress}>
-      <Text>{title}</Text>
+    <RNButton {...(rest as any)} mode={mode} style={finalStyle} contentStyle={contentStyle as any}>
+      {children ? children : <Text>{title}</Text>}
     </RNButton>
   );
 };
+
+export default Button;
