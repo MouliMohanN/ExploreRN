@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Alert,
   FlatList,
@@ -13,6 +13,7 @@ import {
 import Button from '../../common/components/Button';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import storage from '../../common/utils/storage';
 
 type Item = {
   id: string;
@@ -29,6 +30,28 @@ export default function CleanWhatsAppScreen({}: ScreenBaseProps): React.ReactEle
   const [selectedIds, setSelectedIds] = useState<Record<string, boolean>>({});
 
   const inputRef = useRef<TextInput | null>(null);
+  const STORAGE_KEY = 'clean_whatsapp_items_v1';
+
+  // load saved items on mount
+  useEffect(() => {
+    try {
+      const raw = storage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed: Item[] = JSON.parse(raw);
+      if (Array.isArray(parsed)) setItems(parsed);
+    } catch (e) {
+      console.warn('Failed to load saved items', e);
+    }
+  }, []);
+
+  // persist items when they change
+  useEffect(() => {
+    try {
+      storage.setItem(STORAGE_KEY, JSON.stringify(items));
+    } catch (e) {
+      console.warn('Failed to save items', e);
+    }
+  }, [items]);
 
   const addItem = useCallback(() => {
     const trimmed = text.trim();
@@ -84,6 +107,13 @@ export default function CleanWhatsAppScreen({}: ScreenBaseProps): React.ReactEle
       { text: 'Delete', style: 'destructive', onPress: () => setItems([]) },
     ]);
   }, [items.length]);
+
+  const performCleanUp = useCallback(() => {
+    if (!items.length) {
+      Alert.alert('Clean Up', 'No items to clean.');
+      return;
+    }
+  }, [items]);
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<Item>) => {
@@ -145,7 +175,7 @@ export default function CleanWhatsAppScreen({}: ScreenBaseProps): React.ReactEle
         />
         <Button title='Add' onPress={addItem} disabled={!text.trim()} style={styles.addBtn} />
       </View>
-
+      <Button title='Perform Clean Up' onPress={performCleanUp} style={[styles.actionBtn, styles.cleanBtn]} />
       <View style={styles.actionsRow}>
         <Button
           title={selectionMode ? `Exit (${selectedCount})` : 'Select'}
@@ -166,6 +196,7 @@ export default function CleanWhatsAppScreen({}: ScreenBaseProps): React.ReactEle
           disabled={!selectedCount}
           style={[styles.actionBtn, !selectedCount && styles.actionBtnDisabled]}
         />
+
         <Button title='Clear All' onPress={clearAll} style={styles.actionBtn} />
       </View>
 
@@ -238,6 +269,7 @@ const styles = StyleSheet.create({
   checkboxInner: { width: 12, height: 12, backgroundColor: '#0a84ff', borderRadius: 2 },
   deleteBtn: { paddingHorizontal: 10, paddingVertical: 6 },
   deleteText: { color: '#d00', fontWeight: '600' },
+  cleanBtn: { marginHorizontal: 8 },
 });
 
 // Screen configuration for auto-discovery
