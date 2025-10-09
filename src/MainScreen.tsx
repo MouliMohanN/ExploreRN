@@ -7,13 +7,14 @@ import { logger } from './common/utils/logger/logger';
 export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
   const features = {
     log: false,
-    tabView: false,
+    tabView: true,
     webSockets: false,
-    eventBus: false,
+    eventBus: true,
     screenSystemDemo: true,
-    react19: true,
-    typescript: true,
-    inputText: true,
+    react19: false,
+    typescript: false,
+    inputText: false,
+    animations: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -174,6 +175,23 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderAnimations = () => {
+    if (!features.animations) {
+      return null;
+    }
+
+    return (
+      <>
+        <Button
+          title='Animations'
+          onPress={() => {
+            navigation.navigate(ScreenNames.AnimationsHome);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
@@ -186,6 +204,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         {renderReact19()}
         {renderTypescript()}
         {renderInputText()}
+        {renderAnimations()}
       </ScrollView>
     </View>
   );
