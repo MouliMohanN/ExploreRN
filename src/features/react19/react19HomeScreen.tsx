@@ -1,23 +1,16 @@
-import React, { useState, Suspense, createContext } from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
-import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import React, { Suspense, createContext, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScreenConfig } from '../../common/navigation/conventions';
+import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 
 // Import individual example components
-import UseActionStateExample from './examples/UseActionStateExample';
-import UseOptimisticExample from './examples/UseOptimisticExample';
-import UseFormStatusExample from './examples/UseFormStatusExample';
-import UseHookExample from './examples/UseHookExample';
-import RefImprovementsExample from './examples/RefImprovementsExample';
 import ConcurrentFeaturesExample from './examples/ConcurrentFeaturesExample';
 import ReactCompilerExample from './examples/ReactCompilerExample';
+import RefImprovementsExample from './examples/RefImprovementsExample';
+import UseActionStateExample from './examples/UseActionStateExample';
+import UseFormStatusExample from './examples/UseFormStatusExample';
+import UseHookExample from './examples/UseHookExample';
+import UseOptimisticExample from './examples/UseOptimisticExample';
 
 // Feature list with descriptions
 const REACT_19_FEATURES = [
@@ -80,7 +73,7 @@ export const ThemeContext = createContext({
 });
 
 interface FeatureCardProps {
-  feature: typeof REACT_19_FEATURES[0];
+  feature: (typeof REACT_19_FEATURES)[0];
   onPress: () => void;
 }
 
@@ -91,14 +84,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, onPress }) => (
     activeOpacity={0.7}
   >
     <View style={styles.featureContent}>
-      <Text style={[styles.featureTitle, { color: feature.color }]}>
-        {feature.title}
-      </Text>
+      <Text style={[styles.featureTitle, { color: feature.color }]}>{feature.title}</Text>
       <Text style={styles.featureDescription}>{feature.description}</Text>
       <View style={styles.featureFooter}>
-        <Text style={[styles.exploreText, { color: feature.color }]}>
-          Tap to explore →
-        </Text>
+        <Text style={[styles.exploreText, { color: feature.color }]}>Tap to explore →</Text>
       </View>
     </View>
   </TouchableOpacity>
@@ -116,7 +105,7 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
   };
 
   const renderFeatureExample = () => {
-    const feature = REACT_19_FEATURES.find(f => f.id === selectedFeature);
+    const feature = REACT_19_FEATURES.find((f) => f.id === selectedFeature);
     if (!feature) return null;
 
     const ExampleComponent = feature.component;
@@ -124,15 +113,12 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
     return (
       <View style={styles.exampleContainer}>
         <View style={styles.exampleHeader}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={handleBackToHome}
-          >
+          <TouchableOpacity style={styles.backButton} onPress={handleBackToHome}>
             <Text style={styles.backButtonText}>← Back</Text>
           </TouchableOpacity>
           <Text style={styles.exampleTitle}>{feature.title}</Text>
         </View>
-        
+
         <Suspense
           fallback={
             <View style={styles.loadingContainer}>
@@ -147,18 +133,14 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
   };
 
   if (selectedFeature) {
-    return (
-      <SafeAreaView style={styles.container}>
-        {renderFeatureExample()}
-      </SafeAreaView>
-    );
+    return <SafeAreaView style={styles.container}>{renderFeatureExample()}</SafeAreaView>;
   }
 
   return (
     <ThemeContext.Provider
       value={{
         primary: '#007AFF',
-        background: '#FFFFFF', 
+        background: '#FFFFFF',
         text: '#000000',
       }}
     >
@@ -171,9 +153,7 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.mainTitle}>React 19 Features</Text>
-            <Text style={styles.subtitle}>
-              Interactive examples for React Native
-            </Text>
+            <Text style={styles.subtitle}>Interactive examples for React Native</Text>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>React 19 + RN 0.76+</Text>
             </View>
@@ -183,9 +163,8 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
           <View style={styles.overviewSection}>
             <Text style={styles.sectionTitle}>🚀 What's New</Text>
             <Text style={styles.overviewText}>
-              React 19 brings powerful new hooks, automatic optimizations, and enhanced 
-              developer experience to React Native apps. Explore each feature with 
-              interactive examples below.
+              React 19 brings powerful new hooks, automatic optimizations, and enhanced developer experience to React
+              Native apps. Explore each feature with interactive examples below.
             </Text>
           </View>
 
@@ -196,29 +175,25 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
               <View style={styles.highlightItem}>
                 <Text style={styles.highlightBullet}>•</Text>
                 <Text style={styles.highlightText}>
-                  <Text style={styles.highlightBold}>React Compiler:</Text> Automatic 
-                  memoization and optimizations
+                  <Text style={styles.highlightBold}>React Compiler:</Text> Automatic memoization and optimizations
                 </Text>
               </View>
               <View style={styles.highlightItem}>
                 <Text style={styles.highlightBullet}>•</Text>
                 <Text style={styles.highlightText}>
-                  <Text style={styles.highlightBold}>New Hooks:</Text> useActionState, 
-                  useOptimistic, use(), and more
+                  <Text style={styles.highlightBold}>New Hooks:</Text> useActionState, useOptimistic, use(), and more
                 </Text>
               </View>
               <View style={styles.highlightItem}>
                 <Text style={styles.highlightBullet}>•</Text>
                 <Text style={styles.highlightText}>
-                  <Text style={styles.highlightBold}>Better UX:</Text> Optimistic updates 
-                  and enhanced error handling
+                  <Text style={styles.highlightBold}>Better UX:</Text> Optimistic updates and enhanced error handling
                 </Text>
               </View>
               <View style={styles.highlightItem}>
                 <Text style={styles.highlightBullet}>•</Text>
                 <Text style={styles.highlightText}>
-                  <Text style={styles.highlightBold}>Performance:</Text> Improved concurrent 
-                  rendering and Suspense
+                  <Text style={styles.highlightBold}>Performance:</Text> Improved concurrent rendering and Suspense
                 </Text>
               </View>
             </View>
@@ -227,17 +202,11 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
           {/* Interactive Examples */}
           <View style={styles.examplesSection}>
             <Text style={styles.sectionTitle}>📱 Interactive Examples</Text>
-            <Text style={styles.examplesSubtitle}>
-              Tap any card below to see the feature in action
-            </Text>
-            
+            <Text style={styles.examplesSubtitle}>Tap any card below to see the feature in action</Text>
+
             <View style={styles.featuresGrid}>
               {REACT_19_FEATURES.map((feature) => (
-                <FeatureCard
-                  key={feature.id}
-                  feature={feature}
-                  onPress={() => handleFeatureSelect(feature.id)}
-                />
+                <FeatureCard key={feature.id} feature={feature} onPress={() => handleFeatureSelect(feature.id)} />
               ))}
             </View>
           </View>
@@ -248,12 +217,10 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
             <View style={styles.codeBlock}>
               <Text style={styles.codeText}>
                 # Install React 19{'\n'}
-                npm install react@19 react-dom@19{('\n')}
-                {('\n')}
-                # Upgrade React Native{('\n')}
-                npx react-native upgrade{('\n')}
-                {('\n')}
-                # Optional: React Compiler{('\n')}
+                npm install react@19 react-dom@19{'\n'}
+                {'\n'}# Upgrade React Native{'\n'}
+                npx react-native upgrade{'\n'}
+                {'\n'}# Optional: React Compiler{'\n'}
                 npm install babel-plugin-react-compiler
               </Text>
             </View>
@@ -261,9 +228,7 @@ export default function react19HomeScreen({ navigation }: ScreenBaseProps): Reac
 
           {/* Footer */}
           <View style={styles.footer}>
-            <Text style={styles.footerText}>
-              🎯 Ready to explore? Tap on any feature above to see it in action!
-            </Text>
+            <Text style={styles.footerText}>🎯 Ready to explore? Tap on any feature above to see it in action!</Text>
           </View>
         </ScrollView>
       </SafeAreaView>

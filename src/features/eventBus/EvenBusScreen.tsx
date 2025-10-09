@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
+import { Button } from '../../common/components/Button';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { AppEventBus } from '../../common/utils/eventBus/EventBus';
-import { Button } from '../../common/components/Button';
 
 const Screen1 = () => {
-
   const [user, setUser] = React.useState<{ id: number; name: string }>({ id: 0, name: '' });
 
   useEffect(() => {
@@ -24,10 +23,9 @@ const Screen1 = () => {
       <Text>Screen 1: {user.name}</Text>
     </View>
   );
-}
+};
 
 export default function EventBusScreen(): React.ReactElement {
-
   const [count, setCount] = React.useState(0);
 
   const onPress = () => {
@@ -35,7 +33,6 @@ export default function EventBusScreen(): React.ReactElement {
     setCount(newCount);
     AppEventBus.publish('user.loggedIn', { id: 1, name: 'Mouli ' + newCount });
   };
-
 
   return (
     <View>

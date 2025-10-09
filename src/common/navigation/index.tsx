@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { getAllScreens, getScreenNames } from './generated/screenRegistry';
 import { MainScreen } from '../../MainScreen';
+import { getAllScreens, getScreenNames } from './generated/screenRegistry';
 
 // Auto-discovered screen names - no manual management needed!
 export const ScreenNames = {
@@ -19,7 +19,7 @@ export const RootStackScreens = [
       headerShown: true,
     },
   },
-  ...getAllScreens().map(screenConfig => ({
+  ...getAllScreens().map((screenConfig) => ({
     name: screenConfig.name,
     component: screenConfig.component,
     options: screenConfig.options || {},

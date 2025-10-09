@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { CounterContext, useCounter } from './CounterContext';
 import { TabViewScreen1 } from './screens/TabViewScreen1';

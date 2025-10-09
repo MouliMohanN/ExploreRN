@@ -1,5 +1,5 @@
 import React, { useDeferredValue, useState, useTransition } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
 function makeItems(n: number) {
   return Array.from({ length: n }, (_, i) => ({ id: i, label: `Item ${i + 1}`, note: `Details for item ${i + 1}` }));
@@ -9,7 +9,9 @@ function expensiveFilter(items: { id: number; label: string; note: string }[], q
   if (!q) return items;
   const start = performance.now();
   while (performance.now() - start < 30) {}
-  return items.filter(x => x.label.toLowerCase().includes(q.toLowerCase()) || x.note.toLowerCase().includes(q.toLowerCase()));
+  return items.filter(
+    (x) => x.label.toLowerCase().includes(q.toLowerCase()) || x.note.toLowerCase().includes(q.toLowerCase()),
+  );
 }
 
 export default function ConcurrentFeaturesExample(): React.ReactElement {
@@ -30,13 +32,10 @@ export default function ConcurrentFeaturesExample(): React.ReactElement {
       <Text style={styles.title}>Concurrent features</Text>
       <Text style={styles.subtitle}>useTransition + useDeferredValue for smooth filtering</Text>
 
-      <TextInput
-        value={query}
-        onChangeText={setQuery}
-        placeholder="Type to filter..."
-        style={styles.input}
-      />
-      {pending ? <Text style={styles.pending}>Updating list...</Text> : null}
+      <TextInput value={query} onChangeText={setQuery} placeholder='Type to filter...' style={styles.input} />
+      {pending ?
+        <Text style={styles.pending}>Updating list...</Text>
+      : null}
 
       <FlatList
         data={filtered}

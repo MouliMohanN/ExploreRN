@@ -3,6 +3,7 @@
 ## 🚀 Major New Features
 
 ### 1. React Compiler
+
 - **Automatic memoization** without `useMemo`/`useCallback`
 - **Compile-time optimizations** for better performance
 - **Automatic dependency tracking**
@@ -11,53 +12,62 @@
 ### 2. New Hooks
 
 #### `useActionState`
+
 - Manages async actions with built-in pending states
 - Handles form submissions elegantly
 - Provides error handling out of the box
 - Replaces complex `useState` + `useEffect` patterns
 
-#### `useFormStatus`  
+#### `useFormStatus`
+
 - Tracks form submission status
 - Must be used within form context
 - Provides `pending`, `data`, `method`, `action` properties
 - Perfect for submit buttons and form indicators
 
 #### `useOptimistic`
+
 - Enables optimistic UI updates
 - Automatically reverts on failure
 - Great for like buttons, cart updates, etc.
 - Improves perceived performance
 
 #### `use()` Hook
+
 - Consumes promises directly in components
 - Can also consume React context
 - Works with Suspense for data fetching
 - More flexible than `useContext`
 
 #### Enhanced Existing Hooks
+
 - **`useId`** - Better hydration and SSR support
 - **`useTransition`** - Improved performance characteristics
 - **`useDeferredValue`** - Better concurrent features integration
 
 ### 3. Server Components & Actions
+
 - **React Server Components** support
 - **Server Actions** for form handling
 - **Improved SSR** for React Native Web
 - **Better data fetching** patterns
 
 ### 4. Ref Improvements
+
 - **`ref` as prop** - Pass refs directly as props
 - **Cleanup functions** in ref callbacks
 - **Improved ref forwarding**
 - **Better TypeScript support**
 
 ### 5. Enhanced Error Boundaries
+
 - **Better error recovery**
 - **Improved error messages**
 - **Enhanced development experience**
 - **Better integration with Suspense**
 
 ### 6. Concurrent Features
+
 - **Enhanced Suspense** with better error handling
 - **Improved concurrent rendering**
 - **Better hydration** for React Native Web
@@ -66,11 +76,13 @@
 ## 📱 React Native Compatibility
 
 ### Supported Versions
+
 - **React Native 0.76+** - Full support
 - **React Native 0.74-0.75** - Partial support with polyfills
 - **Metro 0.80+** - Required for React Compiler
 
 ### Platform Support
+
 - ✅ iOS, Android, Web, Windows, macOS
 
 ## 🛠 Installation & Setup
@@ -89,46 +101,52 @@ npm install babel-plugin-react-compiler
 ## 🔄 Breaking Changes (Minimal)
 
 ### Removed APIs
+
 - Legacy context APIs (already deprecated)
 - Some internal APIs
 - Old concurrent mode APIs
 
 ### Updated Behaviors
+
 - Stricter concurrent rendering
 - Enhanced error boundary behavior
 - Improved hydration process
 
 ### TypeScript Changes
+
 - Updated type definitions
 - Better inference for new hooks
 - Improved ref types
 
 ## 📋 Feature Status in React Native
 
-| Feature | Status | Notes |
-|---------|--------|-------|
-| React Compiler | ✅ | Requires Metro 0.80+ |
-| useActionState | ✅ | Full support |
-| useFormStatus | ✅ | Works with RN forms |
-| useOptimistic | ✅ | Perfect for mobile UX |
-| use() Hook | ✅ | Great with Suspense |
-| Server Components | ⚠️ | Limited to RN Web |
-| Ref as Prop | ✅ | Full support |
-| Enhanced Suspense | ✅ | Improved error handling |
+| Feature           | Status | Notes                   |
+| ----------------- | ------ | ----------------------- |
+| React Compiler    | ✅     | Requires Metro 0.80+    |
+| useActionState    | ✅     | Full support            |
+| useFormStatus     | ✅     | Works with RN forms     |
+| useOptimistic     | ✅     | Perfect for mobile UX   |
+| use() Hook        | ✅     | Great with Suspense     |
+| Server Components | ⚠️     | Limited to RN Web       |
+| Ref as Prop       | ✅     | Full support            |
+| Enhanced Suspense | ✅     | Improved error handling |
 
 ## 🎯 Key Benefits for React Native
 
 ### Performance
+
 - Automatic optimizations reduce manual work
 - Better concurrent rendering for smooth animations
 - Reduced re-renders with React Compiler
 
-### Developer Experience  
+### Developer Experience
+
 - Simpler patterns for common use cases
 - Better error messages and debugging
 - Enhanced TypeScript integration
 
 ### User Experience
+
 - Optimistic updates for better perceived performance
 - Smoother interactions with concurrent features
 - Better error recovery
@@ -150,4 +168,4 @@ npm install babel-plugin-react-compiler
 
 ---
 
-*This overview covers all major React 19 features. Check `React19HomeScreen.tsx` for interactive examples of each feature.*
+_This overview covers all major React 19 features. Check `React19HomeScreen.tsx` for interactive examples of each feature._

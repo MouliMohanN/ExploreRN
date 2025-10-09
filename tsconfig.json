@@ -4,7 +4,7 @@
     "types": ["node"],
     "jsx": "react-native",
     "paths": {
-      "@AppEvents": ["./src/common/utils/eventBus/AppEvents.ts"],
+      "@AppEvents": ["./src/common/utils/eventBus/AppEvents.ts"]
     }
-  },
+  }
 }

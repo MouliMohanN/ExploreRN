@@ -2,8 +2,8 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
-import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 import { ScreenConfig } from '../../common/navigation/conventions';
+import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 
 export default function LogContentScreen({ route, navigation }: ScreenBaseProps) {
   const { logFilePath } = route.params as { logFilePath: string };
@@ -62,7 +62,7 @@ export default function LogContentScreen({ route, navigation }: ScreenBaseProps)
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -8,7 +8,7 @@ module.exports = {
         target: '19', // React version
         // Optional: enable only in production
         // runtimeModule: 'react-compiler-runtime'
-      }
-    ]
+      },
+    ],
   ],
 };

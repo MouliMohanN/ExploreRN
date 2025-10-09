@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 import { ScreenConfig } from '../../common/navigation/conventions';
+import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 
 /**
  * Example new screen demonstrating the auto-discovery pattern
- * 
+ *
  * To add this screen to the navigation:
  * 1. Create the screen component (this file)
  * 2. Export the screen configuration (see bottom of this file)
@@ -15,27 +15,22 @@ export default function ScreenSystemDemoScreen({ navigation }: ScreenBaseProps):
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🎉 New Screen Added!</Text>
-      
-      <Text style={styles.description}>
-        This screen was added using the new auto-discovery system!
-      </Text>
-      
+
+      <Text style={styles.description}>This screen was added using the new auto-discovery system!</Text>
+
       <Text style={styles.steps}>
         Steps to add a new screen:
         {'\n'}1. Create your screen component
         {'\n'}2. Export a screen configuration
         {'\n'}3. Done! Build system auto-discovers it! 🚀
       </Text>
-      
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={() => navigation.goBack()}
-      >
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -30,12 +30,8 @@ export default function AnimationsHomeScreen({ navigation }: ScreenBaseProps): R
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Animations Hub</Text>
-      <Text style={styles.subtitle}>
-        Explore different animation examples
-      </Text>
-      <ScrollView style={styles.scrollView}>
-        {renderBottomSheetAnimations()}
-      </ScrollView>
+      <Text style={styles.subtitle}>Explore different animation examples</Text>
+      <ScrollView style={styles.scrollView}>{renderBottomSheetAnimations()}</ScrollView>
     </View>
   );
 }

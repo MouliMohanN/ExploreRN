@@ -1,21 +1,21 @@
 import React, { useOptimistic, useState, useTransition } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 async function apiToggleLike(id: number, liked: boolean) {
-  await new Promise(r => setTimeout(r, 800));
+  await new Promise((r) => setTimeout(r, 800));
   if (Math.random() < 0.1) throw new Error('Network error');
   return !liked;
 }
 
 export default function UseOptimisticExample(): React.ReactElement {
-  const [items, setItems] = useState(() => (
-    Array.from({ length: 8 }, (_, i) => ({ id: i + 1, liked: Math.random() > 0.5, text: `Post #${i + 1}` }))
-  ));
+  const [items, setItems] = useState(() =>
+    Array.from({ length: 8 }, (_, i) => ({ id: i + 1, liked: Math.random() > 0.5, text: `Post #${i + 1}` })),
+  );
 
   const renderItem = ({ item }: { item: { id: number; liked: boolean; text: string } }) => (
     <OptimisticRow
       item={item}
-      onCommit={(val) => setItems(prev => prev.map(p => p.id === item.id ? { ...p, liked: val } : p))}
+      onCommit={(val) => setItems((prev) => prev.map((p) => (p.id === item.id ? { ...p, liked: val } : p)))}
     />
   );
 
@@ -34,17 +34,23 @@ export default function UseOptimisticExample(): React.ReactElement {
   );
 }
 
-function OptimisticRow({ item, onCommit }: { item: { id: number; liked: boolean; text: string }; onCommit: (val: boolean) => void }) {
+function OptimisticRow({
+  item,
+  onCommit,
+}: {
+  item: { id: number; liked: boolean; text: string };
+  onCommit: (val: boolean) => void;
+}) {
   const [optimistic, addOptimistic] = useOptimistic(item, (cur, nextLiked: boolean) => ({ ...cur, liked: nextLiked }));
   const [isPending, startTransition] = useTransition();
 
   const toggle = async () => {
     const next = !optimistic.liked;
-    
+
     startTransition(() => {
       addOptimistic(next); // instant UI change wrapped in transition
     });
-    
+
     try {
       const confirmed = await apiToggleLike(item.id, item.liked);
       onCommit(confirmed);
@@ -56,13 +62,17 @@ function OptimisticRow({ item, onCommit }: { item: { id: number; liked: boolean;
   return (
     <View style={styles.row}>
       <Text style={styles.rowText}>{item.text}</Text>
-      <TouchableOpacity 
-        style={[styles.likeBtn, optimistic.liked ? styles.liked : styles.unliked, isPending && styles.pending]} 
+      <TouchableOpacity
+        style={[styles.likeBtn, optimistic.liked ? styles.liked : styles.unliked, isPending && styles.pending]}
         onPress={toggle}
         disabled={isPending}
       >
         <Text style={[styles.likeText, optimistic.liked ? styles.likedText : styles.unlikedText]}>
-          {isPending ? '⏳ Processing...' : optimistic.liked ? '♥ Liked' : '♡ Like'}
+          {isPending ?
+            '⏳ Processing...'
+          : optimistic.liked ?
+            '♥ Liked'
+          : '♡ Like'}
         </Text>
       </TouchableOpacity>
     </View>
@@ -73,7 +83,15 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   title: { fontSize: 22, fontWeight: '700', marginTop: 8, marginHorizontal: 12 },
   subtitle: { color: '#6b7280', marginHorizontal: 12, marginBottom: 8 },
-  row: { backgroundColor: 'white', marginHorizontal: 12, padding: 14, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  row: {
+    backgroundColor: 'white',
+    marginHorizontal: 12,
+    padding: 14,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   rowText: { fontSize: 16 },
   likeBtn: { paddingVertical: 6, paddingHorizontal: 12, borderRadius: 16, borderWidth: 1 },
   liked: { backgroundColor: '#fee2e2', borderColor: '#fecaca' },

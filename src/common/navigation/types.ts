@@ -1,5 +1,5 @@
-import { ComponentType } from 'react';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import { ComponentType } from 'react';
 import { ScreenBaseProps } from '../types/ScreenBaseProps';
 
 export interface ScreenConfig {

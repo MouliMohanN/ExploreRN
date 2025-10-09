@@ -3,8 +3,8 @@ import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 import { ScreenConfig } from '../../common/navigation/conventions';
+import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
 import { getLogFilePaths } from '../../common/utils/logger/loggers/fileLogger';
 
 export default function LogViewerScreen({ navigation }: ScreenBaseProps) {
@@ -156,7 +156,7 @@ export default function LogViewerScreen({ navigation }: ScreenBaseProps) {
       : <Text>No log files found.</Text>}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

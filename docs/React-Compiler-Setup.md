@@ -30,8 +30,8 @@ module.exports = {
         target: '19', // React version
         // Optional: enable only in production
         // runtimeModule: 'react-compiler-runtime'
-      }
-    ]
+      },
+    ],
   ],
 };
 ```
@@ -95,14 +95,17 @@ ls -lh bundle-*.js
 The React Compiler example in the app includes these tests:
 
 #### Test 1: Component Memoization
+
 - **Without Compiler**: Child component re-renders when parent state changes
 - **With Compiler**: Child only re-renders when its props actually change
 
 #### Test 2: Function Stability
+
 - **Without Compiler**: Functions recreated on every render
 - **With Compiler**: Functions automatically memoized when dependencies don't change
 
-#### Test 3: Value Memoization  
+#### Test 3: Value Memoization
+
 - **Without Compiler**: Expensive calculations run on every render
 - **With Compiler**: Calculations automatically memoized
 
@@ -137,7 +140,7 @@ const Parent = () => {
   const handleClick = useCallback(() => {
     // handle click
   }, []);
-  
+
   return <ExpensiveChild data={data} onClick={handleClick} />;
 };
 ```
@@ -152,10 +155,11 @@ const ExpensiveChild = ({ data }) => {
 };
 
 const Parent = () => {
-  const handleClick = () => { // auto-memoized
+  const handleClick = () => {
+    // auto-memoized
     // handle click
   };
-  
+
   return <ExpensiveChild data={data} onClick={handleClick} />;
 };
 ```
@@ -197,17 +201,20 @@ npm run clean-install-android  # your custom script
 ## 📊 Expected Results
 
 ### Performance Improvements
+
 - ✅ 20-40% reduction in unnecessary re-renders
 - ✅ 10-20% smaller bundle size
 - ✅ Faster React DevTools profiler recordings
 
 ### Code Quality
+
 - ✅ Remove manual `React.memo` calls
-- ✅ Remove manual `useCallback` calls  
+- ✅ Remove manual `useCallback` calls
 - ✅ Remove manual `useMemo` calls
 - ✅ Cleaner, more readable components
 
 ### Development Experience
+
 - ✅ Less boilerplate code
 - ✅ Fewer bugs related to missing dependencies
 - ✅ Automatic optimization warnings during build
@@ -221,4 +228,4 @@ npm run clean-install-android  # your custom script
 
 ---
 
-*Note: React Compiler is production-ready as of React 19. It's actively used by Meta in their apps.*
+_Note: React Compiler is production-ready as of React 19. It's actively used by Meta in their apps._

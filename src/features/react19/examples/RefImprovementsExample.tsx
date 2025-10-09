@@ -1,5 +1,5 @@
 import React, { forwardRef, useId, useImperativeHandle, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export type FancyInputHandle = { focus: () => void; clear: () => void };
 
@@ -13,8 +13,10 @@ const FancyInput = forwardRef<FancyInputHandle, { label: string }>((props, ref) 
   const id = useId();
   return (
     <View style={styles.inputCard}>
-      <Text nativeID={`${id}-label`} style={styles.label}>{props.label}</Text>
-      <TextInput ref={inputRef} nativeID={id} style={styles.input} placeholder="Type here" />
+      <Text nativeID={`${id}-label`} style={styles.label}>
+        {props.label}
+      </Text>
+      <TextInput ref={inputRef} nativeID={id} style={styles.input} placeholder='Type here' />
     </View>
   );
 });
@@ -27,7 +29,7 @@ export default function RefImprovementsExample(): React.ReactElement {
       <Text style={styles.title}>Ref improvements</Text>
       <Text style={styles.subtitle}>Forward refs + useId; call methods from parent</Text>
 
-      <FancyInput ref={fancyRef} label="Your message" />
+      <FancyInput ref={fancyRef} label='Your message' />
 
       <View style={{ flexDirection: 'row', gap: 10, marginTop: 10 }}>
         <TouchableOpacity style={styles.button} onPress={() => fancyRef.current?.focus()}>
