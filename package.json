@@ -41,10 +41,11 @@
     "move-mouse-nutjs": "ts-node scripts/useCase/moveMouse/nutjs.ts",
     "screens:generate": "node scripts/navigation/screenScanner.js",
     "screens:watch": "node scripts/navigation/screenScanner.js --watch",
-    "create-screen": "node scripts/navigation/createScreen.js inputText InputText && npm run screens:generate",
+    "create-screen": "node scripts/navigation/createScreen.js animations AnimationsHome && npm run screens:generate",
     "prestart": "npm run screens:generate"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^5.2.6",
     "@react-navigation/bottom-tabs": "7.4.2",
     "@react-navigation/elements": "2.5.2",
     "@react-navigation/material-top-tabs": "7.3.2",
