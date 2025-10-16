@@ -2,29 +2,34 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { CarouselTabs } from '../../common/components/tabViewV3/CarouselTabs';
 import { TabConfig } from '../../common/components/tabViewV3/types';
+import { useCarouselTabFocus } from '../../common/components/tabViewV3/useCarouselTabFocus';
 import { ScreenConfig } from '../../common/navigation/conventions';
-import { ActiveTabContext, ActiveTabContextValue } from './ActiveTabContext';
+import { AppEventBus } from '../../common/utils/eventBus/EventBus';
 import { CounterContext } from './CounterContext';
-import { useTabScreenData } from './useTabScreenData';
 
 // --- Individual Tab Screens ---
 
 type TabScreenProps = {
+  screenName: string;
   tabTitle: string;
   tabIndex: number;
 };
 
-const TabScreen1: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
-  const { count, isFocused, shouldRender } = useTabScreenData(tabIndex);
+const TabScreen1: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }) => {
+  const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
+
+  useEffect(() => {
+    // API call
+  }, [isFocused]);
 
   useEffect(() => {
     console.log('TabScreen1 mounted');
     return () => console.log('TabScreen1 unmounted');
   }, []);
 
-  if (!shouldRender) {
-    return null;
-  }
+  // if (!shouldRender) {
+  //   return null;
+  // }
 
   console.log('TabScreen1 rendered');
   return (
@@ -40,17 +45,17 @@ const TabScreen1: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
   );
 };
 
-const TabScreen2: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
-  const { count, isFocused, shouldRender } = useTabScreenData(tabIndex);
+const TabScreen2: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }) => {
+  const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
     console.log('TabScreen2 mounted');
     return () => console.log('TabScreen2 unmounted');
   }, []);
 
-  if (!shouldRender) {
-    return null;
-  }
+  // if (!shouldRender) {
+  //   return null;
+  // }
 
   console.log('TabScreen2 rendered');
   return (
@@ -66,17 +71,17 @@ const TabScreen2: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
   );
 };
 
-const TabScreen3: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
-  const { count, isFocused, shouldRender } = useTabScreenData(tabIndex);
+const TabScreen3: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }) => {
+  const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
     console.log('TabScreen3 mounted');
     return () => console.log('TabScreen3 unmounted');
   }, []);
 
-  if (!shouldRender) {
-    return null;
-  }
+  // if (!shouldRender) {
+  //   return null;
+  // }
 
   console.log('TabScreen3 rendered');
   return (
@@ -92,17 +97,17 @@ const TabScreen3: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
   );
 };
 
-const TabScreen4: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
-  const { count, isFocused, shouldRender } = useTabScreenData(tabIndex);
+const TabScreen4: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }) => {
+  const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
     console.log('TabScreen4 mounted');
     return () => console.log('TabScreen4 unmounted');
   }, []);
 
-  if (!shouldRender) {
-    return null;
-  }
+  // if (!shouldRender) {
+  //   return null;
+  // }
 
   console.log('TabScreen4 rendered');
   return (
@@ -118,17 +123,17 @@ const TabScreen4: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
   );
 };
 
-const TabScreen5: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
-  const { count, isFocused, shouldRender } = useTabScreenData(tabIndex);
+const TabScreen5: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }) => {
+  const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
     console.log('TabScreen5 mounted');
     return () => console.log('TabScreen5 unmounted');
   }, []);
 
-  if (!shouldRender) {
-    return null;
-  }
+  // if (!shouldRender) {
+  //   return null;
+  // }
 
   console.log('TabScreen5 rendered');
   return (
@@ -144,17 +149,17 @@ const TabScreen5: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
   );
 };
 
-const TabScreen6: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
-  const { count, isFocused, shouldRender } = useTabScreenData(tabIndex);
+const TabScreen6: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }) => {
+  const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
     console.log('TabScreen6 mounted');
     return () => console.log('TabScreen6 unmounted');
   }, []);
 
-  if (!shouldRender) {
-    return null;
-  }
+  // if (!shouldRender) {
+  //   return null;
+  // }
 
   console.log('TabScreen6 rendered');
   return (
@@ -173,6 +178,9 @@ const TabScreen6: React.FC<TabScreenProps> = ({ tabTitle, tabIndex }) => {
 // --- Main Screen Component ---
 
 export default function CarouselTabsExampleScreen() {
+  const screenName = 'MarketScreen_ScreenersSection';
+  // const screenName = 'ScreenersDetailsScreen';
+  // const screenName = ' ';
   const tabItems = useMemo(
     () => [
       { key: 'tab1', title: 'First' },
@@ -198,55 +206,78 @@ export default function CarouselTabsExampleScreen() {
 
   const tabs: Array<TabConfig> = useMemo(
     () => [
-      { key: 'tab1', renderTabBarItem, component: () => <TabScreen1 tabTitle='First' tabIndex={0} /> },
-      { key: 'tab2', renderTabBarItem, component: () => <TabScreen2 tabTitle='Second' tabIndex={1} /> },
-      { key: 'tab3', renderTabBarItem, component: () => <TabScreen3 tabTitle='Third' tabIndex={2} /> },
-      { key: 'tab4', renderTabBarItem, component: () => <TabScreen4 tabTitle='Fourth' tabIndex={3} /> },
-      { key: 'tab5', renderTabBarItem, component: () => <TabScreen5 tabTitle='Fifth' tabIndex={4} /> },
-      { key: 'tab6', renderTabBarItem, component: () => <TabScreen6 tabTitle='Sixth' tabIndex={5} /> },
+      {
+        key: 'tab1',
+        renderTabBarItem,
+        component: () => <TabScreen1 screenName={screenName} tabTitle='First' tabIndex={0} />,
+      },
+      {
+        key: 'tab2',
+        renderTabBarItem,
+        component: () => <TabScreen2 screenName={screenName} tabTitle='Second' tabIndex={1} />,
+      },
+      {
+        key: 'tab3',
+        renderTabBarItem,
+        component: () => <TabScreen3 screenName={screenName} tabTitle='Third' tabIndex={2} />,
+      },
+      {
+        key: 'tab4',
+        renderTabBarItem,
+        component: () => <TabScreen4 screenName={screenName} tabTitle='Fourth' tabIndex={3} />,
+      },
+      {
+        key: 'tab5',
+        renderTabBarItem,
+        component: () => <TabScreen5 screenName={screenName} tabTitle='Fifth' tabIndex={4} />,
+      },
+      {
+        key: 'tab6',
+        renderTabBarItem,
+        component: () => <TabScreen6 screenName={screenName} tabTitle='Sixth' tabIndex={5} />,
+      },
     ],
     [],
   );
 
   const [count, setCount] = useState(0);
-  const [activeTabContextValue, setActiveTabContextValue] = useState<ActiveTabContextValue>({
-    currentIndex: 0,
-    offscreenPageLimit: 1, // Assuming default offscreenPageLimit for CarouselTabs
-    totalTabs: tabItems.length,
-  });
+  // const [activeTabContextValue, setActiveTabContextValue] = useState<ActiveTabContextValue>({
+  //   currentIndex: 0,
+  //   offscreenPageLimit: 1, // Assuming default offscreenPageLimit for CarouselTabs
+  //   totalTabs: tabItems.length,
+  // });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((prevCount) => prevCount + 1);
-    });
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCount((prevCount) => prevCount + 1);
+  //   });
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const handlePageSelected = (index: number) => {
-    setActiveTabContextValue((prev) => ({
-      ...prev,
-      currentIndex: index,
-    }));
+    // setActiveTabContextValue((prev) => ({
+    //   ...prev,
+    //   currentIndex: index,
+    // }));
+    AppEventBus.publish('carouselTabs.focusInfo', { screenName, currentIndex: index });
     console.log('CarouselTabsExampleScreen: onPageSelected received index:', index);
   };
 
   return (
     <CounterContext.Provider value={{ count, setCount }}>
-      <ActiveTabContext.Provider value={activeTabContextValue}>
-        <View style={{ flex: 1 }}>
-          <Text style={Styles.counterText}>Count: {count}</Text>
-          <CarouselTabs
-            tabs={tabs}
-            tabBarIndicatorStyle={{ backgroundColor: '#007AFF', height: 4 }}
-            tabScreenContainerStyle={{ flex: 1 }}
-            onPageSelected={handlePageSelected}
-          />
-        </View>
-      </ActiveTabContext.Provider>
+      <View style={{ flex: 1 }}>
+        <Text style={Styles.counterText}>Count: {count}</Text>
+        <CarouselTabs
+          tabs={tabs}
+          tabBarIndicatorStyle={{ backgroundColor: '#007AFF', height: 4 }}
+          tabScreenContainerStyle={{ flex: 1 }}
+          onPageSelected={handlePageSelected}
+        />
+      </View>
     </CounterContext.Provider>
   );
-};
+}
 
 // Screen configuration for auto-discovery
 export const screenConfig: ScreenConfig = {
