@@ -1,6 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getAllScreens, getScreenNames } from './generated/screenRegistry';
-import { MainScreen } from '../../MainScreen';
+import React from 'react';
+
+const MainScreen = React.lazy(() =>
+  import('../../MainScreen').then((module) => ({ default: module.MainScreen }))
+);
 
 // Auto-discovered screen names - no manual management needed!
 export const ScreenNames = {

@@ -140,12 +140,16 @@ class ScreenScanner {
     // Generate relative import path
     const importPath = this.generateImportPath(filePath);
     
+    const componentName = this.extractComponentName(content) || path.basename(filePath, path.extname(filePath));
+    const isDefaultExport = /export\s+default/.test(content);
+
     return {
       ...screenConfig,
       group: screenConfig.group || featureGroup,
       filePath,
       importPath,
-      componentName: this.extractComponentName(content) || path.basename(filePath, path.extname(filePath))
+      componentName,
+      isDefaultExport,
     };
   }
 
@@ -370,9 +374,12 @@ class ScreenScanner {
    * Generate the TypeScript registry template
    */
   generateRegistryTemplate(screenConfigs) {
-    const imports = screenConfigs.map((config, index) => 
-      `import ${config.componentName}_${index}, { screenConfig as screenConfig_${index} } from '${config.importPath}';`
-    ).join('\n');
+    const imports = screenConfigs.map((config, index) => {
+      const lazyImport = config.isDefaultExport
+        ? `React.lazy(() => import('${config.importPath}'))`
+        : `React.lazy(() => import('${config.importPath}').then(module => ({ default: module.${config.componentName} })))`;
+      return `import { screenConfig as screenConfig_${index} } from '${config.importPath}';\nconst ${config.componentName}_${index} = ${lazyImport};`;
+    }).join('\n\n');
 
     const screenArray = screenConfigs.map((config, index) => `  {
     name: screenConfig_${index}.name,
@@ -398,6 +405,7 @@ class ScreenScanner {
  */
 
 import { ScreenConfig } from '../conventions';
+import React from 'react';
 
 // Screen imports
 ${imports}
