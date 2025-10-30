@@ -5,57 +5,27 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-10-30T05:56:05.885Z
+ * Generated on: 2025-10-09T07:14:06.367Z
  */
 
 import { ScreenConfig } from '../conventions';
-import React from 'react';
 
 // Screen imports
-import { screenConfig as screenConfig_0 } from '../../../features/animations/AnimationsHomeScreen';
-const AnimationsHomeScreen_0 = React.lazy(() => import('../../../features/animations/AnimationsHomeScreen'));
-
-import { screenConfig as screenConfig_1 } from '../../../features/animations/BottomSheetPaddingTopAnimationScreen';
-const BottomSheetPaddingTopAnimationScreen_1 = React.lazy(() => import('../../../features/animations/BottomSheetPaddingTopAnimationScreen'));
-
-import { screenConfig as screenConfig_2 } from '../../../features/demo/ScreenSystemDemoScreen';
-const ScreenSystemDemoScreen_2 = React.lazy(() => import('../../../features/demo/ScreenSystemDemoScreen'));
-
-import { screenConfig as screenConfig_3 } from '../../../features/eventBus/EvenBusScreen';
-const EventBusScreen_3 = React.lazy(() => import('../../../features/eventBus/EvenBusScreen'));
-
-import { screenConfig as screenConfig_4 } from '../../../features/inputText/InputTextScreen';
-const InputTextScreen_4 = React.lazy(() => import('../../../features/inputText/InputTextScreen'));
-
-import { screenConfig as screenConfig_5 } from '../../../features/logs/LogContentScreen';
-const LogContentScreen_5 = React.lazy(() => import('../../../features/logs/LogContentScreen'));
-
-import { screenConfig as screenConfig_6 } from '../../../features/logs/LogViewerScreen';
-const LogViewerScreen_6 = React.lazy(() => import('../../../features/logs/LogViewerScreen'));
-
-import { screenConfig as screenConfig_7 } from '../../../features/react19/react19HomeScreen';
-const react19HomeScreen_7 = React.lazy(() => import('../../../features/react19/react19HomeScreen'));
-
-import { screenConfig as screenConfig_8 } from '../../../features/tabView/CarouselTabsExampleScreen';
-const CarouselTabsExampleScreen_8 = React.lazy(() => import('../../../features/tabView/CarouselTabsExampleScreen'));
-
-import { screenConfig as screenConfig_9 } from '../../../features/tabView/TabViewReactNavigationScreen';
-const TabViewReactNavigationScreen_9 = React.lazy(() => import('../../../features/tabView/TabViewReactNavigationScreen'));
-
-import { screenConfig as screenConfig_10 } from '../../../features/tabView/TabViewReanimatedScreen';
-const TabViewReanimatedScreen_10 = React.lazy(() => import('../../../features/tabView/TabViewReanimatedScreen'));
-
-import { screenConfig as screenConfig_11 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
-const TopTabViewExampleScreenGestureHandler_11 = React.lazy(() => import('../../../features/tabView/TopTabViewGestureHandlerScreen'));
-
-import { screenConfig as screenConfig_12 } from '../../../features/tabView/TopTabViewPagerViewScreen';
-const TopTabViewExampleScreenPagerView_12 = React.lazy(() => import('../../../features/tabView/TopTabViewPagerViewScreen'));
-
-import { screenConfig as screenConfig_13 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
-const ModernTypeScriptFeaturesScreen_13 = React.lazy(() => import('../../../features/typescript/ModernTypeScriptFeaturesScreen'));
-
-import { screenConfig as screenConfig_14 } from '../../../features/webSockets/WebSocketsScreen';
-const WebSocketsScreen_14 = React.lazy(() => import('../../../features/webSockets/WebSocketsScreen'));
+import AnimationsHomeScreen_0, { screenConfig as screenConfig_0 } from '../../../features/animations/AnimationsHomeScreen';
+import BottomSheetPaddingTopAnimationScreen_1, { screenConfig as screenConfig_1 } from '../../../features/animations/BottomSheetPaddingTopAnimationScreen';
+import ScreenSystemDemoScreen_2, { screenConfig as screenConfig_2 } from '../../../features/demo/ScreenSystemDemoScreen';
+import EventBusScreen_3, { screenConfig as screenConfig_3 } from '../../../features/eventBus/EvenBusScreen';
+import InputTextScreen_4, { screenConfig as screenConfig_4 } from '../../../features/inputText/InputTextScreen';
+import LogContentScreen_5, { screenConfig as screenConfig_5 } from '../../../features/logs/LogContentScreen';
+import LogViewerScreen_6, { screenConfig as screenConfig_6 } from '../../../features/logs/LogViewerScreen';
+import react19HomeScreen_7, { screenConfig as screenConfig_7 } from '../../../features/react19/react19HomeScreen';
+import CarouselTabsExampleScreen_8, { screenConfig as screenConfig_8 } from '../../../features/tabView/CarouselTabsExampleScreen';
+import TabViewReactNavigationScreen_9, { screenConfig as screenConfig_9 } from '../../../features/tabView/TabViewReactNavigationScreen';
+import TabViewReanimatedScreen_10, { screenConfig as screenConfig_10 } from '../../../features/tabView/TabViewReanimatedScreen';
+import TopTabViewExampleScreenGestureHandler_11, { screenConfig as screenConfig_11 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
+import TopTabViewExampleScreenPagerView_12, { screenConfig as screenConfig_12 } from '../../../features/tabView/TopTabViewPagerViewScreen';
+import ModernTypeScriptFeaturesScreen_13, { screenConfig as screenConfig_13 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
+import WebSocketsScreen_14, { screenConfig as screenConfig_14 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
 export const SCREENS: readonly ScreenConfig[] = [

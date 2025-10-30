@@ -13,7 +13,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     screenSystemDemo: true,
     react19: true,
     typescript: false,
-    inputText: true,
+    inputText: false,
     animations: true,
   };
   const renderLogFeature = () => {
