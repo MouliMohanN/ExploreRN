@@ -7,6 +7,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { logger } from '../../utils/logger/logger';
 import type { TabBarProps, TabConfigV2, TabLayout } from './typesV2';
 
 interface TabItemProps {
@@ -98,7 +99,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
 
   const onScroll = useAnimatedScrollHandler((event: NativeScrollEvent) => {
     scrollX.value = event.contentOffset.x;
-    console.log('onScroll', event.contentOffset.x);
+    logger.info('onScroll', event.contentOffset.x);
   });
 
   const getTabBarxValue = () => {
@@ -106,7 +107,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
     for (let i = 0; i < tabBarIndex.current; i++) {
       tabBarxValue += allTabsWidth.current[i].width;
     }
-    console.log('getTabBarxValue', tabBarxValue, tabBarIndex.current);
+    logger.info('getTabBarxValue', tabBarxValue, tabBarIndex.current);
     return tabBarxValue;
   };
 
@@ -122,7 +123,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
   });
 
   const updateTabBar = (index: number, isSwipe = false) => {
-    console.log('updateTabBar', allTabsWidth.current, index);
+    logger.info('updateTabBar', allTabsWidth.current, index);
     const tabLayout = allTabsWidth.current[index];
     if (!tabLayout?.width) {
       // If layout not available, retry after a short delay
@@ -153,7 +154,7 @@ export const TabBarV2: React.FC<TabBarProps> = ({
   };
 
   const onTabLayout = (index: number, tabLayout: TabLayout) => {
-    console.log('onTabLayout', index, tabLayout);
+    logger.info('onTabLayout', index, tabLayout);
     allTabsWidth.current[index] = tabLayout;
     if (index === currentIndex) {
       tabBarWidth.value = tabLayout.width;

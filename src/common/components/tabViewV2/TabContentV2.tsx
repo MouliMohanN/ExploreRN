@@ -2,6 +2,7 @@ import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { logger } from '../../utils/logger/logger';
 import type { TabContentV2Props } from './typesV2';
 
 const { width } = Dimensions.get('window');
@@ -53,7 +54,7 @@ export const TabContentV2: React.FC<TabContentV2Props> = ({
       }
     });
 
-  console.log('TabContentV2 rendered');
+  logger.info('TabContentV2 rendered');
   const content = (
     <Animated.View style={[styles.contentContainer, animatedStyle]}>
       {tabs.map((tab, index) => {

@@ -6,8 +6,8 @@ import { logger } from './common/utils/logger/logger';
 
 export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
   const features = {
-    log: false,
-    tabView: true,
+    log: true,
+    tabView: false,
     webSockets: false,
     eventBus: true,
     screenSystemDemo: true,
@@ -26,7 +26,6 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
           title='Log Info'
           onPress={() => {
             logger.info('Log Info button pressed', { exampleData: 'This is some data' });
-            console.log('Log Info button pressed', { exampleData: 'This is some data' });
           }}
         />
         <Button

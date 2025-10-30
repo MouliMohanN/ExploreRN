@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { useSharedValue } from 'react-native-reanimated';
+import { logger } from '../../utils/logger/logger';
 import { TabBar } from './TabBar';
 import { TabContent } from './TabContent';
 import type { TopTabViewProps } from './types';
@@ -26,10 +27,10 @@ export const TopTabView: React.FC<TopTabViewProps> = ({
   const handleTabPress = (index: number) => {
     currentIndex.value = index;
     if (pagerViewRef.current) {
-      console.log('TopTabView: Calling pagerViewRef.current.setPage(', index, ')');
+      logger.info('TopTabView: Calling pagerViewRef.current.setPage(', index, ')');
       pagerViewRef.current.setPage(index);
     } else {
-      console.log('TopTabView: pagerViewRef.current is null');
+      logger.info('TopTabView: pagerViewRef.current is null');
     }
   };
 

@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { interpolate, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import { logger } from '../../common/utils/logger/logger';
 
 export default function BottomSheetPaddingTopAnimationScreen({}: ScreenBaseProps): React.ReactElement {
   // ref
@@ -22,7 +23,7 @@ export default function BottomSheetPaddingTopAnimationScreen({}: ScreenBaseProps
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
+    logger.info('handleSheetChanges', index);
   }, []);
 
   const handleOpenPress = () => {
@@ -48,8 +49,8 @@ export default function BottomSheetPaddingTopAnimationScreen({}: ScreenBaseProps
     const position60 = screenHeight * 0.6;
     const position100 = screenHeight;
 
-    console.log('animatedPosition.value:', animatedPosition.value);
-    console.log('Screen positions - 25%:', position25, '60%:', position60, '100%:', position100);
+    logger.info('animatedPosition.value:', animatedPosition.value);
+    logger.info('Screen positions - 25%:', position25, '60%:', position60, '100%:', position100);
 
     const paddingTop = interpolate(
       screenHeightAnimated.value - animatedPosition.value,
@@ -58,7 +59,7 @@ export default function BottomSheetPaddingTopAnimationScreen({}: ScreenBaseProps
       'clamp',
     );
 
-    console.log('paddingTop:', paddingTop);
+    logger.info('paddingTop:', paddingTop);
 
     return {
       paddingTop,
@@ -113,7 +114,7 @@ export default function BottomSheetPaddingTopAnimationScreen({}: ScreenBaseProps
                 <Text style={styles.featureItem}>✅ Position-based animation</Text>
               </View>
 
-              <TouchableOpacity style={styles.sheetButton} onPress={() => console.log('Padding animation demo!')}>
+              <TouchableOpacity style={styles.sheetButton} onPress={() => logger.info('Padding animation demo!')}>
                 <Text style={styles.sheetButtonText}>Test Animation</Text>
               </TouchableOpacity>
             </Animated.View>

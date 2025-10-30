@@ -1,3 +1,5 @@
+import { logger } from '../../common/utils/logger/logger';
+
 type WebSocketProps = {
   onopen: () => void;
   onclose: (event: WebSocketCloseEvent) => void;
@@ -8,28 +10,28 @@ type WebSocketProps = {
 export const initWebSocket = (url: string, callback: WebSocketProps): WebSocket => {
   const ws = new WebSocket(url);
 
-  console.log('WebSocket client connecting');
+  logger.info('WebSocket client connecting');
   ws.onopen = () => {
     // connection opened
     callback.onopen();
-    console.log('WebSocket client onOpen');
+    logger.info('WebSocket client onOpen');
   };
 
   ws.onmessage = (e) => {
     // a message was received
-    console.log('onMessage', e.data);
+    logger.info('onMessage', e.data);
     callback.onmessage(e);
   };
 
   ws.onerror = (e) => {
     // an error occurred
-    console.log('onError', e.message);
+    logger.info('onError', e.message);
     callback.onerror(e);
   };
 
   ws.onclose = (e) => {
     // connection closed
-    console.log('onClose', e.code, e.reason);
+    logger.info('onClose', { code: e.code, reason: e.reason });
     callback.onclose(e);
   };
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { logger } from '../../../common/utils/logger/logger';
 
 // Component that would normally need React.memo to prevent re-renders
 function ExpensiveChild({ data, onRender }: { data: string; onRender: () => void }) {
@@ -17,7 +18,7 @@ function ExpensiveChild({ data, onRender }: { data: string; onRender: () => void
     return result;
   })();
 
-  console.log('ExpensiveChild rendered');
+  logger.info('ExpensiveChild rendered');
   return (
     <View style={styles.childCard}>
       <Text style={styles.childText}>Expensive Child Component</Text>
@@ -46,7 +47,7 @@ function CallbackExample({ count }: { count: number }) {
     return sum;
   })();
 
-  console.log('CallbackExample rendered');
+  logger.info('CallbackExample rendered');
   return (
     <View style={styles.callbackCard}>
       <Text style={styles.heading}>Callback & Memo Test</Text>
@@ -85,7 +86,7 @@ export default function ReactCompilerExample(): React.ReactElement {
     setParentCount(0);
   };
 
-  console.log('ReactCompilerExample rendered');
+  logger.info('ReactCompilerExample rendered');
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ padding: 12 }}>

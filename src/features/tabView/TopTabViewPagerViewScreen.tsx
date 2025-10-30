@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TopTabView } from '../../common/components/tabView/TopTabView';
 import { ScreenConfig } from '../../common/navigation/conventions';
+import { logger } from '../../common/utils/logger/logger';
 
 // Define TabScreen components outside the main component for better reusability and performance
 const TabScreen1 = () => {
-  console.log('TabScreen1 rendered');
+  logger.info('TabScreen1 rendered');
   useEffect(() => {
-    console.log('TabScreen1 mounted');
+    logger.info('TabScreen1 mounted');
     return () => {
-      console.log('TabScreen1 unmounted');
+      logger.info('TabScreen1 unmounted');
     };
   }, []);
   return (
@@ -20,11 +21,11 @@ const TabScreen1 = () => {
 };
 
 const TabScreen2 = () => {
-  console.log('TabScreen2 rendered');
+  logger.info('TabScreen2 rendered');
   useEffect(() => {
-    console.log('TabScreen2 mounted');
+    logger.info('TabScreen2 mounted');
     return () => {
-      console.log('TabScreen2 unmounted');
+      logger.info('TabScreen2 unmounted');
     };
   }, []);
   return (
@@ -35,11 +36,11 @@ const TabScreen2 = () => {
 };
 
 const TabScreen3 = () => {
-  console.log('TabScreen3 rendered');
+  logger.info('TabScreen3 rendered');
   useEffect(() => {
-    console.log('TabScreen3 mounted');
+    logger.info('TabScreen3 mounted');
     return () => {
-      console.log('TabScreen3 unmounted');
+      logger.info('TabScreen3 unmounted');
     };
   }, []);
   return (
@@ -50,11 +51,11 @@ const TabScreen3 = () => {
 };
 
 const TabScreen4 = () => {
-  console.log('TabScreen4 rendered');
+  logger.info('TabScreen4 rendered');
   useEffect(() => {
-    console.log('TabScreen4 mounted');
+    logger.info('TabScreen4 mounted');
     return () => {
-      console.log('TabScreen4 unmounted');
+      logger.info('TabScreen4 unmounted');
     };
   }, []);
   return (
@@ -65,11 +66,11 @@ const TabScreen4 = () => {
 };
 
 const TabScreen5 = () => {
-  console.log('TabScreen5 rendered');
+  logger.info('TabScreen5 rendered');
   useEffect(() => {
-    console.log('TabScreen5 mounted');
+    logger.info('TabScreen5 mounted');
     return () => {
-      console.log('TabScreen5 unmounted');
+      logger.info('TabScreen5 unmounted');
     };
   }, []);
   return (
@@ -80,11 +81,11 @@ const TabScreen5 = () => {
 };
 
 const TabScreen6 = () => {
-  console.log('TabScreen6 rendered');
+  logger.info('TabScreen6 rendered');
   useEffect(() => {
-    console.log('TabScreen6 mounted');
+    logger.info('TabScreen6 mounted');
     return () => {
-      console.log('TabScreen6 unmounted');
+      logger.info('TabScreen6 unmounted');
     };
   }, []);
   return (
@@ -114,10 +115,10 @@ export default function TopTabViewExampleScreenPagerView() {
   ];
 
   const handlePageSelected = (index: number) => {
-    console.log('TopTabViewExampleScreenPagerView: onPageSelected received index:', index);
+    logger.info('TopTabViewExampleScreenPagerView: onPageSelected received index:', index);
   };
 
-  console.log('TopTabViewExampleScreenPagerView rendered');
+  logger.info('TopTabViewExampleScreenPagerView rendered');
 
   return (
     <View style={localStyles.container}>
