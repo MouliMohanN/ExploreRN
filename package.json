@@ -42,7 +42,8 @@
     "screens:generate": "node scripts/navigation/screenScanner.js",
     "screens:watch": "node scripts/navigation/screenScanner.js --watch",
     "create-screen": "node scripts/navigation/createScreen.js animations AnimationsHome && npm run screens:generate",
-    "prestart": "npm run screens:generate"
+    "prestart": "npm run screens:generate",
+    "depcheck": "depcheck"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.2.6",
@@ -85,7 +86,13 @@
     "@types/react-test-renderer": "19.1.0",
     "babel-plugin-react-compiler": "^19.1.0-rc.3",
     "chokidar": "^4.0.1",
+    "depcheck": "^1.4.7",
     "eslint": "9.31.0",
+    "@eslint/js": "^9.8.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-security": "^3.0.1",
+    "globals": "^15.8.0",
     "jest": "30.0.5",
     "metro-react-native-babel-transformer": "^0.77.0",
     "prettier": "3.6.2",
