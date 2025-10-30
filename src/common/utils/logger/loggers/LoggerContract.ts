@@ -1,7 +1,3 @@
-import { ConsoleLogger } from './consoleLogger';
-import { FileLogger } from './fileLogger';
-import { NetworkLogger } from './networkLogger';
-
 export type LoggerContract = {
   info: (message: string, data?: any) => void;
   debug: (message: string, data?: any) => void;
@@ -12,12 +8,6 @@ export type LoggerContract = {
   redux: (message: string, data?: any) => void;
   setConfig: (config: any) => void; // Optional method to set logger configuration
   cleanUp: () => void; // Optional method to clean up resources
-};
-
-export const LogMapper: Record<string, LoggerContract> = {
-  console: ConsoleLogger,
-  file: FileLogger,
-  network: NetworkLogger,
 };
 
 export const defaultLogLevelConfig = {

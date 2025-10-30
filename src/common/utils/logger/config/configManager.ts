@@ -1,4 +1,4 @@
-import { LogMapper } from '../loggers/LoggerContract';
+import { LogMapper } from '../loggers/logMapper';
 import { defaultConsoleLoggerConfig } from '../loggers/consoleLogger';
 import { defaultFileLoggerConfig } from '../loggers/fileLogger';
 import { defaultNetworkLoggerConfig } from '../loggers/networkLogger';

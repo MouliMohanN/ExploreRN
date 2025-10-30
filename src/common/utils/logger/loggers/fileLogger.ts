@@ -76,7 +76,7 @@ export const defaultFileLoggerConfig: FileLoggerConfig = {
 let config = defaultFileLoggerConfig;
 let logFilePath: string | null = null;
 
-const log = async (level: LogLevel, message: string, data?: any, config?: FileLoggerConfig) => {
+const log = async (level: LogLevel, message: string, data?: any) => {
   if (!config?.logLevel?.[level]) return; // Check if logging is enabled for this level
 
   if (!logFilePath) {

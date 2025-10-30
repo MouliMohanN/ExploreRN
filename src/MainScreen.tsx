@@ -6,7 +6,7 @@ import { logger } from './common/utils/logger/logger';
 
 export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
   const features = {
-    log: false,
+    log: true,
     tabView: false,
     webSockets: false,
     eventBus: true,
