@@ -26,7 +26,6 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
           title='Log Info'
           onPress={() => {
             logger.info('Log Info button pressed', { exampleData: 'This is some data' });
-            console.log('Log Info button pressed', { exampleData: 'This is some data' });
           }}
         />
         <Button

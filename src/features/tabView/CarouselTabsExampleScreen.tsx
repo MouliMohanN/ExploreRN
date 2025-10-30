@@ -5,6 +5,7 @@ import { TabConfig } from '../../common/components/tabViewV3/types';
 import { useCarouselTabFocus } from '../../common/components/tabViewV3/useCarouselTabFocus';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { AppEventBus } from '../../common/utils/eventBus/EventBus';
+import { logger } from '../../common/utils/logger/logger';
 import { CounterContext } from './CounterContext';
 
 // --- Individual Tab Screens ---
@@ -23,15 +24,15 @@ const TabScreen1: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }
   }, [isFocused]);
 
   useEffect(() => {
-    console.log('TabScreen1 mounted');
-    return () => console.log('TabScreen1 unmounted');
+    logger.info('TabScreen1 mounted');
+    return () => logger.info('TabScreen1 unmounted');
   }, []);
 
   // if (!shouldRender) {
   //   return null;
   // }
 
-  console.log('TabScreen1 rendered');
+  logger.info('TabScreen1 rendered');
   return (
     <View>
       <Text style={Styles.tabText}>Content of {tabTitle}</Text>
@@ -49,15 +50,15 @@ const TabScreen2: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }
   const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
-    console.log('TabScreen2 mounted');
-    return () => console.log('TabScreen2 unmounted');
+    logger.info('TabScreen2 mounted');
+    return () => logger.info('TabScreen2 unmounted');
   }, []);
 
   // if (!shouldRender) {
   //   return null;
   // }
 
-  console.log('TabScreen2 rendered');
+  logger.info('TabScreen2 rendered');
   return (
     <View style={Styles.tabContent}>
       <Text style={Styles.tabText}>Content of {tabTitle}</Text>
@@ -75,15 +76,15 @@ const TabScreen3: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }
   const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
-    console.log('TabScreen3 mounted');
-    return () => console.log('TabScreen3 unmounted');
+    logger.info('TabScreen3 mounted');
+    return () => logger.info('TabScreen3 unmounted');
   }, []);
 
   // if (!shouldRender) {
   //   return null;
   // }
 
-  console.log('TabScreen3 rendered');
+  logger.info('TabScreen3 rendered');
   return (
     <View style={Styles.tabContent}>
       <Text style={Styles.tabText}>Content of {tabTitle}</Text>
@@ -101,15 +102,15 @@ const TabScreen4: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }
   const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
-    console.log('TabScreen4 mounted');
-    return () => console.log('TabScreen4 unmounted');
+    logger.info('TabScreen4 mounted');
+    return () => logger.info('TabScreen4 unmounted');
   }, []);
 
   // if (!shouldRender) {
   //   return null;
   // }
 
-  console.log('TabScreen4 rendered');
+  logger.info('TabScreen4 rendered');
   return (
     <View style={Styles.tabContent}>
       <Text style={Styles.tabText}>Content of {tabTitle}</Text>
@@ -127,15 +128,15 @@ const TabScreen5: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }
   const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
-    console.log('TabScreen5 mounted');
-    return () => console.log('TabScreen5 unmounted');
+    logger.info('TabScreen5 mounted');
+    return () => logger.info('TabScreen5 unmounted');
   }, []);
 
   // if (!shouldRender) {
   //   return null;
   // }
 
-  console.log('TabScreen5 rendered');
+  logger.info('TabScreen5 rendered');
   return (
     <View style={Styles.tabContent}>
       <Text style={Styles.tabText}>Content of {tabTitle}</Text>
@@ -153,15 +154,15 @@ const TabScreen6: React.FC<TabScreenProps> = ({ screenName, tabTitle, tabIndex }
   const { count, isFocused, shouldRender } = useCarouselTabFocus(screenName, tabIndex);
 
   useEffect(() => {
-    console.log('TabScreen6 mounted');
-    return () => console.log('TabScreen6 unmounted');
+    logger.info('TabScreen6 mounted');
+    return () => logger.info('TabScreen6 unmounted');
   }, []);
 
   // if (!shouldRender) {
   //   return null;
   // }
 
-  console.log('TabScreen6 rendered');
+  logger.info('TabScreen6 rendered');
   return (
     <View style={Styles.tabContent}>
       <Text style={Styles.tabText}>Content of {tabTitle}</Text>
@@ -261,7 +262,7 @@ export default function CarouselTabsExampleScreen() {
     //   currentIndex: index,
     // }));
     AppEventBus.publish('carouselTabs.focusInfo', { screenName, currentIndex: index });
-    console.log('CarouselTabsExampleScreen: onPageSelected received index:', index);
+    logger.info('CarouselTabsExampleScreen: onPageSelected received index:', index);
   };
 
   return (

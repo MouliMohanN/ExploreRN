@@ -12,6 +12,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { ScreenConfig } from '../../common/navigation/conventions';
+import { logger } from '../../common/utils/logger/logger';
 
 /**
  * ===================================
@@ -40,7 +41,7 @@ import { ScreenConfig } from '../../common/navigation/conventions';
 type SpreadProps<T extends readonly unknown[]> = T extends readonly [infer H, ...infer R] ? H & SpreadProps<R> : {};
 
 function mergeStyles<T extends readonly object[]>(...styles: T): SpreadProps<T> {
-  console.log('🎨 [Variadic Tuple] Merging styles:', styles);
+  logger.info('🎨 [Variadic Tuple] Merging styles:', styles);
   return Object.assign({}, ...styles) as SpreadProps<T>;
 }
 
@@ -48,7 +49,7 @@ type NavigationState = [screenName: string, params: object, timestamp: number];
 
 // Practical React Navigation example
 function navigateToScreen([screenName, params, timestamp]: NavigationState) {
-  console.log(`🧭 [Labeled Tuple] Navigate to: ${screenName} at ${timestamp}`, params);
+  logger.info(`🧭 [Labeled Tuple] Navigate to: ${screenName} at ${timestamp}`, params);
 }
 
 /**
@@ -63,7 +64,7 @@ type ScreenNames = `${ScreenPrefix}${ScreenSuffix}`;
 
 // Usage: This ensures only valid screen names are used
 function getScreenRoute(name: ScreenNames): string {
-  console.log(`📱 [Template Literal] Screen route: ${name}`);
+  logger.info(`📱 [Template Literal] Screen route: ${name}`);
   return name;
 }
 
@@ -91,7 +92,7 @@ class ApiClient {
 
   async request(route: ApiRoute, body?: any): Promise<any> {
     const [method, endpoint] = route.split(' ') as [HttpMethod, ApiEndpoint];
-    console.log(`🌐 [Template Literal API] ${method} ${this.baseUrl}${endpoint}`, body);
+    logger.info(`🌐 [Template Literal API] ${method} ${this.baseUrl}${endpoint}`, body);
 
     // Simulate API call
     return new Promise((resolve) => setTimeout(() => resolve({ success: true, method, endpoint }), 1000));
@@ -125,7 +126,7 @@ function createUserWithGetters(user: User): User & UserGetters {
   Object.keys(user).forEach((key) => {
     const getterName = `get${key.charAt(0).toUpperCase()}${key.slice(1)}` as keyof UserGetters;
     (getters as any)[getterName] = () => {
-      console.log(`🔍 [Key Remapping] Getting ${key}:`, (user as any)[key]);
+      logger.info(`🔍 [Key Remapping] Getting ${key}:`, (user as any)[key]);
       return (user as any)[key];
     };
   });
@@ -161,7 +162,7 @@ const appTheme = {
 
 // Now we can access specific color values AND ensure type safety
 function useThemeColor(color: keyof typeof appTheme) {
-  console.log(`🎨 [Satisfies] Using color ${color}:`, appTheme[color]);
+  logger.info(`🎨 [Satisfies] Using color ${color}:`, appTheme[color]);
   return appTheme[color]; // Return type is specific string literal, not just 'string'
 }
 
@@ -226,15 +227,15 @@ interface ValidationError {
 type AppError = NetworkError | ValidationError;
 
 function handleError(error: AppError) {
-  console.log('🚨 [In Operator] Handling error:', error);
+  logger.info('🚨 [In Operator] Handling error:', error);
 
   if ('code' in error) {
     // TypeScript now knows this is NetworkError
-    console.log(`Network error with code: ${error.code}`);
+    logger.info(`Network error with code: ${error.code}`);
     return `Network Error ${error.code}`;
   } else {
     // TypeScript knows this is ValidationError
-    console.log(`Validation error in field: ${error.field}`);
+    logger.info(`Validation error in field: ${error.field}`);
     return `Validation Error: ${error.field}`;
   }
 }
@@ -251,7 +252,7 @@ function handleError(error: AppError) {
 // Without const: T would be string[], loses specific array structure
 // With const: T preserves exact tuple structure
 function processArray<const T extends readonly string[]>(arr: T): T {
-  console.log('📊 [Const Type Params] Processing array:', arr);
+  logger.info('📊 [Const Type Params] Processing array:', arr);
   // Return type is exactly what was passed in, not just string[]
   return arr;
 }
@@ -275,7 +276,7 @@ function processArray<const T extends readonly string[]>(arr: T): T {
 //     } else {
 //       state = newValue;
 //     }
-//     console.log('🔄 [NoInfer] State updated to:', state);
+//     logger.info('🔄 [NoInfer] State updated to:', state);
 //   };
 
 //   return [state, setState] as const;
@@ -292,12 +293,12 @@ function isString(value: unknown) {
 }
 
 function filterStrings(items: unknown[]) {
-  console.log('🔍 [Inferred Predicates] Filtering strings from:', items);
+  logger.info('🔍 [Inferred Predicates] Filtering strings from:', items);
 
   // TypeScript automatically knows result is string[]
   const strings = items.filter(isString); // No manual type predicate needed!
 
-  console.log('🔍 [Inferred Predicates] Filtered strings:', strings);
+  logger.info('🔍 [Inferred Predicates] Filtered strings:', strings);
   return strings;
 }
 
@@ -329,7 +330,7 @@ export default function ModernTypeScriptFeaturesScreen(): React.ReactElement {
     };
 
     setLogs((prev) => [...prev, newLog]);
-    console.log(`[${newLog.timestamp}] ${feature}: ${message}`);
+    logger.info(`[${newLog.timestamp}] ${feature}: ${message}`);
   }, []);
 
   // Demo functions for each TypeScript feature

@@ -12,13 +12,14 @@ import {
 } from 'react-native';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
+import { logger } from '../../common/utils/logger/logger';
 
-console.log('InputTextScreen imports executed');
+logger.info('InputTextScreen imports executed');
 
 export default function InputTextScreen({}: ScreenBaseProps): React.ReactElement {
   const [numericValue, setNumericValue] = useState('');
   const textInputRef = useRef<TextInput>(null);
-  console.log('InputTextScreen component rendered');
+  logger.info('InputTextScreen component rendered');
   const getTextInputStyle = () => {
     if (Platform.OS === 'android') {
       // For Android, always use left alignment but adjust padding when empty

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BackHandler } from 'react-native';
 import PagerView from 'react-native-pager-view';
+import { logger } from '../../utils/logger/logger';
 import { TabBarMatchParent } from './tabBar/TabBarMatchParent';
 import { TabBarScrollable } from './tabBar/TabBarScrollable';
 import { TabScreenGestureHandler } from './tabScreen/TabScreenGestureHandler';
@@ -102,7 +103,7 @@ const CarouselTabsWrapper: React.FC<CarouselTabsProps> = ({
     return renderGestureHandler();
   };
 
-  console.log('CaruouselTabs render');
+  logger.info('CaruouselTabs render');
 
   return (
     <>

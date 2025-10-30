@@ -7,6 +7,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { logger } from '../../../utils/logger/logger';
 import { TabBarProps, TabConfig } from '../types';
 
 type TabLayout = {
@@ -84,7 +85,7 @@ export const TabBarScrollable: React.FC<TabBarProps> = ({
 
   const onScroll = useAnimatedScrollHandler((event: NativeScrollEvent) => {
     scrollX.value = event.contentOffset.x;
-    console.log('onScroll', event.contentOffset.x);
+    logger.info('onScroll', event.contentOffset.x);
   });
 
   const getTabBarxValue = () => {
@@ -96,7 +97,7 @@ export const TabBarScrollable: React.FC<TabBarProps> = ({
   };
 
   const updateTabBar = (index: number, isSwipe = false) => {
-    console.log('updateTabBar', allTabsWidth.current, index);
+    logger.info('updateTabBar', allTabsWidth.current, index);
     const tabLayout = allTabsWidth.current[index];
     if (!tabLayout?.width) {
       // If layout not available, retry after a short delay
