@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
-const Button = React.lazy(() => import('./common/components/Button').then(m => ({ default: m.Button })));
+import { Button } from './common/components/Button';
 import { ScreenNames } from './common/navigation';
 import { ScreenBaseProps } from './common/types/ScreenBaseProps';
 import { logger } from './common/utils/logger/logger';
@@ -196,17 +196,15 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
       <ScrollView>
-        <React.Suspense fallback={<View />}>
-          {renderLogFeature()}
-          {renderTabViewFeature()}
-          {renderWebSockets()}
-          {renderEventBus()}
-          {renderScreenSystemDemo()}
-          {renderReact19()}
-          {renderTypescript()}
-          {renderInputText()}
-          {renderAnimations()}
-        </React.Suspense>
+        {renderLogFeature()}
+        {renderTabViewFeature()}
+        {renderWebSockets()}
+        {renderEventBus()}
+        {renderScreenSystemDemo()}
+        {renderReact19()}
+        {renderTypescript()}
+        {renderInputText()}
+        {renderAnimations()}
       </ScrollView>
     </View>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-const Button = React.lazy(() => import('../../common/components/Button').then(m => ({ default: m.Button })));
+import { Button } from '../../common/components/Button';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { AppEventBus } from '../../common/utils/eventBus/EventBus';
 import { logger } from '../../common/utils/logger/logger';
@@ -39,9 +39,7 @@ export default function EventBusScreen(): React.ReactElement {
     <View>
       <Text>EventBusScreen</Text>
       <Screen1 />
-      <React.Suspense fallback={<View />}>
-        <Button title='Log In' onPress={onPress} />
-      </React.Suspense>
+      <Button title='Log In' onPress={onPress} />
     </View>
   );
 }
