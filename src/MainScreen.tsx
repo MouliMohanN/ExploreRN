@@ -1,3 +1,4 @@
+import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Button } from './common/components/Button';
 import { ScreenNames } from './common/navigation';
