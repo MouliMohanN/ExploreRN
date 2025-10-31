@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button } from '../../common/components/Button';
+const Button = React.lazy(() => import('../../common/components/Button').then(m => ({ default: m.Button })));
 import { ScreenNames } from '../../common/navigation';
 import { ScreenConfig } from '../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
@@ -34,7 +34,9 @@ export default function AnimationsHomeScreen({ navigation }: ScreenBaseProps): R
         Explore different animation examples
       </Text>
       <ScrollView style={styles.scrollView}>
-        {renderBottomSheetAnimations()}
+        <React.Suspense fallback={<View />}>
+          {renderBottomSheetAnimations()}
+        </React.Suspense>
       </ScrollView>
     </View>
   );
