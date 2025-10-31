@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-10-09T07:14:06.367Z
+ * Generated on: 2025-10-31T04:24:47.929Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -18,7 +18,7 @@ import EventBusScreen_3, { screenConfig as screenConfig_3 } from '../../../featu
 import InputTextScreen_4, { screenConfig as screenConfig_4 } from '../../../features/inputText/InputTextScreen';
 import LogContentScreen_5, { screenConfig as screenConfig_5 } from '../../../features/logs/LogContentScreen';
 import LogViewerScreen_6, { screenConfig as screenConfig_6 } from '../../../features/logs/LogViewerScreen';
-import react19HomeScreen_7, { screenConfig as screenConfig_7 } from '../../../features/react19/react19HomeScreen';
+import React19HomeScreen_7, { screenConfig as screenConfig_7 } from '../../../features/react19/React19HomeScreen';
 import CarouselTabsExampleScreen_8, { screenConfig as screenConfig_8 } from '../../../features/tabView/CarouselTabsExampleScreen';
 import TabViewReactNavigationScreen_9, { screenConfig as screenConfig_9 } from '../../../features/tabView/TabViewReactNavigationScreen';
 import TabViewReanimatedScreen_10, { screenConfig as screenConfig_10 } from '../../../features/tabView/TabViewReanimatedScreen';
@@ -73,7 +73,7 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_7.name,
-    component: react19HomeScreen_7,
+    component: React19HomeScreen_7,
     options: screenConfig_7.options || {},
     group: 'react19',
   },
@@ -130,7 +130,7 @@ export const SCREEN_NAMES = {
   'InputText': 'InputText',
   'LogContent': 'LogContent',
   'LogViewer': 'LogViewer',
-  'react19Home': 'react19Home',
+  'React19Home': 'React19Home',
   'CarouselTabs': 'CarouselTabs',
   'TabViewReactNavigation': 'TabViewReactNavigation',
   'TabViewReanimated': 'TabViewReanimated',
