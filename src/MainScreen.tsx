@@ -136,7 +136,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         <Button
           title='React 19'
           onPress={() => {
-            navigation.navigate(ScreenNames.react19Home);
+            navigation.navigate(ScreenNames.React19Home);
           }}
         />
       </>
