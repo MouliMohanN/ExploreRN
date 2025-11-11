@@ -44,7 +44,7 @@
     "move-mouse-nutjs": "ts-node scripts/useCase/moveMouse/nutjs.ts",
     "screens:generate": "node scripts/navigation/screenScanner.js",
     "screens:watch": "node scripts/navigation/screenScanner.js --watch",
-    "create-screen": "node scripts/navigation/createScreen.js animations AnimationsHome && npm run screens:generate",
+    "create-screen": "node scripts/navigation/createScreen.js nativeModules/localStorage LocalStorage --override && npm run screens:generate",
     "prestart": "npm run screens:generate",
     "depcheck": "depcheck"
   },

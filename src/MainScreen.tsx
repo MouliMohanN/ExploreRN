@@ -16,6 +16,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     typescript: false,
     inputText: false,
     animations: true,
+    nativeModules: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -192,6 +193,22 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderNativeModules = () => {
+    if (!features.nativeModules) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Native Modules'
+          onPress={() => {
+            navigation.navigate(ScreenNames.NativeModulesHome);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
@@ -205,6 +222,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         {renderTypescript()}
         {renderInputText()}
         {renderAnimations()}
+        {renderNativeModules()}
       </ScrollView>
     </View>
   );
