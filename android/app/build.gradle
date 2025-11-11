@@ -122,7 +122,7 @@ android {
             aaptOptions {
                 cruncherEnabled false
             }
-            
+            //manifestPlaceholders = [usesClearTextTraffic: "true"]
         }
         release {
             // FIXME: This is a debug key and should be replaced with a release key.
@@ -136,7 +136,7 @@ android {
                 cruncherEnabled optimizeReleaseBuilds
             }
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            
+            //manifestPlaceholders = [usesClearTextTraffic: "false"]
         }
     }
     splits {

@@ -34,6 +34,7 @@
     "clean-install-android": "npm run clean-android && npm run clean-node-modules && npm run fast-build",
     "clean-install-android-release": "npm run clean-android && npm run clean-node-modules && npm run android-release",
     "clean-node-modules": "rm -rf node_modules && rm -rf package-lock.json && npm install -f",
+    "clean-metro": "watchman watch-del-all && rm -rf /tmp/metro-* && rm -rf /tmp/react-* && rm -rf ~/.metro",
     "clean-android": "cd android && rm -rf app/build && rm -rf app/.cxx && ./gradlew clean && cd ..",
     "android-release": "cd android && ./gradlew installRelease && cd ..",
     "clean-gradle": "cd android && ./gradlew clean && cd ..",
