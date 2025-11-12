@@ -58,6 +58,7 @@
     "react-native": "0.82.1",
     "react-native-fs": "2.20.0",
     "react-native-gesture-handler": "2.29.0",
+    "react-native-local-storage": "file:./modules/react-native-local-storage",
     "react-native-pager-view": "6.9.1",
     "react-native-paper": "5.14.5",
     "react-native-reanimated": "4.1.3",
