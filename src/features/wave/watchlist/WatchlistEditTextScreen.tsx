@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { ScreenConfig } from '../../../common/navigation/conventions';
 import { ScreenBaseProps } from '../../../common/types/ScreenBaseProps';
+import { AppEventBus } from '../../../common/utils/eventBus/EventBus';
 import { logger } from '../../../common/utils/logger/logger';
-import { StockCard, StockCardProps } from './components/StockCard';
+import { StockCard, StockCardProps } from './components/StockCardEditText';
 import { mockStocks } from './utils/mockStocks';
 
 // Helper function to generate random price change within a realistic range
@@ -24,7 +25,7 @@ const formatVolume = (volume: number): string => {
   return safeVolume.toFixed(2);
 };
 
-export default function WatchlistScreen({}: ScreenBaseProps): React.ReactElement {
+export default function WatchlistEditTextScreen({}: ScreenBaseProps): React.ReactElement {
   const [stocks] = useState<StockCardProps[]>(mockStocks);
 
   useEffect(() => {
@@ -57,6 +58,15 @@ export default function WatchlistScreen({}: ScreenBaseProps): React.ReactElement
         const currentVolumeNum = volumeNum * multiplier;
         const newVolumeNum = Math.max(0, currentVolumeNum * (1 + volumeChangePercent / 100));
 
+        AppEventBus.publish('watchlist.stockCard', {
+          name: stock.symbol,
+          price: newPrice,
+          priceChange: totalPriceChange,
+          priceChangePercent: priceChangePercent,
+          volume: formatVolume(newVolumeNum),
+          volumeChange: volumeChangePercent,
+        });
+
         logger.info(
           `Stock: ${stock.symbol}, Price: ${newPrice}, Volume: ${formatVolume(newVolumeNum)}, Price percent: ${priceChangePercent.toFixed(2)}`,
         );
@@ -76,6 +86,7 @@ export default function WatchlistScreen({}: ScreenBaseProps): React.ReactElement
         keyExtractor={(item) => item.symbol}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        // onViewableItemsChanged={}
       />
     </View>
   );
@@ -93,8 +104,8 @@ export const styles = StyleSheet.create({
 
 // Screen configuration for auto-discovery
 export const screenConfig: ScreenConfig = {
-  name: 'Watchlist',
-  component: WatchlistScreen,
+  name: 'WatchlistEditText',
+  component: WatchlistEditTextScreen,
   options: {
     headerShown: true,
     title: 'Watchlist Screen',

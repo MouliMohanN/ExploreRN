@@ -1,6 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AppEventBus } from '../../../../common/utils/eventBus/EventBus';
+import { logger } from '../../../../common/utils/logger/logger';
 
 export interface StockCardProps {
   symbol: string;
@@ -38,6 +40,49 @@ export const StockCard: React.FC<StockCardProps> = ({
   const backgroundColor = isPositive ? '#e8f5e9' : '#ffebee';
   const textColor = isPositive ? '#2e7d32' : '#c62828';
 
+  const priceRef = React.useRef<TextInput>(null);
+  const priceChangeRef = React.useRef<TextInput>(null);
+  const volumeChangeRef = React.useRef<TextInput>(null);
+  const volumeRef = React.useRef<TextInput>(null);
+
+  useEffect(() => {
+    const unsubscribe = AppEventBus.subscribe(
+      'watchlist.stockCard',
+      ({ name: symbol, price, priceChange, priceChangePercent, volume, volumeChange }) => {
+        if (symbol === name) {
+          const safePrice = price ?? 0;
+          const safePriceChange = priceChange ?? 0;
+          const safePriceChangePercent = priceChangePercent ?? 0;
+          const safeVolumeChange = volumeChange ?? 0;
+          const safeVolume = volume ?? '0k';
+
+          const isPositive = safePriceChange >= 0;
+
+          priceRef.current?.setNativeProps({ text: safePrice.toFixed(2) });
+          priceChangeRef.current?.setNativeProps({
+            text: `${isPositive ? '+' : ''}
+            ${safePriceChange.toFixed(2)} (${isPositive ? '+' : ''}
+            ${safePriceChangePercent.toFixed(2)}%)}`,
+          });
+          volumeRef.current?.setNativeProps({ text: safeVolume });
+          volumeChangeRef.current?.setNativeProps({
+            text: `${isPositive ? '+' : ''}
+            ${safeVolumeChange.toFixed(2)}`,
+          });
+          logger.info(
+            `Stock: ${symbol}, Price: ${price}, Price change: ${priceChange}, Price percent: ${priceChangePercent.toFixed(2)}, Volume: ${volume}, volume change: ${volumeChange.toFixed(2)}`,
+          );
+        }
+      },
+    );
+
+    logger.info(`subscribing to watchlist.stockCard event for ${name}`);
+    return () => {
+      logger.info(`un-subscribing from watchlist.stockCard event for ${name}`);
+      unsubscribe();
+    };
+  }, [name]);
+
   return (
     <View style={styles.container}>
       {/* Left Section - Logo and Stock Info */}
@@ -67,22 +112,26 @@ export const StockCard: React.FC<StockCardProps> = ({
 
       {/* Right Section - Price and priceChange */}
       <View style={styles.rightSection}>
-        <Text style={styles.priceText}>{safePrice.toFixed(2)}</Text>
+        <TextInput ref={priceRef} value={safePrice.toFixed(2)} style={styles.priceText} editable={false} />
         <View style={[styles.changeContainer, { backgroundColor }]}>
-          <Text style={[styles.changeText, { color: textColor }]}>
-            {isPositive ? '+' : ''}
-            {safePriceChange.toFixed(2)} ({isPositive ? '+' : ''}
-            {safePriceChangePercent.toFixed(2)}%)
-          </Text>
+          <TextInput
+            ref={priceChangeRef}
+            value={`${isPositive ? '+' : ''}
+            ${safePriceChange.toFixed(2)} (${isPositive ? '+' : ''}
+            ${safePriceChangePercent.toFixed(2)}%)}`}
+            style={[styles.changeText, { color: textColor }]}
+          />
         </View>
         <View style={styles.volumeRow}>
           <Text style={styles.volumeLabel}>Vol: </Text>
-          <Text style={styles.volumeText}>{safeVolume}</Text>
-          <Text style={[styles.volumeChange, { color: safeVolumeChange >= 0 ? '#2e7d32' : '#c62828' }]}>
-            {' '}
+          <TextInput ref={volumeRef} value={safeVolume} style={styles.volumeText} />
+          <TextInput
+            ref={volumeChangeRef}
+            value={`{' '}
             ({safeVolumeChange >= 0 ? '+' : ''}
-            {safeVolumeChange.toFixed(2)}%)
-          </Text>
+            {safeVolumeChange.toFixed(2)}%)`}
+            style={[styles.volumeChange, { color: safeVolumeChange >= 0 ? '#2e7d32' : '#c62828' }]}
+          />
         </View>
       </View>
     </View>
@@ -150,6 +199,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   priceText: {
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
     fontSize: 20,
     fontWeight: '700',
     color: '#212121',
@@ -162,6 +215,10 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   changeText: {
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
     fontSize: 13,
     fontWeight: '600',
   },
@@ -174,10 +231,18 @@ const styles = StyleSheet.create({
     color: '#757575',
   },
   volumeText: {
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
     fontSize: 11,
     color: '#212121',
   },
   volumeChange: {
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
     fontSize: 11,
     fontWeight: '500',
   },

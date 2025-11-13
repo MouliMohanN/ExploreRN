@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { ScreenConfig } from '../../../common/navigation/conventions';
 import { logger } from '../../../common/utils/logger/logger';
-import { StockCardProps } from './components/StockCard';
+import { StockCardProps } from './components/StockCardEditText';
 import { StockCardLegacy } from './components/StockCardLegacy';
 import { mockStocks } from './utils/mockStocks';
 

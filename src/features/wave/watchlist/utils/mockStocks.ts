@@ -1,4 +1,4 @@
-import { StockCardProps } from '../components/StockCard';
+import { StockCardProps } from '../components/StockCardEditText';
 
 export const mockStocks: StockCardProps[] = [
   {

@@ -82,7 +82,8 @@ const run = async () => {
 
     // 4. Run the android app
     console.log('Building and running the app on the connected device (active architecture only)...');
-    androidBuildProcess = spawn('npx react-native run-android --active-arch-only --mode debugOptimized', [], {
+    androidBuildProcess = spawn('npx react-native run-android --active-arch-only', [], {
+      // androidBuildProcess = spawn('npx react-native run-android --active-arch-only --mode debugOptimized', [], {
       cwd: ROOT_DIR,
       stdio: 'inherit',
       shell: true,

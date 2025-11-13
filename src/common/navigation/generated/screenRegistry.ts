@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-11-13T09:01:13.235Z
+ * Generated on: 2025-11-13T10:34:19.478Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -29,8 +29,8 @@ import TopTabViewExampleScreenGestureHandler_14, { screenConfig as screenConfig_
 import TopTabViewExampleScreenPagerView_15, { screenConfig as screenConfig_15 } from '../../../features/tabView/TopTabViewPagerViewScreen';
 import ModernTypeScriptFeaturesScreen_16, { screenConfig as screenConfig_16 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
 import WaveHomeScreen_17, { screenConfig as screenConfig_17 } from '../../../features/wave/WaveHomeScreen';
-import WatchlistLegacyScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
-import WatchlistScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistScreen';
+import WatchlistEditTextScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
+import WatchlistLegacyScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
 import WebSocketsScreen_20, { screenConfig as screenConfig_20 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
@@ -145,13 +145,13 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_18.name,
-    component: WatchlistLegacyScreen_18,
+    component: WatchlistEditTextScreen_18,
     options: screenConfig_18.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_19.name,
-    component: WatchlistScreen_19,
+    component: WatchlistLegacyScreen_19,
     options: screenConfig_19.options || {},
     group: 'wave',
   },
@@ -183,8 +183,8 @@ export const SCREEN_NAMES = {
   'TabViewTopPagerView': 'TabViewTopPagerView',
   'ModernTypeScriptFeatures': 'ModernTypeScriptFeatures',
   'WaveHome': 'WaveHome',
+  'WatchlistEditText': 'WatchlistEditText',
   'WatchlistLegacy': 'WatchlistLegacy',
-  'Watchlist': 'Watchlist',
   'WebSockets': 'WebSockets'
 } as const;
 
