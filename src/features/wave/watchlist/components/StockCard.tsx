@@ -7,8 +7,8 @@ export interface StockCardProps {
   name: string;
   exchange: string;
   price: number;
-  change: number;
-  changePercent: number;
+  priceChange: number;
+  priceChangePercent: number;
   volume: string;
   volumeChange: number;
   logo?: string;
@@ -20,14 +20,21 @@ export const StockCard: React.FC<StockCardProps> = ({
   name,
   exchange,
   price,
-  change,
-  changePercent,
+  priceChange,
+  priceChangePercent,
   volume,
   volumeChange,
   newsCount = 0,
   attachmentCount = 0,
 }) => {
-  const isPositive = change >= 0;
+  // Ensure all numeric values are valid
+  const safePrice = price ?? 0;
+  const safePriceChange = priceChange ?? 0;
+  const safePriceChangePercent = priceChangePercent ?? 0;
+  const safeVolumeChange = volumeChange ?? 0;
+  const safeVolume = volume ?? '0k';
+
+  const isPositive = safePriceChange >= 0;
   const backgroundColor = isPositive ? '#e8f5e9' : '#ffebee';
   const textColor = isPositive ? '#2e7d32' : '#c62828';
 
@@ -58,23 +65,23 @@ export const StockCard: React.FC<StockCardProps> = ({
         </View>
       </View>
 
-      {/* Right Section - Price and Change */}
+      {/* Right Section - Price and priceChange */}
       <View style={styles.rightSection}>
-        <Text style={styles.priceText}>{price.toFixed(2)}</Text>
+        <Text style={styles.priceText}>{safePrice.toFixed(2)}</Text>
         <View style={[styles.changeContainer, { backgroundColor }]}>
           <Text style={[styles.changeText, { color: textColor }]}>
             {isPositive ? '+' : ''}
-            {change.toFixed(2)} ({isPositive ? '+' : ''}
-            {changePercent.toFixed(2)}%)
+            {safePriceChange.toFixed(2)} ({isPositive ? '+' : ''}
+            {safePriceChangePercent.toFixed(2)}%)
           </Text>
         </View>
         <View style={styles.volumeRow}>
           <Text style={styles.volumeLabel}>Vol: </Text>
-          <Text style={styles.volumeText}>{volume}</Text>
-          <Text style={[styles.volumeChange, { color: volumeChange >= 0 ? '#2e7d32' : '#c62828' }]}>
+          <Text style={styles.volumeText}>{safeVolume}</Text>
+          <Text style={[styles.volumeChange, { color: safeVolumeChange >= 0 ? '#2e7d32' : '#c62828' }]}>
             {' '}
-            ({volumeChange >= 0 ? '+' : ''}
-            {volumeChange.toFixed(2)}%)
+            ({safeVolumeChange >= 0 ? '+' : ''}
+            {safeVolumeChange.toFixed(2)}%)
           </Text>
         </View>
       </View>

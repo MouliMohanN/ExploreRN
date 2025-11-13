@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-11-13T08:29:03.875Z
+ * Generated on: 2025-11-13T09:01:13.235Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -30,7 +30,8 @@ import TopTabViewExampleScreenPagerView_15, { screenConfig as screenConfig_15 } 
 import ModernTypeScriptFeaturesScreen_16, { screenConfig as screenConfig_16 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
 import WaveHomeScreen_17, { screenConfig as screenConfig_17 } from '../../../features/wave/WaveHomeScreen';
 import WatchlistLegacyScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
-import WebSocketsScreen_19, { screenConfig as screenConfig_19 } from '../../../features/webSockets/WebSocketsScreen';
+import WatchlistScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistScreen';
+import WebSocketsScreen_20, { screenConfig as screenConfig_20 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
 export const SCREENS: readonly ScreenConfig[] = [
@@ -150,8 +151,14 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_19.name,
-    component: WebSocketsScreen_19,
+    component: WatchlistScreen_19,
     options: screenConfig_19.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_20.name,
+    component: WebSocketsScreen_20,
+    options: screenConfig_20.options || {},
     group: 'webSockets',
   }
 ] as const;
@@ -177,6 +184,7 @@ export const SCREEN_NAMES = {
   'ModernTypeScriptFeatures': 'ModernTypeScriptFeatures',
   'WaveHome': 'WaveHome',
   'WatchlistLegacy': 'WatchlistLegacy',
+  'Watchlist': 'Watchlist',
   'WebSockets': 'WebSockets'
 } as const;
 
@@ -191,8 +199,8 @@ type ScreensByGroupType = {
   readonly 'react19': readonly [typeof SCREENS[10]];
   readonly 'tabView': readonly [typeof SCREENS[11], typeof SCREENS[12], typeof SCREENS[13], typeof SCREENS[14], typeof SCREENS[15]];
   readonly 'typescript': readonly [typeof SCREENS[16]];
-  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18]];
-  readonly 'webSockets': readonly [typeof SCREENS[19]]
+  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18], typeof SCREENS[19]];
+  readonly 'webSockets': readonly [typeof SCREENS[20]]
 };
 
 // Pre-computed screens by group for zero runtime overhead
@@ -206,8 +214,8 @@ export const SCREENS_BY_GROUP: ScreensByGroupType = {
   'react19': [SCREENS[10]],
   'tabView': [SCREENS[11], SCREENS[12], SCREENS[13], SCREENS[14], SCREENS[15]],
   'typescript': [SCREENS[16]],
-  'wave': [SCREENS[17], SCREENS[18]],
-  'webSockets': [SCREENS[19]]
+  'wave': [SCREENS[17], SCREENS[18], SCREENS[19]],
+  'webSockets': [SCREENS[20]]
 } as const;
 
 // Helper functions with zero computation
