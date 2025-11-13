@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-11-13T10:34:19.478Z
+ * Generated on: 2025-11-13T11:13:34.196Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -29,9 +29,10 @@ import TopTabViewExampleScreenGestureHandler_14, { screenConfig as screenConfig_
 import TopTabViewExampleScreenPagerView_15, { screenConfig as screenConfig_15 } from '../../../features/tabView/TopTabViewPagerViewScreen';
 import ModernTypeScriptFeaturesScreen_16, { screenConfig as screenConfig_16 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
 import WaveHomeScreen_17, { screenConfig as screenConfig_17 } from '../../../features/wave/WaveHomeScreen';
-import WatchlistEditTextScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
-import WatchlistLegacyScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
-import WebSocketsScreen_20, { screenConfig as screenConfig_20 } from '../../../features/webSockets/WebSocketsScreen';
+import WatchlistCompoundPatternAiScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/watchlist/WatchlistCompoundPatternAiScreen';
+import WatchlistEditTextScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
+import WatchlistLegacyScreen_20, { screenConfig as screenConfig_20 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
+import WebSocketsScreen_21, { screenConfig as screenConfig_21 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
 export const SCREENS: readonly ScreenConfig[] = [
@@ -145,20 +146,26 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_18.name,
-    component: WatchlistEditTextScreen_18,
+    component: WatchlistCompoundPatternAiScreen_18,
     options: screenConfig_18.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_19.name,
-    component: WatchlistLegacyScreen_19,
+    component: WatchlistEditTextScreen_19,
     options: screenConfig_19.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_20.name,
-    component: WebSocketsScreen_20,
+    component: WatchlistLegacyScreen_20,
     options: screenConfig_20.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_21.name,
+    component: WebSocketsScreen_21,
+    options: screenConfig_21.options || {},
     group: 'webSockets',
   }
 ] as const;
@@ -183,6 +190,7 @@ export const SCREEN_NAMES = {
   'TabViewTopPagerView': 'TabViewTopPagerView',
   'ModernTypeScriptFeatures': 'ModernTypeScriptFeatures',
   'WaveHome': 'WaveHome',
+  'WatchlistCompoundPatternAi': 'WatchlistCompoundPatternAi',
   'WatchlistEditText': 'WatchlistEditText',
   'WatchlistLegacy': 'WatchlistLegacy',
   'WebSockets': 'WebSockets'
@@ -199,8 +207,8 @@ type ScreensByGroupType = {
   readonly 'react19': readonly [typeof SCREENS[10]];
   readonly 'tabView': readonly [typeof SCREENS[11], typeof SCREENS[12], typeof SCREENS[13], typeof SCREENS[14], typeof SCREENS[15]];
   readonly 'typescript': readonly [typeof SCREENS[16]];
-  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18], typeof SCREENS[19]];
-  readonly 'webSockets': readonly [typeof SCREENS[20]]
+  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18], typeof SCREENS[19], typeof SCREENS[20]];
+  readonly 'webSockets': readonly [typeof SCREENS[21]]
 };
 
 // Pre-computed screens by group for zero runtime overhead
@@ -214,8 +222,8 @@ export const SCREENS_BY_GROUP: ScreensByGroupType = {
   'react19': [SCREENS[10]],
   'tabView': [SCREENS[11], SCREENS[12], SCREENS[13], SCREENS[14], SCREENS[15]],
   'typescript': [SCREENS[16]],
-  'wave': [SCREENS[17], SCREENS[18], SCREENS[19]],
-  'webSockets': [SCREENS[20]]
+  'wave': [SCREENS[17], SCREENS[18], SCREENS[19], SCREENS[20]],
+  'webSockets': [SCREENS[21]]
 } as const;
 
 // Helper functions with zero computation
