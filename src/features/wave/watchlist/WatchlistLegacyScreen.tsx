@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { ScreenConfig } from '../../../common/navigation/conventions';
 import { logger } from '../../../common/utils/logger/logger';
-import { StockCard, StockCardProps } from './components/StockCard';
+import { StockCardProps } from './components/StockCard';
+import { StockCardLegacy } from './components/StockCardLegacy';
 import { mockStocks } from './utils/mockStocks';
 
 // Helper function to generate random price change within a realistic range
@@ -74,7 +75,7 @@ export default function WatchlistLegacyScreen(): React.ReactElement {
     return () => clearInterval(interval);
   }, []);
 
-  const renderStockCard = ({ item }: { item: StockCardProps }) => <StockCard {...item} />;
+  const renderStockCard = ({ item }: { item: StockCardProps }) => <StockCardLegacy {...item} />;
 
   return (
     <View style={styles.container}>
