@@ -1,7 +1,7 @@
+import { FlashList } from '@shopify/flash-list';
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ScreenConfig } from '../../../common/navigation/conventions';
-import { ScreenBaseProps } from '../../../common/types/ScreenBaseProps';
 import { AppEventBus } from '../../../common/utils/eventBus/EventBus';
 import { logger } from '../../../common/utils/logger/logger';
 import { StockCard, StockCardProps } from './components/StockCardEditText';
@@ -25,7 +25,7 @@ const formatVolume = (volume: number): string => {
   return safeVolume.toFixed(2);
 };
 
-export default function WatchlistEditTextScreen({}: ScreenBaseProps): React.ReactElement {
+export default function WatchlistEditTextScreen(): React.ReactElement {
   const [stocks] = useState<StockCardProps[]>(mockStocks);
 
   useEffect(() => {
@@ -80,13 +80,11 @@ export default function WatchlistEditTextScreen({}: ScreenBaseProps): React.Reac
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <FlashList
         data={stocks}
         renderItem={renderStockCard}
         keyExtractor={(item) => item.symbol}
-        contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
-        // onViewableItemsChanged={}
       />
     </View>
   );
@@ -96,9 +94,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-  },
-  listContent: {
-    paddingVertical: 8,
   },
 });
 

@@ -1,5 +1,6 @@
+import { FlashList } from '@shopify/flash-list';
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ScreenConfig } from '../../../common/navigation/conventions';
 import { logger } from '../../../common/utils/logger/logger';
 import { StockCardProps } from './components/StockCardEditText';
@@ -79,11 +80,10 @@ export default function WatchlistLegacyScreen(): React.ReactElement {
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <FlashList
         data={stocks}
         renderItem={renderStockCard}
         keyExtractor={(item) => item.symbol}
-        contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
       />
     </View>
@@ -94,9 +94,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-  },
-  listContent: {
-    paddingVertical: 8,
   },
 });
 
