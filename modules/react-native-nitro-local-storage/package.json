@@ -1,0 +1,30 @@
+{
+  "name": "react-native-nitro-local-storage",
+  "version": "0.1.0",
+  "description": "A Nitro HybridObject providing persistent local storage backed by platform stores",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "nitro",
+    "hybrid-object",
+    "local-storage",
+    "new-architecture"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/react-native-nitro-local-storage#readme",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-nitro-modules": "*"
+  },
+  "devDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-nitro-modules": "*"
+  }
+}

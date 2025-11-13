@@ -9,6 +9,7 @@ export default function NativeModulesHomeScreen({ navigation }: ScreenBaseProps)
   return (
     <View>
       <Button title='LocalStorage' onPress={() => navigation.navigate(ScreenNames.LocalStorage)} />
+      <Button title='NitroStorage' onPress={() => navigation.navigate(ScreenNames.NitroLocalStorage)} />
     </View>
   );
 }

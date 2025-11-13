@@ -7,6 +7,7 @@
     "jsx": "react-native",
     "paths": {
       "@AppEvents": ["./src/common/utils/eventBus/AppEvents.ts"],
+      "react-native-nitro-local-storage": ["./modules/react-native-nitro-local-storage/src/index.ts"]
     }
   },
 }
