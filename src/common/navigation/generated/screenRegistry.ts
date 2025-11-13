@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-11-03T05:46:58.910Z
+ * Generated on: 2025-11-12T10:53:07.587Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -18,14 +18,17 @@ import EventBusScreen_3, { screenConfig as screenConfig_3 } from '../../../featu
 import InputTextScreen_4, { screenConfig as screenConfig_4 } from '../../../features/inputText/InputTextScreen';
 import LogContentScreen_5, { screenConfig as screenConfig_5 } from '../../../features/logs/LogContentScreen';
 import LogViewerScreen_6, { screenConfig as screenConfig_6 } from '../../../features/logs/LogViewerScreen';
-import React19HomeScreen_7, { screenConfig as screenConfig_7 } from '../../../features/react19/React19HomeScreen';
-import CarouselTabsExampleScreen_8, { screenConfig as screenConfig_8 } from '../../../features/tabView/CarouselTabsExampleScreen';
-import TabViewReactNavigationScreen_9, { screenConfig as screenConfig_9 } from '../../../features/tabView/TabViewReactNavigationScreen';
-import TabViewReanimatedScreen_10, { screenConfig as screenConfig_10 } from '../../../features/tabView/TabViewReanimatedScreen';
-import TopTabViewExampleScreenGestureHandler_11, { screenConfig as screenConfig_11 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
-import TopTabViewExampleScreenPagerView_12, { screenConfig as screenConfig_12 } from '../../../features/tabView/TopTabViewPagerViewScreen';
-import ModernTypeScriptFeaturesScreen_13, { screenConfig as screenConfig_13 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
-import WebSocketsScreen_14, { screenConfig as screenConfig_14 } from '../../../features/webSockets/WebSocketsScreen';
+import NativeModulesHomeScreen_7, { screenConfig as screenConfig_7 } from '../../../features/nativeModules/NativeModulesHomeScreen';
+import LocalStorageScreen_8, { screenConfig as screenConfig_8 } from '../../../features/nativeModules/localStorage/LocalStorageScreen';
+import NitroLocalStorageScreen_9, { screenConfig as screenConfig_9 } from '../../../features/nativeModules/nitroStorage/NitroLocalStorageScreen';
+import React19HomeScreen_10, { screenConfig as screenConfig_10 } from '../../../features/react19/React19HomeScreen';
+import CarouselTabsExampleScreen_11, { screenConfig as screenConfig_11 } from '../../../features/tabView/CarouselTabsExampleScreen';
+import TabViewReactNavigationScreen_12, { screenConfig as screenConfig_12 } from '../../../features/tabView/TabViewReactNavigationScreen';
+import TabViewReanimatedScreen_13, { screenConfig as screenConfig_13 } from '../../../features/tabView/TabViewReanimatedScreen';
+import TopTabViewExampleScreenGestureHandler_14, { screenConfig as screenConfig_14 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
+import TopTabViewExampleScreenPagerView_15, { screenConfig as screenConfig_15 } from '../../../features/tabView/TopTabViewPagerViewScreen';
+import ModernTypeScriptFeaturesScreen_16, { screenConfig as screenConfig_16 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
+import WebSocketsScreen_17, { screenConfig as screenConfig_17 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
 export const SCREENS: readonly ScreenConfig[] = [
@@ -73,50 +76,68 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_7.name,
-    component: React19HomeScreen_7,
+    component: NativeModulesHomeScreen_7,
     options: screenConfig_7.options || {},
-    group: 'react19',
+    group: 'nativeModules',
   },
   {
     name: screenConfig_8.name,
-    component: CarouselTabsExampleScreen_8,
+    component: LocalStorageScreen_8,
     options: screenConfig_8.options || {},
-    group: 'tabView',
+    group: 'nativeModules',
   },
   {
     name: screenConfig_9.name,
-    component: TabViewReactNavigationScreen_9,
+    component: NitroLocalStorageScreen_9,
     options: screenConfig_9.options || {},
-    group: 'tabView',
+    group: 'nativeModules',
   },
   {
     name: screenConfig_10.name,
-    component: TabViewReanimatedScreen_10,
+    component: React19HomeScreen_10,
     options: screenConfig_10.options || {},
-    group: 'tabView',
+    group: 'react19',
   },
   {
     name: screenConfig_11.name,
-    component: TopTabViewExampleScreenGestureHandler_11,
+    component: CarouselTabsExampleScreen_11,
     options: screenConfig_11.options || {},
     group: 'tabView',
   },
   {
     name: screenConfig_12.name,
-    component: TopTabViewExampleScreenPagerView_12,
+    component: TabViewReactNavigationScreen_12,
     options: screenConfig_12.options || {},
     group: 'tabView',
   },
   {
     name: screenConfig_13.name,
-    component: ModernTypeScriptFeaturesScreen_13,
+    component: TabViewReanimatedScreen_13,
     options: screenConfig_13.options || {},
-    group: 'typescript',
+    group: 'tabView',
   },
   {
     name: screenConfig_14.name,
-    component: WebSocketsScreen_14,
+    component: TopTabViewExampleScreenGestureHandler_14,
     options: screenConfig_14.options || {},
+    group: 'tabView',
+  },
+  {
+    name: screenConfig_15.name,
+    component: TopTabViewExampleScreenPagerView_15,
+    options: screenConfig_15.options || {},
+    group: 'tabView',
+  },
+  {
+    name: screenConfig_16.name,
+    component: ModernTypeScriptFeaturesScreen_16,
+    options: screenConfig_16.options || {},
+    group: 'typescript',
+  },
+  {
+    name: screenConfig_17.name,
+    component: WebSocketsScreen_17,
+    options: screenConfig_17.options || {},
     group: 'webSockets',
   }
 ] as const;
@@ -130,6 +151,9 @@ export const SCREEN_NAMES = {
   'InputText': 'InputText',
   'LogContent': 'LogContent',
   'LogViewer': 'LogViewer',
+  'NativeModulesHome': 'NativeModulesHome',
+  'LocalStorage': 'LocalStorage',
+  'NitroLocalStorage': 'NitroLocalStorage',
   'React19Home': 'React19Home',
   'CarouselTabs': 'CarouselTabs',
   'TabViewReactNavigation': 'TabViewReactNavigation',
@@ -147,10 +171,11 @@ type ScreensByGroupType = {
   readonly 'eventBus': readonly [typeof SCREENS[3]];
   readonly 'inputText': readonly [typeof SCREENS[4]];
   readonly 'logs': readonly [typeof SCREENS[5], typeof SCREENS[6]];
-  readonly 'react19': readonly [typeof SCREENS[7]];
-  readonly 'tabView': readonly [typeof SCREENS[8], typeof SCREENS[9], typeof SCREENS[10], typeof SCREENS[11], typeof SCREENS[12]];
-  readonly 'typescript': readonly [typeof SCREENS[13]];
-  readonly 'webSockets': readonly [typeof SCREENS[14]]
+  readonly 'nativeModules': readonly [typeof SCREENS[7], typeof SCREENS[8], typeof SCREENS[9]];
+  readonly 'react19': readonly [typeof SCREENS[10]];
+  readonly 'tabView': readonly [typeof SCREENS[11], typeof SCREENS[12], typeof SCREENS[13], typeof SCREENS[14], typeof SCREENS[15]];
+  readonly 'typescript': readonly [typeof SCREENS[16]];
+  readonly 'webSockets': readonly [typeof SCREENS[17]]
 };
 
 // Pre-computed screens by group for zero runtime overhead
@@ -160,10 +185,11 @@ export const SCREENS_BY_GROUP: ScreensByGroupType = {
   'eventBus': [SCREENS[3]],
   'inputText': [SCREENS[4]],
   'logs': [SCREENS[5], SCREENS[6]],
-  'react19': [SCREENS[7]],
-  'tabView': [SCREENS[8], SCREENS[9], SCREENS[10], SCREENS[11], SCREENS[12]],
-  'typescript': [SCREENS[13]],
-  'webSockets': [SCREENS[14]]
+  'nativeModules': [SCREENS[7], SCREENS[8], SCREENS[9]],
+  'react19': [SCREENS[10]],
+  'tabView': [SCREENS[11], SCREENS[12], SCREENS[13], SCREENS[14], SCREENS[15]],
+  'typescript': [SCREENS[16]],
+  'webSockets': [SCREENS[17]]
 } as const;
 
 // Helper functions with zero computation

@@ -11,31 +11,31 @@ const SCRIPT_DIR = __dirname;
 const APP_BUILD_GRADLE_PATH = path.join(ROOT_DIR, 'android', 'app', 'build.gradle');
 const DEBUG_BUILD_GRADLE_PATH = path.join(SCRIPT_DIR, 'config', 'debugBuildSingleAbi.gradle');
 
-let metroProcess: import('child_process').ChildProcess | null = null;
+// const metroProcess: import('child_process').ChildProcess | null = null;
 let androidBuildProcess: import('child_process').ChildProcess | null = null;
 let originalBuildGradleContent: string | null = null;
 
-const isMetroRunning = (): Promise<boolean> => {
-  return new Promise((resolve) => {
-    const client = new net.Socket();
-    client.once('connect', () => {
-      client.end();
-      resolve(true);
-    });
-    client.once('error', () => {
-      resolve(false);
-    });
-    client.connect(8081, '127.0.0.1');
-  });
-};
+// const isMetroRunning = (): Promise<boolean> => {
+//   return new Promise((resolve) => {
+//     const client = new net.Socket();
+//     client.once('connect', () => {
+//       client.end();
+//       resolve(true);
+//     });
+//     client.once('error', () => {
+//       resolve(false);
+//     });
+//     client.connect(8081, '127.0.0.1');
+//   });
+// };
 
 const cleanup = () => {
   console.log('\nInitiating cleanup...');
 
-  if (metroProcess && !metroProcess.killed) {
-    console.log('Stopping Metro bundler...');
-    metroProcess.kill();
-  }
+  // if (metroProcess && !metroProcess.killed) {
+  //   console.log('Stopping Metro bundler...');
+  //   metroProcess.kill();
+  // }
 
   if (androidBuildProcess && !androidBuildProcess.killed) {
     console.log('Stopping Android build process...');
@@ -82,7 +82,7 @@ const run = async () => {
 
     // 4. Run the android app
     console.log('Building and running the app on the connected device (active architecture only)...');
-    androidBuildProcess = spawn('npx react-native run-android --active-arch-only', [], {
+    androidBuildProcess = spawn('npx react-native run-android --active-arch-only --mode debugOptimized', [], {
       cwd: ROOT_DIR,
       stdio: 'inherit',
       shell: true,

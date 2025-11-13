@@ -38,6 +38,7 @@ class ScreenGenerator {
     const options = {
       headerShown: true,
       title: null,
+      override: false,
     };
 
     for (let i = 2; i < this.args.length; i++) {
@@ -47,6 +48,8 @@ class ScreenGenerator {
       } else if (arg === '--title' && i + 1 < this.args.length) {
         options.title = this.args[i + 1];
         i++; // Skip next argument
+      } else if (arg === '--override') {
+        options.override = true;
       }
     }
 
@@ -55,8 +58,8 @@ class ScreenGenerator {
 
   createScreen(featureName, screenName, options) {
     // Validate inputs
-    if (!/^[a-zA-Z][a-zA-Z0-9]*$/.test(featureName)) {
-      throw new Error('Feature name must be alphanumeric and start with a letter');
+    if (/[^a-zA-Z0-9\/]/.test(featureName)) {
+      throw new Error('Feature name can only contain alphanumeric characters and slashes.');
     }
 
     if (!/^[a-zA-Z][a-zA-Z0-9]*$/.test(screenName)) {
@@ -75,25 +78,30 @@ class ScreenGenerator {
     const filePath = path.join(featureDir, fileName);
 
     // Check if file already exists
-    if (fs.existsSync(filePath)) {
-      throw new Error(`Screen file already exists: ${filePath}`);
+    if (fs.existsSync(filePath) && !options.override) {
+      throw new Error(`Screen file already exists: ${filePath}. Use the --override flag to overwrite it.`);
     }
 
     // Generate screen content
-    const screenContent = this.generateScreenTemplate(screenName, options);
+    const screenContent = this.generateScreenTemplate(featureName, screenName, options);
 
     // Write file
     fs.writeFileSync(filePath, screenContent);
   }
 
-  generateScreenTemplate(screenName, options) {
+  generateScreenTemplate(featureName, screenName, options) {
     const componentName = `${screenName}Screen`;
     const title = options.title || `${screenName} Screen`;
 
+    const featureDir = path.join(process.cwd(), 'src', 'features', featureName);
+    const commonDir = path.join(process.cwd(), 'src', 'common');
+    let relativePathToCommon = path.relative(featureDir, commonDir);
+    relativePathToCommon = relativePathToCommon.replace(/\\/g, '/');
+
     return `import React from 'react';
 import { Text, View } from 'react-native';
-import { ScreenBaseProps } from '../../common/types/ScreenBaseProps';
-import { ScreenConfig } from '../../common/navigation/conventions';
+import { ScreenBaseProps } from '${relativePathToCommon}/types/ScreenBaseProps';
+import { ScreenConfig } from '${relativePathToCommon}/navigation/conventions';
 
 export default function ${componentName}({ navigation }: ScreenBaseProps): React.ReactElement {
   return (
@@ -122,12 +130,13 @@ export const screenConfig: ScreenConfig = {
 Usage: npm run create-screen <feature> <screen> [options]
 
 Arguments:
-  feature     Feature name (e.g., 'auth', 'profile')
+  feature     Feature name (e.g., 'auth', 'profile', 'auth/resetPassword')
   screen      Screen name (e.g., 'Login', 'Settings')
 
 Options:
   --no-header     Hide the navigation header
   --title <text>  Custom screen title
+  --override      Override the existing screen file
 
 Examples:
   npm run create-screen auth Login
