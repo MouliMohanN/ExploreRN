@@ -37,7 +37,7 @@ interface StockCardContextValue {
 
 const StockCardContext = createContext<StockCardContextValue | null>(null);
 
-const useStockCardContext = () => {
+export const useStockCardContext = () => {
   const context = useContext(StockCardContext);
   if (!context) {
     throw new Error('StockCard compound components must be used within StockCard');
@@ -100,7 +100,7 @@ const LeftSection: React.FC<LeftSectionProps> = React.memo(({ children, style })
 LeftSection.displayName = 'LeftSection';
 
 // Logo Component
-interface LogoProps {
+export interface LogoProps {
   iconName?: string;
   iconColor?: string;
   style?: ViewStyle;
@@ -288,7 +288,7 @@ export const StockCardCompoundPatternAi = React.memo<StockCardProps>((props) => 
 });
 StockCardCompoundPatternAi.displayName = 'StockCardCompoundPattern';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
