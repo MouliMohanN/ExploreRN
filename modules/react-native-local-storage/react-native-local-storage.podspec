@@ -11,7 +11,8 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   # Use the minimum iOS version from the main app's Podfile
-  s.platforms    = min_ios_version_supported
+  # s.platforms    = min_ios_version_supported
+  s.platforms = { :ios => min_ios_version_supported }
   s.source       = { :git => "https://github.com/yourusername/react-native-local-storage.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm}"

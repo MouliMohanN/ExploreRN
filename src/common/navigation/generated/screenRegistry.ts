@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-11-12T10:53:07.587Z
+ * Generated on: 2025-11-13T11:15:49.023Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -28,7 +28,12 @@ import TabViewReanimatedScreen_13, { screenConfig as screenConfig_13 } from '../
 import TopTabViewExampleScreenGestureHandler_14, { screenConfig as screenConfig_14 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
 import TopTabViewExampleScreenPagerView_15, { screenConfig as screenConfig_15 } from '../../../features/tabView/TopTabViewPagerViewScreen';
 import ModernTypeScriptFeaturesScreen_16, { screenConfig as screenConfig_16 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
-import WebSocketsScreen_17, { screenConfig as screenConfig_17 } from '../../../features/webSockets/WebSocketsScreen';
+import WaveHomeScreen_17, { screenConfig as screenConfig_17 } from '../../../features/wave/WaveHomeScreen';
+import WatchlistCompoundPatternAiScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/watchlist/WatchlistCompoundPatternAiScreen';
+import WatchlistCompoundPatternWithEventBusScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistCompoundPatternWithEventBusScreen';
+import WatchlistEditTextScreen_20, { screenConfig as screenConfig_20 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
+import WatchlistLegacyScreen_21, { screenConfig as screenConfig_21 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
+import WebSocketsScreen_22, { screenConfig as screenConfig_22 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
 export const SCREENS: readonly ScreenConfig[] = [
@@ -136,8 +141,38 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_17.name,
-    component: WebSocketsScreen_17,
+    component: WaveHomeScreen_17,
     options: screenConfig_17.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_18.name,
+    component: WatchlistCompoundPatternAiScreen_18,
+    options: screenConfig_18.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_19.name,
+    component: WatchlistCompoundPatternWithEventBusScreen_19,
+    options: screenConfig_19.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_20.name,
+    component: WatchlistEditTextScreen_20,
+    options: screenConfig_20.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_21.name,
+    component: WatchlistLegacyScreen_21,
+    options: screenConfig_21.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_22.name,
+    component: WebSocketsScreen_22,
+    options: screenConfig_22.options || {},
     group: 'webSockets',
   }
 ] as const;
@@ -161,6 +196,11 @@ export const SCREEN_NAMES = {
   'TabViewTopGuestureHandler': 'TabViewTopGuestureHandler',
   'TabViewTopPagerView': 'TabViewTopPagerView',
   'ModernTypeScriptFeatures': 'ModernTypeScriptFeatures',
+  'WaveHome': 'WaveHome',
+  'WatchlistCompoundPatternAi': 'WatchlistCompoundPatternAi',
+  'WatchlistCompoundPatternWithEventBus': 'WatchlistCompoundPatternWithEventBus',
+  'WatchlistEditText': 'WatchlistEditText',
+  'WatchlistLegacy': 'WatchlistLegacy',
   'WebSockets': 'WebSockets'
 } as const;
 
@@ -175,7 +215,8 @@ type ScreensByGroupType = {
   readonly 'react19': readonly [typeof SCREENS[10]];
   readonly 'tabView': readonly [typeof SCREENS[11], typeof SCREENS[12], typeof SCREENS[13], typeof SCREENS[14], typeof SCREENS[15]];
   readonly 'typescript': readonly [typeof SCREENS[16]];
-  readonly 'webSockets': readonly [typeof SCREENS[17]]
+  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18], typeof SCREENS[19], typeof SCREENS[20], typeof SCREENS[21]];
+  readonly 'webSockets': readonly [typeof SCREENS[22]]
 };
 
 // Pre-computed screens by group for zero runtime overhead
@@ -189,7 +230,8 @@ export const SCREENS_BY_GROUP: ScreensByGroupType = {
   'react19': [SCREENS[10]],
   'tabView': [SCREENS[11], SCREENS[12], SCREENS[13], SCREENS[14], SCREENS[15]],
   'typescript': [SCREENS[16]],
-  'webSockets': [SCREENS[17]]
+  'wave': [SCREENS[17], SCREENS[18], SCREENS[19], SCREENS[20], SCREENS[21]],
+  'webSockets': [SCREENS[22]]
 } as const;
 
 // Helper functions with zero computation

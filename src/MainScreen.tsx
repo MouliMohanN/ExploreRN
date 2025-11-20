@@ -17,6 +17,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     inputText: false,
     animations: true,
     nativeModules: true,
+    wave: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -209,6 +210,22 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderWave = () => {
+    if (!features.wave) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Wave'
+          onPress={() => {
+            navigation.navigate(ScreenNames.WaveHome);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
@@ -223,6 +240,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         {renderInputText()}
         {renderAnimations()}
         {renderNativeModules()}
+        {renderWave()}
       </ScrollView>
     </View>
   );
