@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-11-13T11:15:49.023Z
+ * Generated on: 2025-11-20T11:01:41.204Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -29,11 +29,12 @@ import TopTabViewExampleScreenGestureHandler_14, { screenConfig as screenConfig_
 import TopTabViewExampleScreenPagerView_15, { screenConfig as screenConfig_15 } from '../../../features/tabView/TopTabViewPagerViewScreen';
 import ModernTypeScriptFeaturesScreen_16, { screenConfig as screenConfig_16 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
 import WaveHomeScreen_17, { screenConfig as screenConfig_17 } from '../../../features/wave/WaveHomeScreen';
-import WatchlistCompoundPatternAiScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/watchlist/WatchlistCompoundPatternAiScreen';
-import WatchlistCompoundPatternWithEventBusScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistCompoundPatternWithEventBusScreen';
-import WatchlistEditTextScreen_20, { screenConfig as screenConfig_20 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
-import WatchlistLegacyScreen_21, { screenConfig as screenConfig_21 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
-import WebSocketsScreen_22, { screenConfig as screenConfig_22 } from '../../../features/webSockets/WebSocketsScreen';
+import OrderCartChooseScripsScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/orderCart/chooseScrips/OrderCartChooseScripsScreen';
+import WatchlistCompoundPatternAiScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistCompoundPatternAiScreen';
+import WatchlistCompoundPatternWithEventBusScreen_20, { screenConfig as screenConfig_20 } from '../../../features/wave/watchlist/WatchlistCompoundPatternWithEventBusScreen';
+import WatchlistEditTextScreen_21, { screenConfig as screenConfig_21 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
+import WatchlistLegacyScreen_22, { screenConfig as screenConfig_22 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
+import WebSocketsScreen_23, { screenConfig as screenConfig_23 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
 export const SCREENS: readonly ScreenConfig[] = [
@@ -147,32 +148,38 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_18.name,
-    component: WatchlistCompoundPatternAiScreen_18,
+    component: OrderCartChooseScripsScreen_18,
     options: screenConfig_18.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_19.name,
-    component: WatchlistCompoundPatternWithEventBusScreen_19,
+    component: WatchlistCompoundPatternAiScreen_19,
     options: screenConfig_19.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_20.name,
-    component: WatchlistEditTextScreen_20,
+    component: WatchlistCompoundPatternWithEventBusScreen_20,
     options: screenConfig_20.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_21.name,
-    component: WatchlistLegacyScreen_21,
+    component: WatchlistEditTextScreen_21,
     options: screenConfig_21.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_22.name,
-    component: WebSocketsScreen_22,
+    component: WatchlistLegacyScreen_22,
     options: screenConfig_22.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_23.name,
+    component: WebSocketsScreen_23,
+    options: screenConfig_23.options || {},
     group: 'webSockets',
   }
 ] as const;
@@ -197,6 +204,7 @@ export const SCREEN_NAMES = {
   'TabViewTopPagerView': 'TabViewTopPagerView',
   'ModernTypeScriptFeatures': 'ModernTypeScriptFeatures',
   'WaveHome': 'WaveHome',
+  'OrderCartChooseScrips': 'OrderCartChooseScrips',
   'WatchlistCompoundPatternAi': 'WatchlistCompoundPatternAi',
   'WatchlistCompoundPatternWithEventBus': 'WatchlistCompoundPatternWithEventBus',
   'WatchlistEditText': 'WatchlistEditText',
@@ -215,8 +223,8 @@ type ScreensByGroupType = {
   readonly 'react19': readonly [typeof SCREENS[10]];
   readonly 'tabView': readonly [typeof SCREENS[11], typeof SCREENS[12], typeof SCREENS[13], typeof SCREENS[14], typeof SCREENS[15]];
   readonly 'typescript': readonly [typeof SCREENS[16]];
-  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18], typeof SCREENS[19], typeof SCREENS[20], typeof SCREENS[21]];
-  readonly 'webSockets': readonly [typeof SCREENS[22]]
+  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18], typeof SCREENS[19], typeof SCREENS[20], typeof SCREENS[21], typeof SCREENS[22]];
+  readonly 'webSockets': readonly [typeof SCREENS[23]]
 };
 
 // Pre-computed screens by group for zero runtime overhead
@@ -230,8 +238,8 @@ export const SCREENS_BY_GROUP: ScreensByGroupType = {
   'react19': [SCREENS[10]],
   'tabView': [SCREENS[11], SCREENS[12], SCREENS[13], SCREENS[14], SCREENS[15]],
   'typescript': [SCREENS[16]],
-  'wave': [SCREENS[17], SCREENS[18], SCREENS[19], SCREENS[20], SCREENS[21]],
-  'webSockets': [SCREENS[22]]
+  'wave': [SCREENS[17], SCREENS[18], SCREENS[19], SCREENS[20], SCREENS[21], SCREENS[22]],
+  'webSockets': [SCREENS[23]]
 } as const;
 
 // Helper functions with zero computation

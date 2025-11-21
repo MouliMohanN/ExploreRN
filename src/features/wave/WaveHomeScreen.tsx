@@ -18,6 +18,7 @@ export default function WaveHomeScreen({ navigation }: ScreenBaseProps): React.R
         title='Watchlist (compound pattern with eventbus)'
         onPress={() => navigation.navigate(ScreenNames.WatchlistCompoundPatternWithEventBus)}
       />
+      <Button title='OrderCartChooseScrips' onPress={() => navigation.navigate(ScreenNames.OrderCartChooseScrips)} />
     </View>
   );
 }
