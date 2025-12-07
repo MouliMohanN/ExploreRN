@@ -17,16 +17,22 @@ type ScripWithCheckBoxComponentProps = {
 
 export const ScripWithCheckBoxComponent: React.FC<ScripWithCheckBoxComponentProps> = (props) => {
   const { scriptInfo } = props;
-  const [selectedScripsCount] = useState(0);
-
-  const [dataBasedOnUi] = useState<Array<ScriptCardWithCheckBoxProps>>(
+  const [dataBasedOnUi, setDataBasedOnUi] = useState<Array<ScriptCardWithCheckBoxProps>>(
     ScripWithCheckBoxComponentUtils.getDataBasedOnUiList(scriptInfo),
   );
 
+  const handlePress = (index: number) => {
+    const newData = [...dataBasedOnUi];
+    newData[index].isChecked = !newData[index].isChecked;
+    setDataBasedOnUi(newData);
+  };
+
+  const selectedScripsCount = dataBasedOnUi.filter((item) => item.isChecked).length;
+
   const renderSelectedScrips = () => {
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-        <Text style={{ fontSize: 12 }}>{`selected (${selectedScripsCount}/${scriptInfo.length})`}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'flex-end', paddingBottom: 8 }}>
+        <Text style={{ fontSize: 12, color: '#666' }}>{`selected (${selectedScripsCount}/${scriptInfo.length})`}</Text>
       </View>
     );
   };
@@ -36,10 +42,11 @@ export const ScripWithCheckBoxComponent: React.FC<ScripWithCheckBoxComponentProp
       <View style={{ flex: 1 }}>
         <FlashList
           data={dataBasedOnUi}
-          renderItem={({ item }) => <ScriptCardWithCheckBox {...item} />}
+          renderItem={({ item, index }) => <ScriptCardWithCheckBox {...item} onPress={() => handlePress(index)} />}
           keyExtractor={(item, index) => `${item.title}-${index}`}
+          extraData={dataBasedOnUi} // Ensure list updates on state change
           style={{ flex: 1 }}
-          contentContainerStyle={{ paddingVertical: 8 }}
+          contentContainerStyle={{ paddingBottom: 16 }}
         />
       </View>
     );

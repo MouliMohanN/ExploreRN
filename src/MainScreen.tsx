@@ -10,14 +10,15 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     log: true,
     tabView: false,
     webSockets: false,
-    eventBus: true,
-    screenSystemDemo: true,
-    react19: true,
+    eventBus: false,
+    screenSystemDemo: false,
+    react19: false,
     typescript: false,
     inputText: false,
-    animations: true,
-    nativeModules: true,
+    animations: false,
+    nativeModules: false,
     wave: true,
+    nativePressable: true,
   };
   const renderLogFeature = () => {
     if (!features.log) {
@@ -226,6 +227,22 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
     );
   };
 
+  const renderNativePressable = () => {
+    if (!features.nativePressable) {
+      return null;
+    }
+    return (
+      <>
+        <Button
+          title='Native Pressable'
+          onPress={() => {
+            navigation.navigate(ScreenNames.NativePressable);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
       <Text>Main Screen</Text>
@@ -241,6 +258,7 @@ export const MainScreen: React.FC<ScreenBaseProps> = ({ navigation }) => {
         {renderAnimations()}
         {renderNativeModules()}
         {renderWave()}
+        {renderNativePressable()}
       </ScrollView>
     </View>
   );

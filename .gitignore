@@ -77,3 +77,5 @@ metro-stats.json
 
 # Temporary commit message file
 commit_message.txt
+modules/react-native-local-storage/android/.settings/org.eclipse.buildship.core.prefs
+modules/react-native-nitro-local-storage/android/.settings/org.eclipse.buildship.core.prefs

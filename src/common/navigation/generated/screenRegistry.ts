@@ -5,7 +5,7 @@
  * To add new screens, create screen files following the conventions
  * and run the screen scanner.
  * 
- * Generated on: 2025-11-20T11:01:41.204Z
+ * Generated on: 2025-12-07T04:20:01.993Z
  */
 
 import { ScreenConfig } from '../conventions';
@@ -21,20 +21,21 @@ import LogViewerScreen_6, { screenConfig as screenConfig_6 } from '../../../feat
 import NativeModulesHomeScreen_7, { screenConfig as screenConfig_7 } from '../../../features/nativeModules/NativeModulesHomeScreen';
 import LocalStorageScreen_8, { screenConfig as screenConfig_8 } from '../../../features/nativeModules/localStorage/LocalStorageScreen';
 import NitroLocalStorageScreen_9, { screenConfig as screenConfig_9 } from '../../../features/nativeModules/nitroStorage/NitroLocalStorageScreen';
-import React19HomeScreen_10, { screenConfig as screenConfig_10 } from '../../../features/react19/React19HomeScreen';
-import CarouselTabsExampleScreen_11, { screenConfig as screenConfig_11 } from '../../../features/tabView/CarouselTabsExampleScreen';
-import TabViewReactNavigationScreen_12, { screenConfig as screenConfig_12 } from '../../../features/tabView/TabViewReactNavigationScreen';
-import TabViewReanimatedScreen_13, { screenConfig as screenConfig_13 } from '../../../features/tabView/TabViewReanimatedScreen';
-import TopTabViewExampleScreenGestureHandler_14, { screenConfig as screenConfig_14 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
-import TopTabViewExampleScreenPagerView_15, { screenConfig as screenConfig_15 } from '../../../features/tabView/TopTabViewPagerViewScreen';
-import ModernTypeScriptFeaturesScreen_16, { screenConfig as screenConfig_16 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
-import WaveHomeScreen_17, { screenConfig as screenConfig_17 } from '../../../features/wave/WaveHomeScreen';
-import OrderCartChooseScripsScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/orderCart/chooseScrips/OrderCartChooseScripsScreen';
-import WatchlistCompoundPatternAiScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/watchlist/WatchlistCompoundPatternAiScreen';
-import WatchlistCompoundPatternWithEventBusScreen_20, { screenConfig as screenConfig_20 } from '../../../features/wave/watchlist/WatchlistCompoundPatternWithEventBusScreen';
-import WatchlistEditTextScreen_21, { screenConfig as screenConfig_21 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
-import WatchlistLegacyScreen_22, { screenConfig as screenConfig_22 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
-import WebSocketsScreen_23, { screenConfig as screenConfig_23 } from '../../../features/webSockets/WebSocketsScreen';
+import NativePressableScreen_10, { screenConfig as screenConfig_10 } from '../../../features/nativePressable/NativePressableScreen';
+import React19HomeScreen_11, { screenConfig as screenConfig_11 } from '../../../features/react19/React19HomeScreen';
+import CarouselTabsExampleScreen_12, { screenConfig as screenConfig_12 } from '../../../features/tabView/CarouselTabsExampleScreen';
+import TabViewReactNavigationScreen_13, { screenConfig as screenConfig_13 } from '../../../features/tabView/TabViewReactNavigationScreen';
+import TabViewReanimatedScreen_14, { screenConfig as screenConfig_14 } from '../../../features/tabView/TabViewReanimatedScreen';
+import TopTabViewExampleScreenGestureHandler_15, { screenConfig as screenConfig_15 } from '../../../features/tabView/TopTabViewGestureHandlerScreen';
+import TopTabViewExampleScreenPagerView_16, { screenConfig as screenConfig_16 } from '../../../features/tabView/TopTabViewPagerViewScreen';
+import ModernTypeScriptFeaturesScreen_17, { screenConfig as screenConfig_17 } from '../../../features/typescript/ModernTypeScriptFeaturesScreen';
+import WaveHomeScreen_18, { screenConfig as screenConfig_18 } from '../../../features/wave/WaveHomeScreen';
+import OrderCartChooseScripsScreen_19, { screenConfig as screenConfig_19 } from '../../../features/wave/orderCart/chooseScrips/OrderCartChooseScripsScreen';
+import WatchlistCompoundPatternAiScreen_20, { screenConfig as screenConfig_20 } from '../../../features/wave/watchlist/WatchlistCompoundPatternAiScreen';
+import WatchlistCompoundPatternWithEventBusScreen_21, { screenConfig as screenConfig_21 } from '../../../features/wave/watchlist/WatchlistCompoundPatternWithEventBusScreen';
+import WatchlistEditTextScreen_22, { screenConfig as screenConfig_22 } from '../../../features/wave/watchlist/WatchlistEditTextScreen';
+import WatchlistLegacyScreen_23, { screenConfig as screenConfig_23 } from '../../../features/wave/watchlist/WatchlistLegacyScreen';
+import WebSocketsScreen_24, { screenConfig as screenConfig_24 } from '../../../features/webSockets/WebSocketsScreen';
 
 // Pre-computed registry for zero runtime overhead
 export const SCREENS: readonly ScreenConfig[] = [
@@ -100,86 +101,92 @@ export const SCREENS: readonly ScreenConfig[] = [
   },
   {
     name: screenConfig_10.name,
-    component: React19HomeScreen_10,
+    component: NativePressableScreen_10,
     options: screenConfig_10.options || {},
-    group: 'react19',
+    group: 'nativePressable',
   },
   {
     name: screenConfig_11.name,
-    component: CarouselTabsExampleScreen_11,
+    component: React19HomeScreen_11,
     options: screenConfig_11.options || {},
-    group: 'tabView',
+    group: 'react19',
   },
   {
     name: screenConfig_12.name,
-    component: TabViewReactNavigationScreen_12,
+    component: CarouselTabsExampleScreen_12,
     options: screenConfig_12.options || {},
     group: 'tabView',
   },
   {
     name: screenConfig_13.name,
-    component: TabViewReanimatedScreen_13,
+    component: TabViewReactNavigationScreen_13,
     options: screenConfig_13.options || {},
     group: 'tabView',
   },
   {
     name: screenConfig_14.name,
-    component: TopTabViewExampleScreenGestureHandler_14,
+    component: TabViewReanimatedScreen_14,
     options: screenConfig_14.options || {},
     group: 'tabView',
   },
   {
     name: screenConfig_15.name,
-    component: TopTabViewExampleScreenPagerView_15,
+    component: TopTabViewExampleScreenGestureHandler_15,
     options: screenConfig_15.options || {},
     group: 'tabView',
   },
   {
     name: screenConfig_16.name,
-    component: ModernTypeScriptFeaturesScreen_16,
+    component: TopTabViewExampleScreenPagerView_16,
     options: screenConfig_16.options || {},
-    group: 'typescript',
+    group: 'tabView',
   },
   {
     name: screenConfig_17.name,
-    component: WaveHomeScreen_17,
+    component: ModernTypeScriptFeaturesScreen_17,
     options: screenConfig_17.options || {},
-    group: 'wave',
+    group: 'typescript',
   },
   {
     name: screenConfig_18.name,
-    component: OrderCartChooseScripsScreen_18,
+    component: WaveHomeScreen_18,
     options: screenConfig_18.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_19.name,
-    component: WatchlistCompoundPatternAiScreen_19,
+    component: OrderCartChooseScripsScreen_19,
     options: screenConfig_19.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_20.name,
-    component: WatchlistCompoundPatternWithEventBusScreen_20,
+    component: WatchlistCompoundPatternAiScreen_20,
     options: screenConfig_20.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_21.name,
-    component: WatchlistEditTextScreen_21,
+    component: WatchlistCompoundPatternWithEventBusScreen_21,
     options: screenConfig_21.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_22.name,
-    component: WatchlistLegacyScreen_22,
+    component: WatchlistEditTextScreen_22,
     options: screenConfig_22.options || {},
     group: 'wave',
   },
   {
     name: screenConfig_23.name,
-    component: WebSocketsScreen_23,
+    component: WatchlistLegacyScreen_23,
     options: screenConfig_23.options || {},
+    group: 'wave',
+  },
+  {
+    name: screenConfig_24.name,
+    component: WebSocketsScreen_24,
+    options: screenConfig_24.options || {},
     group: 'webSockets',
   }
 ] as const;
@@ -196,6 +203,7 @@ export const SCREEN_NAMES = {
   'NativeModulesHome': 'NativeModulesHome',
   'LocalStorage': 'LocalStorage',
   'NitroLocalStorage': 'NitroLocalStorage',
+  'NativePressable': 'NativePressable',
   'React19Home': 'React19Home',
   'CarouselTabs': 'CarouselTabs',
   'TabViewReactNavigation': 'TabViewReactNavigation',
@@ -220,11 +228,12 @@ type ScreensByGroupType = {
   readonly 'inputText': readonly [typeof SCREENS[4]];
   readonly 'logs': readonly [typeof SCREENS[5], typeof SCREENS[6]];
   readonly 'nativeModules': readonly [typeof SCREENS[7], typeof SCREENS[8], typeof SCREENS[9]];
-  readonly 'react19': readonly [typeof SCREENS[10]];
-  readonly 'tabView': readonly [typeof SCREENS[11], typeof SCREENS[12], typeof SCREENS[13], typeof SCREENS[14], typeof SCREENS[15]];
-  readonly 'typescript': readonly [typeof SCREENS[16]];
-  readonly 'wave': readonly [typeof SCREENS[17], typeof SCREENS[18], typeof SCREENS[19], typeof SCREENS[20], typeof SCREENS[21], typeof SCREENS[22]];
-  readonly 'webSockets': readonly [typeof SCREENS[23]]
+  readonly 'nativePressable': readonly [typeof SCREENS[10]];
+  readonly 'react19': readonly [typeof SCREENS[11]];
+  readonly 'tabView': readonly [typeof SCREENS[12], typeof SCREENS[13], typeof SCREENS[14], typeof SCREENS[15], typeof SCREENS[16]];
+  readonly 'typescript': readonly [typeof SCREENS[17]];
+  readonly 'wave': readonly [typeof SCREENS[18], typeof SCREENS[19], typeof SCREENS[20], typeof SCREENS[21], typeof SCREENS[22], typeof SCREENS[23]];
+  readonly 'webSockets': readonly [typeof SCREENS[24]]
 };
 
 // Pre-computed screens by group for zero runtime overhead
@@ -235,11 +244,12 @@ export const SCREENS_BY_GROUP: ScreensByGroupType = {
   'inputText': [SCREENS[4]],
   'logs': [SCREENS[5], SCREENS[6]],
   'nativeModules': [SCREENS[7], SCREENS[8], SCREENS[9]],
-  'react19': [SCREENS[10]],
-  'tabView': [SCREENS[11], SCREENS[12], SCREENS[13], SCREENS[14], SCREENS[15]],
-  'typescript': [SCREENS[16]],
-  'wave': [SCREENS[17], SCREENS[18], SCREENS[19], SCREENS[20], SCREENS[21], SCREENS[22]],
-  'webSockets': [SCREENS[23]]
+  'nativePressable': [SCREENS[10]],
+  'react19': [SCREENS[11]],
+  'tabView': [SCREENS[12], SCREENS[13], SCREENS[14], SCREENS[15], SCREENS[16]],
+  'typescript': [SCREENS[17]],
+  'wave': [SCREENS[18], SCREENS[19], SCREENS[20], SCREENS[21], SCREENS[22], SCREENS[23]],
+  'webSockets': [SCREENS[24]]
 } as const;
 
 // Helper functions with zero computation
