@@ -50,7 +50,7 @@
     "move-mouse-nutjs": "ts-node scripts/useCase/moveMouse/nutjs.ts",
     "screens:generate": "node scripts/navigation/screenScanner.js",
     "screens:watch": "node scripts/navigation/screenScanner.js --watch",
-    "create-screen": "node scripts/navigation/createScreen.js wave/watchlist WatchlistCompoundPatternWithEventBus  --override && npm run screens:generate",
+    "create-screen": "node scripts/navigation/createScreen.js nativePressable NativePressable  --override && npm run screens:generate",
     "prestart": "npm run screens:generate",
     "depcheck": "depcheck"
   },
